@@ -1,6 +1,6 @@
 using System;
 
-namespace AssignmentEcommerce_Backend.Models
+namespace AssignmentEcommerce_Backend.ViewModels
 {
     public class ErrorViewModel
     {
