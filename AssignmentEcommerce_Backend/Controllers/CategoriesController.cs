@@ -14,6 +14,7 @@ namespace AssignmentEcommerce_Backend.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize("Bearer")]
     public class CategoriesController : ControllerBase
     {
         private readonly ApplicationDbContext _context;
