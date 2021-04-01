@@ -1,0 +1,32 @@
+﻿@using Microsoft.AspNetCore.Authentication
+@using Microsoft.Extensions.Configuration
+
+@inject IConfiguration Configuration
+
+@{
+    ViewData["Title"] = "My profile";
+}
+
+<h2><a href="https://localhost:44311/Identity/Account/Manage">My Account</a></h2>
+<br />
+<br />
+
+<h2>Claims</h2>
+
+<dl>
+    @foreach (var claim in User.Claims)
+    {
+        <dt>@claim.Type</dt>
+        <dd>@claim.Value</dd>
+    }
+</dl>
+
+<h2>Properties</h2>
+
+<dl>
+    @foreach (var prop in (await Context.AuthenticateAsync()).Properties.Items)
+    {
+        <dt>@prop.Key</dt>
+        <dd>@prop.Value</dd>
+    }
+</dl>
