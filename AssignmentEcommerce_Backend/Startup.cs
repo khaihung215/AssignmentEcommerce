@@ -69,6 +69,7 @@ namespace AssignmentEcommerce_Backend
             });
 
             services.AddControllersWithViews();
+            services.AddRazorPages();
 
             services.AddSwaggerGen(c =>
             {
