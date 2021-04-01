@@ -14,4 +14,8 @@
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="5.0.4" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\AssignmentEcommerce_Shared\AssignmentEcommerce_Shared.csproj" />
+  </ItemGroup>
+
 </Project>
