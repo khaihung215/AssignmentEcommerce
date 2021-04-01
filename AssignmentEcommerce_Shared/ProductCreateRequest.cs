@@ -1,8 +1,8 @@
 ﻿using System;
 
-namespace ViewModels
+namespace AssignmentEcommerce_Shared
 {
-    public class ProductFormVm
+    public class ProductCreateRequest
     {
         public string Name { get; set; }
 

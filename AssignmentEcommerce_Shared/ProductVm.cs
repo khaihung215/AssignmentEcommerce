@@ -1,4 +1,4 @@
-﻿namespace ViewModels
+﻿namespace AssignmentEcommerce_Shared
 {
     public class ProductVm
     {

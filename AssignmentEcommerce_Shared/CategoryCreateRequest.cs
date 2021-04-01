@@ -1,6 +1,6 @@
-﻿namespace ViewModels
+﻿namespace AssignmentEcommerce_Shared
 {
-    public class CategoryFormVm
+    public class CategoryCreateRequest
     {
         public string NameCategory { get; set; }
 
