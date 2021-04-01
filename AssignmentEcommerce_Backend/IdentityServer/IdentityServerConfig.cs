@@ -51,7 +51,28 @@ namespace AssignmentEcommerce_Backend.IdentityServer
                         IdentityServerConstants.StandardScopes.Profile,
                         "assignmentecommerce.api"
                     }
-                }
+                },
+
+                new Client
+                {
+                    ClientId = "swagger",
+                    ClientSecrets = { new Secret("secret".Sha256()) },
+                    AllowedGrantTypes = GrantTypes.Code,
+
+                    RequireConsent = false,
+                    RequirePkce = true,
+
+                    RedirectUris =           { $"https://localhost:44311/swagger/oauth2-redirect.html" },
+                    PostLogoutRedirectUris = { $"https://localhost:44311/swagger/oauth2-redirect.html" },
+                    AllowedCorsOrigins =     { $"https://localhost:44311" },
+
+                    AllowedScopes = new List<string>
+                    {
+                        IdentityServerConstants.StandardScopes.OpenId,
+                        IdentityServerConstants.StandardScopes.Profile,
+                        "assignmentecommerce.api"
+                    }
+                },
             };
     }
 }
