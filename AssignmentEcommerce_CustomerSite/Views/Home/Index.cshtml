@@ -1,8 +1,128 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
-}
+﻿<div class="carousel" data-count="3" data-current="2">
+    <!-- <button class="btn btn-control"></button> -->
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+    <div class="items">
+        <div class="item" data-marker="1">
+            <img src="~/Template/assets/img/carousel/bckg.jpg" alt="Background" class="background" />
+
+            <div class="content">
+                <div class="outside-content">
+                    <div class="inside-content">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-sm-12 align-center">
+                                    <h1>New amazing laptops</h1>
+                                    <p>Provide lightweight and powerull</p>
+                                    <a href="./catalog/">More laptops ></a>
+                                    <br><br>
+                                </div>
+                                <div class="col-sm-6 col-sm-offset-3 align-center">
+                                    <img src="~/Template/assets/img/carousel/newlaptops.jpg" alt="Laptops" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="item active" data-marker="2">
+            <img src="~/Template/assets/img/carousel/bckg.jpg" alt="Background" class="background" />
+
+            <div class="content">
+                <div class="outside-content">
+                    <div class="inside-content">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-sm-8 col-sm-offset-2 align-center">
+                                    <img src="~/Template/assets/img/carousel/surfaces.jpg" alt="Surface Pro" />
+                                </div>
+                                <div class="col-sm-12 align-center">
+                                    <h1>8 Windows Hybrid Laptops</h1>
+                                    <p>The laptop comes with an Intel i5 chip and 8GB of RAM.</p>
+                                    <a href="./catalog/">View surfaces ></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="item" data-marker="3">
+            <img src="~/Template/assets/img/carousel/bckg.jpg" alt="Background" class="background" />
+
+            <div class="content">
+                <div class="outside-content">
+                    <div class="inside-content">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-sm-5 col-sm-offset-1 align-center">
+                                    <img src="~/Template/assets/img/carousel/ipadair2.jpg" alt="iPad Air 2" class="hidden-xs hidden-sm" />
+                                    <img src="~/Template/assets/img/carousel/ipadair2m.jpg" alt="iPad Air 2" class="hidden-md hidden-lg" />
+                                </div>
+                                <div class="col-sm-4 align-left">
+                                    <br class="hidden-xs hidden-sm"><br class="hidden-xs hidden-sm"><br class="hidden-xs hidden-sm">
+                                    <br class="hidden-xs hidden-sm"><br class="hidden-xs hidden-sm"><br class="hidden-xs hidden-sm">
+                                    <h1>Luxury devices</h1>
+                                    <br>
+
+                                    <p>
+                                        Luxury watches, business tablets and 3D touch: How Apple plans to stay ahead in mobile.
+                                        When it comes to the brand’s latest iPhones, the biggest excitement isn’t focused on the addition of a rose gold coloured device but the new 3D touch sensors.
+                                    </p>
+                                    <a href="./blog/item-photo.html">View article ></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <ul class="markers">
+        <li data-marker="1"><img src="~/Template/assets/img/carousel/newlaptops.jpg" alt="Background" /></li>
+        <li data-marker="2" class="active"><img src="~/Template/assets/img/carousel/surfaces.jpg" alt="Background" /></li>
+        <li data-marker="3"><img src="~/Template/assets/img/carousel/ipadair2.jpg" alt="Background" /></li>
+    </ul>
 </div>
+<br>
+<br>
+
+<div class="container">
+    <div class="row">
+        <div class="col-sm-3 align-center">
+            <a href="./blog/">
+                <img src="~/Template/assets/img/tiles/blog.jpg" alt="Blog" class="image" />
+            </a>
+            <br><br>
+
+            <a href="#">Blog headlines</a>
+        </div>
+        <div class="col-sm-3 align-center">
+            <a href="#">
+                <img src="~/Template/assets/img/tiles/video-apple.jpg" alt="New devices" class="image" />
+            </a>
+            <br><br>
+
+            <a href="#">New apple diveces</a>
+        </div>
+        <div class="col-sm-3 align-center">
+            <a href="#">
+                <img src="~/Template/assets/img/tiles/video-dell.jpg" alt="Del XPS" class="image" />
+            </a>
+            <br><br>
+
+            <a href="#">Brend new DELL XPS</a>
+        </div>
+        <div class="col-sm-3 align-center">
+            <a href="#">
+                <img src="~/Template/assets/img/tiles/gallery.jpg" alt="Gallery" class="image" />
+            </a>
+            <br><br>
+
+            <a href="#">Products gallery</a>
+        </div>
+    </div>
+</div>
+<br>
+<br>
