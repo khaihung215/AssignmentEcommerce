@@ -1,6 +1,7 @@
 ﻿using AssignmentEcommerce_Backend.Data;
 using AssignmentEcommerce_Backend.Models;
 using AssignmentEcommerce_Shared;
+using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -18,24 +19,23 @@ namespace AssignmentEcommerce_Backend.Controllers
     public class CategoriesController : ControllerBase
     {
         private readonly ApplicationDbContext _context;
+        private IMapper _mapper;
 
-        public CategoriesController(ApplicationDbContext context)
+        public CategoriesController(ApplicationDbContext context, IMapper mapper)
         {
             _context = context;
+            _mapper = mapper;
         }
 
         [HttpGet]
         [AllowAnonymous]
-        public async Task<ActionResult<IEnumerable<CategoryVm>>> GetCategory()
+        public async Task<IEnumerable<CategoryVm>> GetCategory()
         {
-            return await _context.Categories
-                .Select(x => new CategoryVm
-                {
-                    CategoryId = x.CategoryId,
-                    NameCategory = x.NameCategory,
-                    Description = x.Description
-                })
-                .ToListAsync();
+            var category = await _context.Categories.ToListAsync();
+
+            var categoryRes = _mapper.Map<IEnumerable<CategoryVm>>(category);
+
+            return categoryRes;
         }
 
         [HttpGet("{id}")]
@@ -49,19 +49,14 @@ namespace AssignmentEcommerce_Backend.Controllers
                 return NotFound();
             }
 
-            var categoryVm = new CategoryVm
-            {
-                CategoryId = category.CategoryId,
-                NameCategory = category.NameCategory,
-                Description = category.Description
-            };
+            var categoryVm = _mapper.Map<CategoryVm>(category);
 
             return categoryVm;
         }
 
         [HttpPut("{id}")]
         [Authorize(Roles = "admin")]
-        public async Task<IActionResult> PutCategory(int id, CategoryCreateRequest categoryCreateRequest)
+        public async Task<ActionResult<CategoryCreateRequest>> PutCategory(int id, CategoryCreateRequest categoryCreateRequest)
         {
             var category = await _context.Categories.FindAsync(id);
 
@@ -70,32 +65,26 @@ namespace AssignmentEcommerce_Backend.Controllers
                 return NotFound();
             }
 
-            category.NameCategory = categoryCreateRequest.NameCategory;
-            category.Description = categoryCreateRequest.Description;
+            _context.Entry<Category>(category).CurrentValues.SetValues(categoryCreateRequest);
 
             await _context.SaveChangesAsync();
 
-            return NoContent();
+            var categoryRes = _mapper.Map<CategoryCreateRequest>(category);
+
+            return categoryRes;
         }
 
         [HttpPost]
         [Authorize(Roles = "admin")]
         public async Task<ActionResult<CategoryVm>> PostCategory(CategoryCreateRequest categoryCreateRequest)
         {
-            var category = new Category
-            {
-                NameCategory = categoryCreateRequest.NameCategory,
-                Description = categoryCreateRequest.Description
-            };
+            var category = _mapper.Map<Category>(categoryCreateRequest);
 
             _context.Categories.Add(category);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetCategory", new { id = category.CategoryId }, new CategoryVm
-            {
-                NameCategory = category.NameCategory,
-                Description = category.Description
-            });
+            var categoryRes = _mapper.Map<CategoryVm>(category);
+            return categoryRes;
         }
 
         [HttpDelete("{id}")]

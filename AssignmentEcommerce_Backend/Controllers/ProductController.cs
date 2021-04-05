@@ -1,6 +1,7 @@
 ﻿using AssignmentEcommerce_Backend.Data;
 using AssignmentEcommerce_Backend.Models;
 using AssignmentEcommerce_Shared;
+using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -18,26 +19,23 @@ namespace AssignmentEcommerce_Backend.Controllers
     public class ProductController : ControllerBase
     {
         private readonly ApplicationDbContext _context;
+        private IMapper _mapper;
 
-        public ProductController(ApplicationDbContext context)
+        public ProductController(ApplicationDbContext context, IMapper mapper)
         {
             _context = context;
+            _mapper = mapper;
         }
 
         [HttpGet]
         [AllowAnonymous]
-        public async Task<ActionResult<IEnumerable<ProductVm>>> GetProduct()
+        public async Task<IEnumerable<ProductVm>> GetProduct()
         {
-            return await _context.Products
-                .Select(x => new ProductVm
-                {
-                    ProductId = x.ProductId,
-                    Name = x.Name,
-                    Description = x.Description,
-                    Price = x.Price,
-                    Images = x.Images
-                })
-                .ToListAsync();
+            var product = await _context.Products.ToListAsync();
+
+            var productRes = _mapper.Map<IEnumerable<ProductVm>>(product);
+
+            return productRes;
         }
 
         [HttpGet("{id}")]
@@ -51,21 +49,14 @@ namespace AssignmentEcommerce_Backend.Controllers
                 return NotFound();
             }
 
-            var productVm = new ProductVm
-            {
-                ProductId = product.ProductId,
-                Name = product.Name,
-                Description = product.Description,
-                Price = product.Price,
-                Images = product.Images
-            };
+            var productVm = _mapper.Map<ProductVm>(product);
 
             return productVm;
         }
 
         [HttpPut("{id}")]
         [Authorize(Roles = "admin")]
-        public async Task<IActionResult> PutProduct(int id, ProductCreateRequest productCreateRequest)
+        public async Task<ActionResult<ProductCreateRequest>> PutProduct(int id, ProductCreateRequest productCreateRequest)
         {
             var product = await _context.Products.FindAsync(id);
 
@@ -74,43 +65,26 @@ namespace AssignmentEcommerce_Backend.Controllers
                 return NotFound();
             }
 
-            product.Name = productCreateRequest.Name;
-            product.Price = productCreateRequest.Price;
-            product.Description = productCreateRequest.Description;
-            product.Images = productCreateRequest.Images;
-            product.UpdatedDate = DateTime.Now.Date;
+            _context.Entry<Product>(product).CurrentValues.SetValues(productCreateRequest);
 
             await _context.SaveChangesAsync();
 
-            return NoContent();
+            var productRes = _mapper.Map<ProductCreateRequest>(product);
+
+            return productRes;
         }
 
         [HttpPost]
         [Authorize(Roles = "admin")]
         public async Task<ActionResult<ProductVm>> PostProduct(ProductCreateRequest productCreateRequest)
         {
-            var product = new Product
-            {
-                Name = productCreateRequest.Name,
-                Description = productCreateRequest.Description,
-                Price = productCreateRequest.Price,
-                Images = productCreateRequest.Images,
-                CreatedDate = DateTime.Now.Date,
-                UpdatedDate = DateTime.Now.Date,
-                CategoryId = productCreateRequest.CategoryId
-            };
+            var product = _mapper.Map<Product>(productCreateRequest);
 
             _context.Products.Add(product);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetProduct", new { id = product.ProductId }, new ProductVm
-            {
-                ProductId = product.ProductId,
-                Name = product.Name,
-                Description = product.Description,
-                Price = product.Price,
-                Images = product.Images
-            });
+            var productRes = _mapper.Map<ProductVm>(product);
+            return productRes;
         }
 
         [HttpDelete("{id}")]
