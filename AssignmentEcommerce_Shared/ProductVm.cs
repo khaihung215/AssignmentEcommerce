@@ -2,7 +2,7 @@
 {
     public class ProductVm
     {
-        public int ProductId { get; set; }
+        public string ProductId { get; set; }
 
         public string Name { get; set; }
 

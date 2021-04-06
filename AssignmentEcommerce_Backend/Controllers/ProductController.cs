@@ -40,7 +40,7 @@ namespace AssignmentEcommerce_Backend.Controllers
 
         [HttpGet("{id}")]
         [AllowAnonymous]
-        public async Task<ActionResult<ProductVm>> GetProduct(int id)
+        public async Task<ActionResult<ProductVm>> GetProduct(string id)
         {
             var product = await _context.Products.FindAsync(id);
 
@@ -56,7 +56,7 @@ namespace AssignmentEcommerce_Backend.Controllers
 
         [HttpPut("{id}")]
         [Authorize(Roles = "admin")]
-        public async Task<ActionResult<ProductCreateRequest>> PutProduct(int id, ProductCreateRequest productCreateRequest)
+        public async Task<ActionResult<ProductCreateRequest>> PutProduct(string id,[FromForm] ProductUpdateRequest productUpdateRequest)
         {
             var product = await _context.Products.FindAsync(id);
 
@@ -65,7 +65,8 @@ namespace AssignmentEcommerce_Backend.Controllers
                 return NotFound();
             }
 
-            _context.Entry<Product>(product).CurrentValues.SetValues(productCreateRequest);
+            _context.Entry<Product>(product).CurrentValues.SetValues(productUpdateRequest);
+            product.UpdatedDate = DateTime.Now.Date;
 
             await _context.SaveChangesAsync();
 
@@ -76,9 +77,12 @@ namespace AssignmentEcommerce_Backend.Controllers
 
         [HttpPost]
         [Authorize(Roles = "admin")]
-        public async Task<ActionResult<ProductVm>> PostProduct(ProductCreateRequest productCreateRequest)
+        public async Task<ActionResult<ProductVm>> PostProduct([FromForm] ProductCreateRequest productCreateRequest)
         {
             var product = _mapper.Map<Product>(productCreateRequest);
+            product.ProductId = Guid.NewGuid().ToString();
+            product.CreatedDate = DateTime.Now.Date;
+            product.UpdatedDate = DateTime.Now.Date;
 
             _context.Products.Add(product);
             await _context.SaveChangesAsync();
@@ -89,7 +93,7 @@ namespace AssignmentEcommerce_Backend.Controllers
 
         [HttpDelete("{id}")]
         [Authorize(Roles = "admin")]
-        public async Task<IActionResult> DeleteProduct(int id)
+        public async Task<IActionResult> DeleteProduct(string id)
         {
             var product = await _context.Products.FindAsync(id);
             if (product == null)

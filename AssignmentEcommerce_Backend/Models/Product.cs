@@ -7,7 +7,7 @@ namespace AssignmentEcommerce_Backend.Models
 {
     public class Product
     {
-        public int ProductId { get; set; }
+        public string ProductId { get; set; }
 
         public string Name { get; set; }
 
@@ -21,7 +21,7 @@ namespace AssignmentEcommerce_Backend.Models
 
         public DateTime UpdatedDate { get; set; }
 
-        public int CategoryId { get; set; }
+        public string CategoryId { get; set; }
 
         public Category Category { get; set; }
     }

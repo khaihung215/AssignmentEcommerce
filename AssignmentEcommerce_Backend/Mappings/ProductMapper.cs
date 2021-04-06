@@ -10,6 +10,7 @@ namespace AssignmentEcommerce_Backend.Mappings
         {
             CreateMap<ProductVm, Product>().ReverseMap();
             CreateMap<ProductCreateRequest, Product>().ReverseMap();
+            CreateMap<ProductUpdateRequest, Product>().ReverseMap();
         }
     }
 }

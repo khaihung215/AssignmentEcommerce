@@ -7,7 +7,7 @@ namespace AssignmentEcommerce_Backend.Models
 {
     public class Category
     {
-        public int CategoryId { get; set; }
+        public string CategoryId { get; set; }
 
         public string NameCategory { get; set; }
 

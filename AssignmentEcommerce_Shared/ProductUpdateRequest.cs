@@ -2,7 +2,7 @@
 
 namespace AssignmentEcommerce_Shared
 {
-    public class ProductCreateRequest
+    public class ProductUpdateRequest
     {
         public string Name { get; set; }
 
@@ -12,7 +12,7 @@ namespace AssignmentEcommerce_Shared
 
         public string Images { get; set; }
 
-        public DateTime CreatedDate { get; set; }
+        public DateTime UpdatedDate { get; set; }
 
         public string CategoryId { get; set; }
     }

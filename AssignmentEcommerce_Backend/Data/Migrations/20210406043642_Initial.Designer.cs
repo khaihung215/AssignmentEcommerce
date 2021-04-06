@@ -7,11 +7,11 @@ using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
-namespace AssignmentEcommerce_Backend.Data.Migrations
+namespace AssignmentEcommerce_Backend.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20210401042658_AddProductAndCategory")]
-    partial class AddProductAndCategory
+    [Migration("20210406043642_Initial")]
+    partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -23,10 +23,8 @@ namespace AssignmentEcommerce_Backend.Data.Migrations
 
             modelBuilder.Entity("AssignmentEcommerce_Backend.Models.Category", b =>
                 {
-                    b.Property<int>("CategoryId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                    b.Property<string>("CategoryId")
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
@@ -41,13 +39,11 @@ namespace AssignmentEcommerce_Backend.Data.Migrations
 
             modelBuilder.Entity("AssignmentEcommerce_Backend.Models.Product", b =>
                 {
-                    b.Property<int>("ProductId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                    b.Property<string>("ProductId")
+                        .HasColumnType("nvarchar(450)");
 
-                    b.Property<int>("CategoryId")
-                        .HasColumnType("int");
+                    b.Property<string>("CategoryId")
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<DateTime>("CreatedDate")
                         .HasColumnType("datetime2");
@@ -281,9 +277,7 @@ namespace AssignmentEcommerce_Backend.Data.Migrations
                 {
                     b.HasOne("AssignmentEcommerce_Backend.Models.Category", "Category")
                         .WithMany("Product")
-                        .HasForeignKey("CategoryId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("CategoryId");
 
                     b.Navigation("Category");
                 });

@@ -40,7 +40,7 @@ namespace AssignmentEcommerce_Backend.Controllers
 
         [HttpGet("{id}")]
         [AllowAnonymous]
-        public async Task<ActionResult<CategoryVm>> GetCategory(int id)
+        public async Task<ActionResult<CategoryVm>> GetCategory(string id)
         {
             var category = await _context.Categories.FindAsync(id);
 
@@ -56,7 +56,7 @@ namespace AssignmentEcommerce_Backend.Controllers
 
         [HttpPut("{id}")]
         [Authorize(Roles = "admin")]
-        public async Task<ActionResult<CategoryCreateRequest>> PutCategory(int id, CategoryCreateRequest categoryCreateRequest)
+        public async Task<ActionResult<CategoryCreateRequest>> PutCategory(string id, CategoryCreateRequest categoryCreateRequest)
         {
             var category = await _context.Categories.FindAsync(id);
 
@@ -79,6 +79,7 @@ namespace AssignmentEcommerce_Backend.Controllers
         public async Task<ActionResult<CategoryVm>> PostCategory(CategoryCreateRequest categoryCreateRequest)
         {
             var category = _mapper.Map<Category>(categoryCreateRequest);
+            category.CategoryId = Guid.NewGuid().ToString();
 
             _context.Categories.Add(category);
             await _context.SaveChangesAsync();
@@ -89,7 +90,7 @@ namespace AssignmentEcommerce_Backend.Controllers
 
         [HttpDelete("{id}")]
         [Authorize(Roles = "admin")]
-        public async Task<IActionResult> DeleteCategory(int id)
+        public async Task<IActionResult> DeleteCategory(string id)
         {
             var category = await _context.Categories.FindAsync(id);
             if (category == null)
