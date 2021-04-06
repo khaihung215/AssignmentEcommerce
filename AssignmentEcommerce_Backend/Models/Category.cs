@@ -13,6 +13,8 @@ namespace AssignmentEcommerce_Backend.Models
 
         public string Description { get; set; }
 
+        public string Images { get; set; }
+
         public ICollection<Product> Product { get; set; }
     }
 }

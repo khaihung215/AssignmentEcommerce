@@ -59,6 +59,8 @@ namespace AssignmentEcommerce_Backend.Controllers
                 return NotFound();
             }
 
+            product.Images = _storageService.GetFileUrl(product.Images);
+
             var productVm = _mapper.Map<ProductVm>(product);
 
             return productVm;
