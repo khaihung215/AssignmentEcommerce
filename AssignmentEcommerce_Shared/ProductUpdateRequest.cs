@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Http;
+using System;
 
 namespace AssignmentEcommerce_Shared
 {
@@ -10,7 +11,7 @@ namespace AssignmentEcommerce_Shared
 
         public decimal Price { get; set; }
 
-        public string Images { get; set; }
+        public IFormFile ThumbnailImages { get; set; }
 
         public DateTime UpdatedDate { get; set; }
 
