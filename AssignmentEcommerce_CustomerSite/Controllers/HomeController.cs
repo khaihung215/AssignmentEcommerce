@@ -1,4 +1,5 @@
 ﻿using AssignmentEcommerce_CustomerSite.Models;
+using AssignmentEcommerce_CustomerSite.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
@@ -12,14 +13,19 @@ namespace AssignmentEcommerce_CustomerSite.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
+        private readonly ICategoryApiClient _categoryClient;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(ILogger<HomeController> logger, ICategoryApiClient productClient)
         {
             _logger = logger;
+            _categoryClient = productClient;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
+            var categorys = await _categoryClient.GetCategory();
+            ViewBag.Category = categorys;
+
             return View();
         }
 
