@@ -1,0 +1,152 @@
+﻿@model AssignmentEcommerce_Shared.ProductVm
+
+<hr class="offset-lg">
+<div class="product">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-7 col-md-7">
+                <div class="carousel product" data-count="5" data-current="1">
+                    <div class="items">
+                        <div class="item active" data-marker="1">
+                            <img src="@Model.Images" alt="@Model.Name" />
+                        </div>
+                    </div>
+
+                    <ul class="markers">
+                        <li data-marker="1" class="active"><img src="@Model.Images" alt="@Model.Name" /></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-sm-5 col-md-5">
+                <h2>@Model.NameCategory</h2>
+                <h1>@Model.Name</h1>
+                <p> · Chrome OS™</p>
+                <p> · Intel® Celeron® processor</p>
+                <p> · Intel HD Graphics</p>
+
+                <p class="price">@Convert.ToDecimal(Model.Price).ToString("#,##") VND</p>
+                <br><br>
+
+                <button class="btn btn-primary btn-rounded"> <i class="ion-bag"></i> Add to cart</button>
+            </div>
+        </div>
+        <br><br><br>
+
+
+        <div class="row">
+            <div class="col-sm-7">
+                <h1>@Model.Name</h1>
+                <br>
+                <p>@Model.Description</p>
+                <br>
+
+                <h2>Product specifications</h2>
+                <br>
+
+                <div class="row specification">
+                    <div class="col-sm-6"> <label>Operating system</label> </div>
+                    <div class="col-sm-6"> <p>Chrome OS™</p> </div>
+                </div>
+
+                <div class="row specification">
+                    <div class="col-sm-6"> <label>Processor</label> </div>
+                    <div class="col-sm-6"> <p>Intel® Celeron® N2840 with Intel® HD Graphics (2.16 GHz, up to 2.58 GHz, 1 MB cache, 2 cores)</p> </div>
+                </div>
+
+                <div class="row specification">
+                    <div class="col-sm-6"> <label>Processor technology</label> </div>
+                    <div class="col-sm-6"> <p>Intel Turbo Boost Technology</p> </div>
+                </div>
+
+                <div class="row specification">
+                    <div class="col-sm-6"> <label>Graphics</label> </div>
+                    <div class="col-sm-6"> <p>Intel HD Graphics</p> </div>
+                </div>
+
+                <div class="row specification">
+                    <div class="col-sm-6"> <label>Memory</label> </div>
+                    <div class="col-sm-6"> <p>2 GB DDR3L SDRAM (onboard)</p> </div>
+                </div>
+
+                <div class="row specification">
+                    <div class="col-sm-6"> <label>Hard drive</label> </div>
+                    <div class="col-sm-6"> <p>16 GB eMMC</p> </div>
+                </div>
+
+                <div class="row specification">
+                    <div class="col-sm-6"> <label>Wireless</label> </div>
+                    <div class="col-sm-6"> <p>802.11ac (2x2) and Bluetooth® 4.0 combo</p> </div>
+                </div>
+
+                <div class="row specification">
+                    <div class="col-sm-6"> <label>Power supply</label> </div>
+                    <div class="col-sm-6"> <p>45 W AC power adapter</p> </div>
+                </div>
+
+                <div class="row specification">
+                    <div class="col-sm-6"> <label>Battery</label> </div>
+                    <div class="col-sm-6"> <p>3-cell, 36 Wh Li-ion</p> </div>
+                </div>
+            </div>
+            <div class="col-sm-5">
+                <div class="comments">
+                    <h2 class="h3">What do you think? (#3)</h2>
+                    <br>
+
+
+                    <div class="wrapper">
+                        <div class="content">
+                            <h3>Anne Hathaway</h3>
+                            <label>2 years ago</label>
+                            <p>
+                                Apple Music brings iTunes music streaming to the UK. But is it worth paying for? In our Apple Music review, we examine the service's features, UK pricing, audio quality and music library
+                            </p>
+
+
+                            <h3>Chris Hemsworth</h3>
+                            <label>Today</label>
+                            <p>
+                                Samsung's Galaxy S7 smartphone is getting serious hype. Here's what it does better than Apple's iPhone 6s.
+                            </p>
+
+
+                            <h3>Anne Hathaway</h3>
+                            <label>2 years ago</label>
+                            <p>
+                                Apple Music brings iTunes music streaming to the UK. But is it worth paying for? In our Apple Music review, we examine the service's features, UK pricing, audio quality and music library
+                            </p>
+                        </div>
+                    </div>
+                    <br>
+
+                    <button class="btn btn-default btn-sm" data-toggle="modal" data-target="#Modal-Comment"> <i class="ion-chatbox-working"></i> Add comment </button>
+                </div>
+                <br><br>
+
+                <div class="talk">
+                    <h2 class="h3">Do you have any questions?</h2>
+                    <p>Online chat with our manager</p>
+
+                    <button class="btn btn-default btn-sm"> <i class="ion-android-contact"></i> Lat's talk </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<br>
+<br>
+
+<section class="products">
+    <div class="container">
+        <h1 class="h3">Recommendation for you</h1>
+
+        <div class="row">
+            @foreach (var product in ViewBag.ProductsSameCate)
+            {
+                @await Component.InvokeAsync("ProductCard", product);
+            }
+        </div>
+    </div>
+</section>
+<br>
+<br>

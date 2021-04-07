@@ -51,9 +51,9 @@ namespace AssignmentEcommerce_Backend.Controllers
             return productRes;
         }
 
-        [HttpGet("{id}")]
+        [HttpGet("GetProductById/{id}")]
         [AllowAnonymous]
-        public async Task<ActionResult<ProductVm>> GetProduct(string id)
+        public async Task<ActionResult<ProductVm>> GetProductById(string id)
         {
             var product = await _context.Products
                 .Include(products => products.Category)
@@ -70,6 +70,28 @@ namespace AssignmentEcommerce_Backend.Controllers
 
             var productVm = _mapper.Map<ProductVm>(product);
             productVm.NameCategory = product.Category.NameCategory;
+
+            return productVm;
+        }
+
+        [HttpGet("GetProductSameCategory/{productId}")]
+        [AllowAnonymous]
+        public async Task<IEnumerable<ProductVm>> GetProductSameCategory(string productId)
+        {
+            var product = await _context.Products.FindAsync(productId);
+
+            var productsSame = await _context.Products
+                .Include(p => p.Category)
+                .Where(p => p.CategoryId.Equals(product.CategoryId) && p.ProductId != product.ProductId)
+                .AsNoTracking()
+                .ToListAsync();
+
+            foreach (var item in productsSame)
+            {
+                item.Images = _storageService.GetFileUrl(item.Images);
+            }
+
+            var productVm = _mapper.Map<IEnumerable<ProductVm>>(productsSame);
 
             return productVm;
         }

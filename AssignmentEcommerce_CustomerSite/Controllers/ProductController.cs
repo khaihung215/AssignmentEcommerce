@@ -25,5 +25,15 @@ namespace AssignmentEcommerce_CustomerSite.Controllers
 
             return View();
         }
+
+        public async Task<IActionResult> Detail(string id)
+        {
+            var product = await _productClient.GetProductById(id);
+
+            var productsSameCate = await _productClient.GetProductSameCategory(id);
+            ViewBag.ProductsSameCate = productsSameCate;
+
+            return View(product);
+        }
     }
 }

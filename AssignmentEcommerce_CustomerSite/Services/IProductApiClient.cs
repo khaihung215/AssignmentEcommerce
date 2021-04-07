@@ -9,5 +9,9 @@ namespace AssignmentEcommerce_CustomerSite.Services
     public interface IProductApiClient
     {
         Task<IList<ProductVm>> GetProduct();
+
+        Task<ProductVm> GetProductById(string id);
+
+        Task<IList<ProductVm>> GetProductSameCategory(string id);
     }
 }
