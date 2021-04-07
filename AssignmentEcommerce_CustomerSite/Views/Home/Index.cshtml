@@ -90,7 +90,7 @@
 
 <div class="container">
     <div class="row">
-        @foreach (var cate in ViewBag.Category)
+        @foreach (var cate in ViewBag.Categorys)
         {
             <div class="col-sm-3 align-center">
                 <a href="#">
@@ -108,98 +108,12 @@
 <hr />
 <div class="container">
     <div class="col-sm-12 products">
-        <h1 class="text-center">New Products</h1>
+        <h1 class="text-center">Products</h1>
         <div class="row">
-            <div class="col-sm-6 col-md-4 product">
-                <a href="#favorites" class="favorites" data-favorite="inactive"><i class="ion-ios-heart-outline"></i></a>
-                <a href="./"><img src="~/Template/assets/img/products/surface-pro.jpg" alt="Surface Pro" /></a>
-
-                <div class="content">
-                    <h1 class="h4">Surface Pro</h1>
-                    <p class="price">$199.99</p>
-                    <label>Hybrid</label>
-
-                    <a href="../catalog/product.html" class="btn btn-link"> Details</a>
-                    <button class="btn btn-primary btn-rounded btn-sm"> <i class="ion-bag"></i> Add to cart</button>
-                </div>
-            </div>
-
-            <div class="col-sm-6 col-md-4 product">
-                <a href="#favorites" class="favorites" data-favorite="inactive"><i class="ion-ios-heart-outline"></i></a>
-                <a href="./"><img src="~/Template/assets/img/products/lenovo-yoga.jpg" alt="Lenovo Yoga" /></a>
-
-                <div class="content">
-                    <h1 class="h4">Lenovo Yoga</h1>
-                    <p class="price">$199.99</p>
-                    <label>Hybrid</label>
-
-                    <a href="../catalog/product.html" class="btn btn-link"> Details</a>
-                    <button class="btn btn-primary btn-rounded btn-sm"> <i class="ion-bag"></i> Add to cart</button>
-                </div>
-            </div>
-
-            <div class="col-sm-6 col-md-4 product">
-                <a href="#favorites" class="favorites" data-favorite="inactive"><i class="ion-ios-heart-outline"></i></a>
-                <a href="./"><img src="~/Template/assets/img/products/asus-transformer.jpg" alt="ASUS Transformer" /></a>
-
-                <div class="content">
-                    <h1 class="h4">ASUS Transformer</h1>
-                    <p class="price">$199.99</p>
-                    <label>Hybrid</label>
-
-                    <a href="../catalog/product.html" class="btn btn-link"> Details</a>
-                    <button class="btn btn-primary btn-rounded btn-sm"> <i class="ion-bag"></i> Add to cart</button>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-<hr />
-<div class="container">
-    <div class="col-sm-12 products">
-        <h1 class="text-center">Hot Products</h1>
-        <div class="row">
-            <div class="col-sm-6 col-md-4 product">
-                <a href="#favorites" class="favorites" data-favorite="inactive"><i class="ion-ios-heart-outline"></i></a>
-                <a href="./"><img src="~/Template/assets/img/products/surface-pro.jpg" alt="Surface Pro" /></a>
-
-                <div class="content">
-                    <h1 class="h4">Surface Pro</h1>
-                    <p class="price">$199.99</p>
-                    <label>Hybrid</label>
-
-                    <a href="../catalog/product.html" class="btn btn-link"> Details</a>
-                    <button class="btn btn-primary btn-rounded btn-sm"> <i class="ion-bag"></i> Add to cart</button>
-                </div>
-            </div>
-
-            <div class="col-sm-6 col-md-4 product">
-                <a href="#favorites" class="favorites" data-favorite="inactive"><i class="ion-ios-heart-outline"></i></a>
-                <a href="./"><img src="~/Template/assets/img/products/lenovo-yoga.jpg" alt="Lenovo Yoga" /></a>
-
-                <div class="content">
-                    <h1 class="h4">Lenovo Yoga</h1>
-                    <p class="price">$199.99</p>
-                    <label>Hybrid</label>
-
-                    <a href="../catalog/product.html" class="btn btn-link"> Details</a>
-                    <button class="btn btn-primary btn-rounded btn-sm"> <i class="ion-bag"></i> Add to cart</button>
-                </div>
-            </div>
-
-            <div class="col-sm-6 col-md-4 product">
-                <a href="#favorites" class="favorites" data-favorite="inactive"><i class="ion-ios-heart-outline"></i></a>
-                <a href="./"><img src="~/Template/assets/img/products/asus-transformer.jpg" alt="ASUS Transformer" /></a>
-
-                <div class="content">
-                    <h1 class="h4">ASUS Transformer</h1>
-                    <p class="price">$199.99</p>
-                    <label>Hybrid</label>
-
-                    <a href="../catalog/product.html" class="btn btn-link"> Details</a>
-                    <button class="btn btn-primary btn-rounded btn-sm"> <i class="ion-bag"></i> Add to cart</button>
-                </div>
-            </div>
+            @foreach (var product in ViewBag.Products)
+            {
+                @await Component.InvokeAsync("ProductCard", product);
+            }
         </div>
     </div>
 </div>

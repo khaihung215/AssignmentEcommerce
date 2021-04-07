@@ -23,7 +23,7 @@ namespace AssignmentEcommerce_Backend.Controllers
     {
         private readonly ApplicationDbContext _context;
         private readonly IStorageService _storageService;
-        private IMapper _mapper;
+        private readonly IMapper _mapper;
 
         public ProductController(ApplicationDbContext context, IMapper mapper, IStorageService storageService)
         {
@@ -36,14 +36,17 @@ namespace AssignmentEcommerce_Backend.Controllers
         [AllowAnonymous]
         public async Task<IEnumerable<ProductVm>> GetProduct()
         {
-            var product = await _context.Products.ToListAsync();
+            var products = await _context.Products
+                .Include(product => product.Category)
+                .AsNoTracking()
+                .ToListAsync();
 
-            foreach(var item in product)
+            foreach (var item in products)
             {
                 item.Images = _storageService.GetFileUrl(item.Images);
             }
 
-            var productRes = _mapper.Map<IEnumerable<ProductVm>>(product);
+            var productRes = _mapper.Map<IEnumerable<ProductVm>>(products);
 
             return productRes;
         }
@@ -52,7 +55,11 @@ namespace AssignmentEcommerce_Backend.Controllers
         [AllowAnonymous]
         public async Task<ActionResult<ProductVm>> GetProduct(string id)
         {
-            var product = await _context.Products.FindAsync(id);
+            var product = await _context.Products
+                .Include(products => products.Category)
+                .Where(product => product.ProductId.Equals(id))
+                .AsNoTracking()
+                .SingleAsync();
 
             if (product == null)
             {
@@ -62,6 +69,7 @@ namespace AssignmentEcommerce_Backend.Controllers
             product.Images = _storageService.GetFileUrl(product.Images);
 
             var productVm = _mapper.Map<ProductVm>(product);
+            productVm.NameCategory = product.Category.NameCategory;
 
             return productVm;
         }
@@ -114,6 +122,7 @@ namespace AssignmentEcommerce_Backend.Controllers
             await _context.SaveChangesAsync();
 
             var productRes = _mapper.Map<ProductVm>(product);
+
             return productRes;
         }
 

@@ -14,17 +14,22 @@ namespace AssignmentEcommerce_CustomerSite.Controllers
     {
         private readonly ILogger<HomeController> _logger;
         private readonly ICategoryApiClient _categoryClient;
+        private readonly IProductApiClient _productClient;
 
-        public HomeController(ILogger<HomeController> logger, ICategoryApiClient productClient)
+        public HomeController(ILogger<HomeController> logger, ICategoryApiClient categoryClient, IProductApiClient productClient)
         {
             _logger = logger;
-            _categoryClient = productClient;
+            _categoryClient = categoryClient;
+            _productClient = productClient;
         }
 
         public async Task<IActionResult> Index()
         {
             var categorys = await _categoryClient.GetCategory();
-            ViewBag.Category = categorys;
+            ViewBag.Categorys = categorys;
+
+            var products = await _productClient.GetProduct();
+            ViewBag.Products = products;
 
             return View();
         }

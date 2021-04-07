@@ -8,7 +8,10 @@ namespace AssignmentEcommerce_Backend.Mappings
     {
         public ProductMapper()
         {
-            CreateMap<ProductVm, Product>().ReverseMap();
+            CreateMap<ProductVm, Product>()
+                .ForPath(p => p.Category.NameCategory, pm => pm.MapFrom(o => o.NameCategory))
+                .ReverseMap();
+
             CreateMap<ProductCreateRequest, Product>().ReverseMap();
             CreateMap<ProductUpdateRequest, Product>().ReverseMap();
         }

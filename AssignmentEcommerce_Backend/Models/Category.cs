@@ -15,6 +15,6 @@ namespace AssignmentEcommerce_Backend.Models
 
         public string Images { get; set; }
 
-        public ICollection<Product> Product { get; set; }
+        public virtual ICollection<Product> Product { get; set; }
     }
 }

@@ -23,6 +23,6 @@ namespace AssignmentEcommerce_Backend.Models
 
         public string CategoryId { get; set; }
 
-        public Category Category { get; set; }
+        public virtual Category Category { get; set; }
     }
 }
