@@ -4,6 +4,6 @@
 <ul class="dropdown-menu">
     @foreach (var cate in Model)
     {
-        <li><a href="#">@cate.NameCategory</a></li>
+        <li><a asp-controller="Product" asp-action="Index" asp-route-id="@cate.CategoryId">@cate.NameCategory</a></li>
     }
 </ul>

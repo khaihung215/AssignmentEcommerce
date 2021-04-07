@@ -39,5 +39,13 @@ namespace AssignmentEcommerce_CustomerSite.Services
             response.EnsureSuccessStatusCode();
             return await response.Content.ReadAsAsync<IList<ProductVm>>();
         }
+
+        public async Task<IList<ProductVm>> GetProductByCategory(string id)
+        {
+            var client = _httpClientFactory.CreateClient();
+            var response = await client.GetAsync("https://localhost:44311/api/product/getproductbycategory/" + id);
+            response.EnsureSuccessStatusCode();
+            return await response.Content.ReadAsAsync<IList<ProductVm>>();
+        }
     }
 }

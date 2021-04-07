@@ -96,6 +96,26 @@ namespace AssignmentEcommerce_Backend.Controllers
             return productVm;
         }
 
+        [HttpGet("GetProductByCategory/{categoryId}")]
+        [AllowAnonymous]
+        public async Task<IEnumerable<ProductVm>> GetProductByCategory(string categoryId)
+        {
+            var products = await _context.Products
+                .Include(p => p.Category)
+                .Where(p => p.CategoryId.Equals(categoryId))
+                .AsNoTracking()
+                .ToListAsync();
+
+            foreach (var item in products)
+            {
+                item.Images = _storageService.GetFileUrl(item.Images);
+            }
+
+            var productVm = _mapper.Map<IEnumerable<ProductVm>>(products);
+
+            return productVm;
+        }
+
         [HttpPut("{id}")]
         [Authorize(Roles = "admin")]
         public async Task<ActionResult<ProductVm>> PutProduct(string id,[FromForm] ProductUpdateRequest productUpdateRequest)

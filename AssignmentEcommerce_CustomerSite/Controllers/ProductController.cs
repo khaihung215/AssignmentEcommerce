@@ -15,13 +15,21 @@ namespace AssignmentEcommerce_CustomerSite.Controllers
             _categoryClient = categoryClient;
         }
 
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string? id)
         {
-            var products = await _productClient.GetProduct();
-            ViewBag.Products = products;
-
             var categorys = await _categoryClient.GetCategory();
             ViewBag.Categorys = categorys;
+
+            if (id != null)
+            {
+                var productByCate = await _productClient.GetProductByCategory(id);
+                ViewBag.Products = productByCate;
+            }
+            else
+            {
+                var products = await _productClient.GetProduct();
+                ViewBag.Products = products;
+            }
 
             return View();
         }
