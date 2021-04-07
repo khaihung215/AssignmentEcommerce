@@ -36,11 +36,10 @@
             <div id="navbar" class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
                     <li><a asp-controller="Home" asp-action="Index">Home</a></li>
+                    <li><a asp-controller="Product" asp-action="Index">Product</a></li>
                     <li class="dropdown">
                         @await Component.InvokeAsync("CategoryMenu")
                     </li>
-                    <li><a href="#">Blog</a></li>
-                    <li><a href="#">Gallery</a></li>
                     <li class="dropdown">
                         <a href="./catalog/" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">More <span class="caret"></span></a>
                         <ul class="dropdown-menu">
@@ -208,6 +207,9 @@
     <script src="~/Template/assets/js/core.js"></script>
     <script src="~/Template/assets/js/carousel.js"></script>
     <script src="~/Template/assets/js/carousel-recommendation.js"></script>
+    <script src="~/Template/assets/js/catalog.js"></script>
+    <script type="text/javascript" src="~/Template/assets/js/jquery-ui-1.11.4.js"></script>
+    <script type="text/javascript" src="~/Template/assetss/js/jquery.ui.touch-punch.js"></script>
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>
