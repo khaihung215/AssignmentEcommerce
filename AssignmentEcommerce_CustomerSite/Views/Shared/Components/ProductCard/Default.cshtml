@@ -5,7 +5,7 @@
 
     <div class="content">
         <h1 class="h4">@Model.Name</h1>
-        <p class="price">@Model.Price VND</p>
+        <p class="price">@Convert.ToDecimal(Model.Price).ToString("#,##") VND</p>
         <label>@Model.NameCategory</label>
 
         <a href="#" class="btn btn-link"> Details</a>
