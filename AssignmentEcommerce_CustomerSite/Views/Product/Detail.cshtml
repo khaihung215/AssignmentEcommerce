@@ -150,3 +150,40 @@
 </section>
 <br>
 <br>
+
+<div class="modal fade" id="Modal-Comment" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header align-center">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true"><i class="ion-android-close"></i></span></button>
+                <h1 class="h4 modal-title">Add your comment</h1>
+            </div>
+            <div class="modal-body">
+                <div class="container-fluid">
+                    <form class="join" action="index.php" method="post">
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <textarea name="comment" placeholder="Type here" required="" class="form-control" rows="5"></textarea>
+                                <br>
+                            </div>
+                            <div class="col-sm-6">
+                                <input type="text" name="name" value="" placeholder="Name" required="" class="form-control" />
+                            </div>
+                            <div class="col-sm-6">
+                                <input type="email" name="email" value="" placeholder="E-mail" required="" class="form-control" />
+                            </div>
+                            <div class="col-sm-12">
+                                <div class="align-center">
+                                    <br>
+                                    <button type="submit" class="btn btn-primary btn-sm"> <i class="ion-android-send"></i> Send</button>
+                                    <button type="button" class="btn btn-primary btn-sm" data-dismiss="modal"> <i class="ion-android-share"></i> No, thanks </button>
+                                    <br><br>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

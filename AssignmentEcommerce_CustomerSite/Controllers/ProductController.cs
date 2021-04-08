@@ -17,18 +17,17 @@ namespace AssignmentEcommerce_CustomerSite.Controllers
 
         public async Task<IActionResult> Index(string? id)
         {
-            var categorys = await _categoryClient.GetCategory();
-            ViewBag.Categorys = categorys;
-
             if (id != null)
             {
                 var productByCate = await _productClient.GetProductByCategory(id);
                 ViewBag.Products = productByCate;
+                ViewBag.SearchBy = productByCate[0].NameCategory;
             }
             else
             {
                 var products = await _productClient.GetProduct();
                 ViewBag.Products = products;
+                ViewBag.SearchBy = "All products";
             }
 
             return View();

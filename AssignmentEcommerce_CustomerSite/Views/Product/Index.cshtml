@@ -15,85 +15,15 @@
     <p>Search by tags</p>
     <div class="btn-group" data-toggle="buttons">
         <label class="btn btn-default btn-xs active">
-            <input type="radio" name="options" id="option1" checked> All products
+            <input type="radio" name="options" id="option1" checked> @ViewBag.SearchBy
         </label>
     </div>
 </div>
 
 <div class="container">
     <div class="row">
-        <!-- Filter -->
-        <div class="col-sm-3 filter">
-            <div class="item">
-                <div class="title">
-                    <a href="#clear" data-action="open" class="down"> <i class="ion-android-arrow-dropdown"></i> Open</a>
-                    <a href="#clear" data-action="clear"> <i class="ion-ios-trash-outline"></i> Clear</a>
-                    <h1 class="h4">Type</h1>
-                </div>
-
-                <div class="controls">
-                    @foreach (var cate in ViewBag.Categorys)
-                    {
-                        <div class="checkbox-group" data-status="inactive">
-                            <div class="checkbox"><i class="ion-android-done"></i></div>
-                            <div class="label" data-value="Laptops">@cate.NameCategory</div>
-                            <input type="checkbox" name="checkbox" value="">
-                        </div>
-                    }
-                </div>
-            </div>
-
-            <br>
-
-            <div class="item">
-                <div class="title">
-                    <a href="#clear" data-action="open" class="down"> <i class="ion-android-arrow-dropdown"></i> Open</a>
-                    <a href="#clear" data-action="clear"> <i class="ion-ios-trash-outline"></i> Clear</a>
-                    <h1 class="h4">Manufacturer</h1>
-                </div>
-
-                <div class="controls grid">
-                    <div class="checkbox-group" data-status="inactive">
-                        <div class="checkbox"><i class="ion-android-done"></i></div>
-                        <div class="label" data-value="7 in">HP</div>
-                        <input type="checkbox" name="checkbox" value="">
-                    </div>
-
-                    <div class="checkbox-group" data-status="inactive">
-                        <div class="checkbox"><i class="ion-android-done"></i></div>
-                        <div class="label" data-value="10 in">Acer</div>
-                        <input type="checkbox" name="checkbox" value="">
-                    </div>
-
-                    <div class="checkbox-group" data-status="inactive">
-                        <div class="checkbox"><i class="ion-android-done"></i></div>
-                        <div class="label" data-value="11 in">Apple</div>
-                        <input type="checkbox" name="checkbox" value="">
-                    </div>
-
-                    <div class="checkbox-group" data-status="inactive">
-                        <div class="checkbox"><i class="ion-android-done"></i></div>
-                        <div class="label" data-value="14 in">Asus</div>
-                        <input type="checkbox" name="checkbox" value="">
-                    </div>
-
-                    <div class="checkbox-group" data-status="inactive">
-                        <div class="checkbox"><i class="ion-android-done"></i></div>
-                        <div class="label" data-value="15 in">Dell</div>
-                        <input type="checkbox" name="checkbox" value="">
-                    </div>
-
-                    <div class="checkbox-group" data-status="inactive">
-                        <div class="checkbox"><i class="ion-android-done"></i></div>
-                        <div class="label" data-value="17 in">Lenovo</div>
-                        <input type="checkbox" name="checkbox" value="">
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- /// -->
         <!-- Products -->
-        <div class="col-sm-9 products">
+        <div class="col-sm-12 products">
             <div class="row">
                 @foreach (var product in ViewBag.Products)
                 {
@@ -121,8 +51,5 @@
                 </ul>
             </nav>
         </div>
-        <!-- /// -->
     </div>
 </div>
-<br>
-<br>

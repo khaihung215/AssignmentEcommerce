@@ -93,12 +93,12 @@
         @foreach (var cate in ViewBag.Categorys)
         {
             <div class="col-sm-3 align-center">
-                <a href="#">
+                <a asp-controller="Product" asp-action="Index" asp-route-id="@cate.CategoryId">
                     <img src="@cate.Images" alt="Blog" class="image"/>
                 </a>
                 <br><br>
 
-                <a href="#">@cate.NameCategory</a>
+                <a asp-controller="Product" asp-action="Index" asp-route-id="@cate.CategoryId">@cate.NameCategory</a>
             </div>
         }
     </div>
