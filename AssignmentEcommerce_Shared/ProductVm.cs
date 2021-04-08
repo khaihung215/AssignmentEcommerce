@@ -15,5 +15,7 @@
         public string CategoryId { get; set; }
 
         public string NameCategory { get; set; }
+
+        public int Rating { get; set; }
     }
 }

@@ -20,9 +20,12 @@
             <div class="col-sm-5 col-md-5">
                 <h2>@Model.NameCategory</h2>
                 <h1>@Model.Name</h1>
-                <p> · Chrome OS™</p>
-                <p> · Intel® Celeron® processor</p>
-                <p> · Intel HD Graphics</p>
+                <h3>
+                    @for (int i = 0; i < Model.Rating; i++)
+                    {
+                        <i class="ion-android-star" style="color: #ffdd59"></i>
+                    }
+                </h3>
 
                 <p class="price">@Convert.ToDecimal(Model.Price).ToString("#,##") VND</p>
                 <br><br>
@@ -90,35 +93,16 @@
             </div>
             <div class="col-sm-5">
                 <div class="comments">
-                    <h2 class="h3">What do you think? (#3)</h2>
-                    <br>
-
-
+                    <h2 class="h3">What do you think? (#@ViewBag.ReviewsCount)</h2>
                     <div class="wrapper">
                         <div class="content">
-                            <h3>Anne Hathaway</h3>
-                            <label>2 years ago</label>
-                            <p>
-                                Apple Music brings iTunes music streaming to the UK. But is it worth paying for? In our Apple Music review, we examine the service's features, UK pricing, audio quality and music library
-                            </p>
-
-
-                            <h3>Chris Hemsworth</h3>
-                            <label>Today</label>
-                            <p>
-                                Samsung's Galaxy S7 smartphone is getting serious hype. Here's what it does better than Apple's iPhone 6s.
-                            </p>
-
-
-                            <h3>Anne Hathaway</h3>
-                            <label>2 years ago</label>
-                            <p>
-                                Apple Music brings iTunes music streaming to the UK. But is it worth paying for? In our Apple Music review, we examine the service's features, UK pricing, audio quality and music library
-                            </p>
+                            @foreach (var review in ViewBag.Reviews)
+                            {
+                                @await Component.InvokeAsync("ReviewContent", review);
+                            }
                         </div>
                     </div>
                     <br>
-
                     <button class="btn btn-default btn-sm" data-toggle="modal" data-target="#Modal-Comment"> <i class="ion-chatbox-working"></i> Add comment </button>
                 </div>
                 <br><br>
@@ -160,28 +144,51 @@
             </div>
             <div class="modal-body">
                 <div class="container-fluid">
-                    <form class="join" action="index.php" method="post">
-                        <div class="row">
-                            <div class="col-sm-12">
-                                <textarea name="comment" placeholder="Type here" required="" class="form-control" rows="5"></textarea>
-                                <br>
-                            </div>
-                            <div class="col-sm-6">
-                                <input type="text" name="name" value="" placeholder="Name" required="" class="form-control" />
-                            </div>
-                            <div class="col-sm-6">
-                                <input type="email" name="email" value="" placeholder="E-mail" required="" class="form-control" />
-                            </div>
-                            <div class="col-sm-12">
-                                <div class="align-center">
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        <form class="join" asp-action="PostReview" asp-controller="Product" method="post">
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <div class="rate">
+                                        <input type="radio" id="star5" name="rating" value="5" />
+                                        <label for="star5" title="text">5 stars</label>
+                                        <input type="radio" id="star4" name="rating" value="4" />
+                                        <label for="star4" title="text">4 stars</label>
+                                        <input type="radio" id="star3" name="rating" value="3" />
+                                        <label for="star3" title="text">3 stars</label>
+                                        <input type="radio" id="star2" name="rating" value="2" />
+                                        <label for="star2" title="text">2 stars</label>
+                                        <input type="radio" id="star1" name="rating" value="1" />
+                                        <label for="star1" title="text">1 star</label>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <input type="text" name="userName" value="" placeholder="Name" required class="form-control" />
+                                    <input type="hidden" name="productId" value="@Model.ProductId" />
                                     <br>
-                                    <button type="submit" class="btn btn-primary btn-sm"> <i class="ion-android-send"></i> Send</button>
-                                    <button type="button" class="btn btn-primary btn-sm" data-dismiss="modal"> <i class="ion-android-share"></i> No, thanks </button>
-                                    <br><br>
+                                </div>
+                                <div class="col-sm-12">
+                                    <textarea name="content" placeholder="Type here" required class="form-control" rows="5"></textarea>
+                                    <br>
+                                </div>
+                                <div class="col-sm-12">
+                                    <div class="align-center">
+                                        <br>
+                                        <button type="submit" class="btn btn-primary btn-sm"> <i class="ion-android-send"></i> Send</button>
+                                        <button type="button" class="btn btn-primary btn-sm" data-dismiss="modal"> <i class="ion-android-share"></i> No, thanks </button>
+                                        <br><br>
+                                    </div>
                                 </div>
                             </div>
+                        </form>
+                    }
+                    else
+                    {
+                        <div class="text-center">
+                            <h3 class="text-center">Please login before comment the product !</h3>
+                            <a asp-controller="Account" asp-action="SignIn"> Login </a>
                         </div>
-                    </form>
+                    }
                 </div>
             </div>
         </div>

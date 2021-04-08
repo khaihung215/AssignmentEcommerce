@@ -23,7 +23,7 @@ namespace AssignmentEcommerce_Backend.Controllers
     {
         private readonly ApplicationDbContext _context;
         private readonly IStorageService _storageService;
-        private IMapper _mapper;
+        private readonly IMapper _mapper;
 
         public CategoriesController(ApplicationDbContext context, IMapper mapper, IStorageService storageService)
         {

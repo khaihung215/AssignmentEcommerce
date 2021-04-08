@@ -1,14 +1,17 @@
 using AssignmentEcommerce_CustomerSite.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.Extensions.Hosting;
 using Microsoft.IdentityModel.Tokens;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
 using System.Threading.Tasks;
 namespace AssignmentEcommerce_CustomerSite
 {
@@ -25,6 +28,8 @@ namespace AssignmentEcommerce_CustomerSite
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddHttpClient();
+            services.TryAddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+
             services.AddTransient<ICategoryApiClient, CategoryApiClient>();
             services.AddTransient<IProductApiClient, ProductApiClient>();
 

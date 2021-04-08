@@ -26,5 +26,7 @@ namespace AssignmentEcommerce_Backend.Models
         public virtual Category Category { get; set; }
 
         public virtual ICollection<Review> Reviews { get; set; }
+
+        public int Rating { get; set; }
     }
 }

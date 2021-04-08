@@ -1,5 +1,9 @@
 ﻿using AssignmentEcommerce_CustomerSite.Services;
+using AssignmentEcommerce_Shared;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace AssignmentEcommerce_CustomerSite.Controllers
@@ -15,7 +19,7 @@ namespace AssignmentEcommerce_CustomerSite.Controllers
             _categoryClient = categoryClient;
         }
 
-        public async Task<IActionResult> Index(string? id)
+        public async Task<IActionResult> Index(string id)
         {
             if (id != null)
             {
@@ -37,10 +41,31 @@ namespace AssignmentEcommerce_CustomerSite.Controllers
         {
             var product = await _productClient.GetProductById(id);
 
+            var reviews = await _productClient.GetReviews(id);
+            ViewBag.ReviewsCount = reviews.Count();
+            ViewBag.Reviews = reviews;
+
             var productsSameCate = await _productClient.GetProductSameCategory(id);
             ViewBag.ProductsSameCate = productsSameCate;
 
             return View(product);
+        }
+
+        [Authorize]
+        [HttpPost]
+        public async Task<IActionResult> PostReview(string userName, int rating, string content, string productId)
+        {
+            var review = new ReviewFormRequest
+            {
+                UserName = userName,
+                Content = content,
+                Rating = rating,
+                ProductId = productId,
+            };
+
+            await _productClient.PostReview(review);
+
+            return RedirectToAction("Detail", new { id = productId });
         }
     }
 }

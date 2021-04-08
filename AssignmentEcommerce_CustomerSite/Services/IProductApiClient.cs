@@ -15,5 +15,9 @@ namespace AssignmentEcommerce_CustomerSite.Services
         Task<IList<ProductVm>> GetProductSameCategory(string id);
 
         Task<IList<ProductVm>> GetProductByCategory(string id);
+
+        Task<IList<ReviewVm>> GetReviews(string id);
+
+        Task<ReviewFormRequest> PostReview(ReviewFormRequest reviewFormRequest);
     }
 }

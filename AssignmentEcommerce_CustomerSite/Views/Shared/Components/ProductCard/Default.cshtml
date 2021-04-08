@@ -5,6 +5,12 @@
 
     <div class="content">
         <h1 class="h4">@Model.Name</h1>
+        <p>
+            @for (int i = 0; i < Model.Rating; i++)
+            {
+                <i class="ion-android-star" style="color: #ffdd59"></i>
+            }
+        </p>
         <p class="price">@Convert.ToDecimal(Model.Price).ToString("#,##") VND</p>
         <label>@Model.NameCategory</label>
 

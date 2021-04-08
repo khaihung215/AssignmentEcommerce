@@ -1,0 +1,11 @@
+﻿@model AssignmentEcommerce_Shared.ReviewVm
+
+<h3>
+    @Model.UserName
+    @for (int i = 0; i < Model.Rating; i++)
+    {
+        <i class="ion-android-star" style="color: #ffdd59"></i>
+    }
+</h3>
+<label>@Convert.ToDateTime(Model.DateReview).ToString("dd-MM-yyyy")</label>
+<p>@Model.Content</p>
