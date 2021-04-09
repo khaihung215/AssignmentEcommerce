@@ -111,7 +111,7 @@
                     <h2 class="h3">Do you have any questions?</h2>
                     <p>Online chat with our manager</p>
 
-                    <button class="btn btn-default btn-sm"> <i class="ion-android-contact"></i> Lat's talk </button>
+                    <button class="btn btn-default btn-sm" data-toggle="modal" data-target="#Modal-Talk"> <i class="ion-android-contact"></i> Lat's talk </button>
                 </div>
             </div>
         </div>
@@ -189,6 +189,24 @@
                             <a asp-controller="Account" asp-action="SignIn"> Login </a>
                         </div>
                     }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="Modal-Talk" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header align-center">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true"><i class="ion-android-close"></i></span></button>
+                <h1 class="h4 modal-title">Talk</h1>
+            </div>
+            <div class="modal-body">
+                <div class="container-fluid">
+                        <div class="text-center">
+                            <h3 class="text-center">We don't talk anymore - Charlie Puth !</h3>
+                        </div>
                 </div>
             </div>
         </div>
