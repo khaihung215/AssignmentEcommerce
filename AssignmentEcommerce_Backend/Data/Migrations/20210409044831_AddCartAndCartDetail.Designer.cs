@@ -4,56 +4,22 @@ using AssignmentEcommerce_Backend.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace AssignmentEcommerce_Backend.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210409044831_AddCartAndCartDetail")]
+    partial class AddCartAndCartDetail
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("ProductVersion", "5.0.4")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-            modelBuilder.Entity("AssignmentEcommerce_Backend.Models.Cart", b =>
-                {
-                    b.Property<string>("CartId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("UserId")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("CartId");
-
-                    b.ToTable("Carts");
-                });
-
-            modelBuilder.Entity("AssignmentEcommerce_Backend.Models.CartDetail", b =>
-                {
-                    b.Property<string>("CartDetailId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("CartId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("ProductId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<int>("Quantity")
-                        .HasColumnType("int");
-
-                    b.HasKey("CartDetailId");
-
-                    b.HasIndex("CartId");
-
-                    b.HasIndex("ProductId");
-
-                    b.ToTable("CartDetails");
-                });
 
             modelBuilder.Entity("AssignmentEcommerce_Backend.Models.Category", b =>
                 {
@@ -343,21 +309,6 @@ namespace AssignmentEcommerce_Backend.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
-            modelBuilder.Entity("AssignmentEcommerce_Backend.Models.CartDetail", b =>
-                {
-                    b.HasOne("AssignmentEcommerce_Backend.Models.Cart", "Cart")
-                        .WithMany("CartDetails")
-                        .HasForeignKey("CartId");
-
-                    b.HasOne("AssignmentEcommerce_Backend.Models.Product", "Product")
-                        .WithMany()
-                        .HasForeignKey("ProductId");
-
-                    b.Navigation("Cart");
-
-                    b.Navigation("Product");
-                });
-
             modelBuilder.Entity("AssignmentEcommerce_Backend.Models.Product", b =>
                 {
                     b.HasOne("AssignmentEcommerce_Backend.Models.Category", "Category")
@@ -425,11 +376,6 @@ namespace AssignmentEcommerce_Backend.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-                });
-
-            modelBuilder.Entity("AssignmentEcommerce_Backend.Models.Cart", b =>
-                {
-                    b.Navigation("CartDetails");
                 });
 
             modelBuilder.Entity("AssignmentEcommerce_Backend.Models.Category", b =>

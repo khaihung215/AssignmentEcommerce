@@ -12,8 +12,6 @@ namespace AssignmentEcommerce_Backend.Models
 
         public string UserId { get; set; }
 
-        public virtual IdentityUser User { get; set; }
-
         public virtual ICollection<CartDetail> CartDetails { get; set; }
     }
 }
