@@ -117,7 +117,9 @@ namespace AssignmentEcommerce_Backend.Controllers
             cart.Quantity = quantity;
             await _context.SaveChangesAsync();
 
-            return Ok();
+            var cartRes = _mapper.Map<CartRespond>(cart);
+
+            return cartRes;
         }
 
         [HttpDelete("RemoveCart/{id}")]
@@ -133,7 +135,9 @@ namespace AssignmentEcommerce_Backend.Controllers
             _context.CartDetails.Remove(cart);
             await _context.SaveChangesAsync();
 
-            return NoContent();
+            var cartRes = _mapper.Map<CartRespond>(cart);
+
+            return cartRes;
         }
 
         private async Task<bool> CheckUserCart(string userId)

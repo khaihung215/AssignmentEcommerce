@@ -2,7 +2,7 @@
 
 <div class="media">
     <div class="media-left">
-        <a href="#">
+        <a asp-controller="Product" asp-action="Detail" asp-route-id="@Model.ProductId">
             <img class="media-object" src="@Model.Image" alt="@Model.ProductName" />
         </a>
     </div>
@@ -21,6 +21,10 @@
             </span>
         </div>
 
-        <a href="#remove"> <i class="ion-trash-b"></i> Remove </a>
+        <form asp-action="RemoveCart" asp-controller="Carts" method="post">
+            <input name="id" type="hidden" value="@Model.CartDetailId" />
+            <button type="submit" class="btn btn-primary btn-rounded btn-sm"> <i class="ion-trash-b"></i> Remove</button>
+        </form>
     </div>
+    <br />
 </div>

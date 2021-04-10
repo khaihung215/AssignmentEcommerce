@@ -44,5 +44,14 @@ namespace AssignmentEcommerce_CustomerSite.Controllers
 
             return RedirectToAction("Index");
         }
+
+        [Authorize]
+        [HttpPost]
+        public async Task<IActionResult> RemoveCart(string id)
+        {
+            await _cartApiClient.RemoveCart(id);
+
+            return RedirectToAction("Index");
+        }
     }
 }

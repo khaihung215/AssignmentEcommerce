@@ -52,5 +52,18 @@ namespace AssignmentEcommerce_CustomerSite.Services
 
             return await response.Content.ReadAsAsync<CartCreateRequest>();
         }
+
+        public async Task<CartRespond> RemoveCart(string id)
+        {
+            var client = _httpClientFactory.CreateClient();
+            var accessToken = await _httpContextAccessor.HttpContext.GetTokenAsync("access_token");
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", accessToken);
+
+            var response = await client.DeleteAsync("https://localhost:44311/api/carts/removecart/" + id);
+
+            response.EnsureSuccessStatusCode();
+
+            return await response.Content.ReadAsAsync<CartRespond>();
+        }
     }
 }

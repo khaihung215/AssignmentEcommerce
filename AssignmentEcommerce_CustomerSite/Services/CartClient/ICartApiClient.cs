@@ -11,5 +11,7 @@ namespace AssignmentEcommerce_CustomerSite.Services
         Task<IList<CartRespond>> GetCart();
 
         Task<CartCreateRequest> PostCart(CartCreateRequest cartCreateRequest);
+
+        Task<CartRespond> RemoveCart(string id);
     }
 }
