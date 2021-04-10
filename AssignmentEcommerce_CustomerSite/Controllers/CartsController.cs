@@ -53,5 +53,20 @@ namespace AssignmentEcommerce_CustomerSite.Controllers
 
             return RedirectToAction("Index");
         }
+
+        [Authorize]
+        [HttpPost]
+        public async Task<IActionResult> UpdateCart(string cartDetailId, int quantity)
+        {
+            var cartItem = new CartUpdateRequest
+            {
+                CartDetailId = cartDetailId,
+                Quantity = quantity
+            };
+
+            await _cartApiClient.UpdateCart(cartItem);
+
+            return RedirectToAction("Index");
+        }
     }
 }

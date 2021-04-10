@@ -12,13 +12,21 @@
     </div>
     <div class="controls">
         <div class="input-group">
-            <span class="input-group-btn">
-                <button class="btn btn-default btn-sm" type="button" data-action="minus"><i class="ion-minus-round"></i></button>
-            </span>
+            <form asp-action="UpdateCart" asp-controller="Carts" method="post" style="display: inline">
+                <span class="input-group-btn">
+                    <input type="hidden" name="cartDetailId" value="@Model.CartDetailId" />
+                    <input type="hidden" name="quantity" value="-1" />
+                    <button class="btn btn-default btn-sm" type="submit"><i class="ion-minus-round"></i></button>
+                </span>
+            </form>
             <input type="text" class="form-control input-sm" placeholder="Qty" value="@Model.Quantity" readonly="">
-            <span class="input-group-btn">
-                <button class="btn btn-default btn-sm" type="button" data-action="plus"><i class="ion-plus-round"></i></button>
-            </span>
+            <form asp-action="UpdateCart" asp-controller="Carts" method="post" style="display: inline">
+                <span class="input-group-btn">
+                    <input type="hidden" name="cartDetailId" value="@Model.CartDetailId" />
+                    <input type="hidden" name="quantity" value="1" />
+                    <button class="btn btn-default btn-sm" type="submit"><i class="ion-plus-round"></i></button>
+                </span>
+            </form>
         </div>
 
         <form asp-action="RemoveCart" asp-controller="Carts" method="post">
@@ -26,5 +34,7 @@
             <button type="submit" class="btn btn-primary btn-rounded btn-sm"> <i class="ion-trash-b"></i> Remove</button>
         </form>
     </div>
+    <br />
+    <br />
     <br />
 </div>

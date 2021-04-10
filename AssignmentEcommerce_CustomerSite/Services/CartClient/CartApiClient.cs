@@ -65,5 +65,21 @@ namespace AssignmentEcommerce_CustomerSite.Services
 
             return await response.Content.ReadAsAsync<CartRespond>();
         }
+
+        public async Task<CartRespond> UpdateCart(CartUpdateRequest cartUpdateRequest)
+        {
+            var client = _httpClientFactory.CreateClient();
+            var accessToken = await _httpContextAccessor.HttpContext.GetTokenAsync("access_token");
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", accessToken);
+
+            var json = JsonConvert.SerializeObject(cartUpdateRequest);
+            var data = new StringContent(json, Encoding.UTF8, "application/json");
+
+            var response = await client.PutAsync("https://localhost:44311/api/carts/updatecart", data);
+
+            response.EnsureSuccessStatusCode();
+
+            return await response.Content.ReadAsAsync<CartRespond>();
+        }
     }
 }

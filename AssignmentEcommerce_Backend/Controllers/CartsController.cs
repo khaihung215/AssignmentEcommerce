@@ -104,17 +104,28 @@ namespace AssignmentEcommerce_Backend.Controllers
             }
         }
 
-        [HttpPut("UpdateCart/{id}")]
-        public async Task<ActionResult<CartRespond>> UpdateCart(string id, int quantity)
+        [HttpPut("UpdateCart")]
+        public async Task<ActionResult<CartRespond>> UpdateCart(CartUpdateRequest cartUpdateRequest)
         {
-            var cart = await _context.CartDetails.FindAsync(id);
+            var cart = await _context.CartDetails.FindAsync(cartUpdateRequest.CartDetailId);
 
             if (cart == null)
             {
                 return NotFound();
             }
 
-            cart.Quantity = quantity;
+            if(cartUpdateRequest.Quantity > 0)
+            {
+                cart.Quantity++;
+            }
+            else
+            {
+                if (cart.Quantity > 1)
+                {
+                    cart.Quantity--;
+                }
+            }
+       
             await _context.SaveChangesAsync();
 
             var cartRes = _mapper.Map<CartRespond>(cart);

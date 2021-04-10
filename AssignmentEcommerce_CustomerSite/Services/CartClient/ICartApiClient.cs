@@ -13,5 +13,7 @@ namespace AssignmentEcommerce_CustomerSite.Services
         Task<CartCreateRequest> PostCart(CartCreateRequest cartCreateRequest);
 
         Task<CartRespond> RemoveCart(string id);
+
+        Task<CartRespond> UpdateCart(CartUpdateRequest cartUpdateRequest);
     }
 }
