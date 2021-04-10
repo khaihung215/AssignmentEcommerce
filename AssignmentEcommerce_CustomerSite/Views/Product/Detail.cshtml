@@ -30,7 +30,18 @@
                 <p class="price">@Convert.ToDecimal(Model.Price).ToString("#,##") VND</p>
                 <br><br>
 
-                <button class="btn btn-primary btn-rounded"> <i class="ion-bag"></i> Add to cart</button>
+                @if (User.Identity.IsAuthenticated)
+                {
+                    <form asp-action="AddToCart" asp-controller="Carts" method="post">
+                        <input name="productId" type="hidden" value="@Model.ProductId" />
+                        <input name="quantity" type="hidden" value="1" />
+                        <button type="submit" class="btn btn-primary btn-rounded btn-sm"> <i class="ion-bag"></i> Add to cart</button>
+                    </form>
+                }
+                else
+                {
+                    <button class="btn btn-primary btn-rounded btn-sm"> <i class="ion-bag"></i> Add to cart</button>
+                }
             </div>
         </div>
         <br><br><br>
@@ -204,9 +215,9 @@
             </div>
             <div class="modal-body">
                 <div class="container-fluid">
-                        <div class="text-center">
-                            <h3 class="text-center">We don't talk anymore - Charlie Puth !</h3>
-                        </div>
+                    <div class="text-center">
+                        <h3 class="text-center">We don't talk anymore - Charlie Puth !</h3>
+                    </div>
                 </div>
             </div>
         </div>

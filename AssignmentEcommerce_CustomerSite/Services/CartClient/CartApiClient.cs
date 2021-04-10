@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Headers;
+using System.Text;
 using System.Threading.Tasks;
 
 namespace AssignmentEcommerce_CustomerSite.Services
@@ -34,6 +35,22 @@ namespace AssignmentEcommerce_CustomerSite.Services
             response.EnsureSuccessStatusCode();
 
             return await response.Content.ReadAsAsync<IList<CartRespond>>();
+        }
+
+        public async Task<CartCreateRequest> PostCart(CartCreateRequest cartCreateRequest)
+        {
+            var client = _httpClientFactory.CreateClient();
+            var accessToken = await _httpContextAccessor.HttpContext.GetTokenAsync("access_token");
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", accessToken);
+
+            var json = JsonConvert.SerializeObject(cartCreateRequest);
+            var data = new StringContent(json, Encoding.UTF8, "application/json");
+
+            var response = await client.PostAsync("https://localhost:44311/api/carts/postcart", data);
+
+            response.EnsureSuccessStatusCode();
+
+            return await response.Content.ReadAsAsync<CartCreateRequest>();
         }
     }
 }

@@ -9,5 +9,7 @@ namespace AssignmentEcommerce_CustomerSite.Services
     public interface ICartApiClient
     {
         Task<IList<CartRespond>> GetCart();
+
+        Task<CartCreateRequest> PostCart(CartCreateRequest cartCreateRequest);
     }
 }

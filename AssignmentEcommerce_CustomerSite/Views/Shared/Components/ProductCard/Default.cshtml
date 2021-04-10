@@ -1,7 +1,7 @@
 ﻿@model AssignmentEcommerce_Shared.ProductVm
 
 <div class="col-sm-6 col-md-4 product">
-    <a asp-controller="Product" asp-action="Detail" asp-route-id="@Model.ProductId"><img src="@Model.Images" alt="@Model.Name" style="height: 200px; width: 200px"/></a>
+    <a asp-controller="Product" asp-action="Detail" asp-route-id="@Model.ProductId"><img src="@Model.Images" alt="@Model.Name" style="height: 200px; width: 200px" /></a>
 
     <div class="content">
         <h1 class="h4">@Model.Name</h1>
@@ -14,7 +14,19 @@
         <p class="price">@Convert.ToDecimal(Model.Price).ToString("#,##") VND</p>
         <label>@Model.NameCategory</label>
 
-        <a asp-controller="Product" asp-action="Detail" asp-route-id="@Model.ProductId" class="btn btn-link"> Details</a>
-        <button class="btn btn-primary btn-rounded btn-sm"> <i class="ion-bag"></i> Add to cart</button>
+        @if (User.Identity.IsAuthenticated)
+        {
+            <form asp-action="AddToCart" asp-controller="Carts" method="post">
+                <a asp-controller="Product" asp-action="Detail" asp-route-id="@Model.ProductId" class="btn btn-link"> Details</a>
+                <input name="productId" type="hidden" value="@Model.ProductId" />
+                <input name="quantity" type="hidden" value="1" />
+                <button type="submit" class="btn btn-primary btn-rounded btn-sm"> <i class="ion-bag"></i> Add to cart</button>
+            </form>
+        }
+        else
+        {
+            <a asp-controller="Product" asp-action="Detail" asp-route-id="@Model.ProductId" class="btn btn-link"> Details</a>
+            <button class="btn btn-primary btn-rounded btn-sm"> <i class="ion-bag"></i> Add to cart</button>
+        }
     </div>
 </div>

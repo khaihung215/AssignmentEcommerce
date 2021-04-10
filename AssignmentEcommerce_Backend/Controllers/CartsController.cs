@@ -55,7 +55,7 @@ namespace AssignmentEcommerce_Backend.Controllers
         }
 
         [HttpPost("PostCart")]
-        public async Task<ActionResult<CartDetail>> PostCart(CartCreateRequest cartDetailVm)
+        public async Task<ActionResult<CartDetail>> PostCart(CartCreateRequest cartCreateRequest)
         {
             var userId = User.FindFirst(ClaimTypes.NameIdentifier).Value;
 
@@ -68,9 +68,9 @@ namespace AssignmentEcommerce_Backend.Controllers
                 var cartDetail = new CartDetail
                 {
                     CartDetailId = Guid.NewGuid().ToString(),
-                    Quantity = cartDetailVm.Quantity,
+                    Quantity = cartCreateRequest.Quantity,
                     CartId = cart.CartId,
-                    ProductId = cartDetailVm.ProductId
+                    ProductId = cartCreateRequest.ProductId
                 };
 
                 await _context.CartDetails.AddAsync(cartDetail);
@@ -92,9 +92,9 @@ namespace AssignmentEcommerce_Backend.Controllers
                 var cartDetail = new CartDetail
                 {
                     CartDetailId = Guid.NewGuid().ToString(),
-                    Quantity = cartDetailVm.Quantity,
+                    Quantity = cartCreateRequest.Quantity,
                     CartId = cart.CartId,
-                    ProductId = cartDetailVm.ProductId
+                    ProductId = cartCreateRequest.ProductId
                 };
 
                 await _context.CartDetails.AddAsync(cartDetail);
