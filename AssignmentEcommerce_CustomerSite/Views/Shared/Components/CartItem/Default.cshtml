@@ -1,0 +1,26 @@
+﻿@model AssignmentEcommerce_Shared.CartRespond
+
+<div class="media">
+    <div class="media-left">
+        <a href="#">
+            <img class="media-object" src="@Model.Image" alt="@Model.ProductName" />
+        </a>
+    </div>
+    <div class="media-body">
+        <h2 class="h4 media-heading">@Model.ProductName</h2>
+        <p class="price">@Convert.ToDecimal(Model.Price).ToString("#,##") VND</p>
+    </div>
+    <div class="controls">
+        <div class="input-group">
+            <span class="input-group-btn">
+                <button class="btn btn-default btn-sm" type="button" data-action="minus"><i class="ion-minus-round"></i></button>
+            </span>
+            <input type="text" class="form-control input-sm" placeholder="Qty" value="@Model.Quantity" readonly="">
+            <span class="input-group-btn">
+                <button class="btn btn-default btn-sm" type="button" data-action="plus"><i class="ion-plus-round"></i></button>
+            </span>
+        </div>
+
+        <a href="#remove"> <i class="ion-trash-b"></i> Remove </a>
+    </div>
+</div>

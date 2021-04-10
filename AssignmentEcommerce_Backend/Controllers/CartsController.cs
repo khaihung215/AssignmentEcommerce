@@ -31,8 +31,8 @@ namespace AssignmentEcommerce_Backend.Controllers
             _storageService = storageService;
         }
 
-        [HttpGet("GetCard")]
-        public async Task<IEnumerable<CartRespond>> GetCard()
+        [HttpGet("GetCart")]
+        public async Task<IEnumerable<CartRespond>> GetCart()
         {
             var userId = User.FindFirst(ClaimTypes.NameIdentifier).Value;
 
