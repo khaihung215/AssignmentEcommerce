@@ -19,7 +19,6 @@
                     <button class="btn btn-default btn-sm" type="submit"><i class="ion-minus-round"></i></button>
                 </span>
             </form>
-            <input type="text" class="form-control input-sm" placeholder="Qty" value="@Model.Quantity" readonly="">
             <form asp-action="UpdateCart" asp-controller="Carts" method="post" style="display: inline">
                 <span class="input-group-btn">
                     <input type="hidden" name="cartDetailId" value="@Model.CartDetailId" />
@@ -27,14 +26,14 @@
                     <button class="btn btn-default btn-sm" type="submit"><i class="ion-plus-round"></i></button>
                 </span>
             </form>
+            <form asp-action="RemoveCart" asp-controller="Carts" method="post" style="display: inline">
+                <span class="input-group-btn">
+                    <input name="id" type="hidden" value="@Model.CartDetailId" />
+                    <button type="submit" class="btn btn-default btn-sm"><i class="ion-trash-b"></i></button>
+                </span>
+            </form>
+            <input type="text" class="form-control input-sm" placeholder="Qty" value="@Model.Quantity" readonly="">
         </div>
-
-        <form asp-action="RemoveCart" asp-controller="Carts" method="post">
-            <input name="id" type="hidden" value="@Model.CartDetailId" />
-            <button type="submit" class="btn btn-primary btn-rounded btn-sm"> <i class="ion-trash-b"></i> Remove</button>
-        </form>
     </div>
-    <br />
-    <br />
     <br />
 </div>

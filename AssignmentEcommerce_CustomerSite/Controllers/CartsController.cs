@@ -27,6 +27,11 @@ namespace AssignmentEcommerce_CustomerSite.Controllers
             ViewBag.Total = carts.Sum(x => x.Price * x.Quantity);
             ViewBag.TotalItem = carts.Count();
 
+            if(carts.Count() < 1)
+            {
+                ViewBag.CartNull = "Your cart is empty !";
+            }
+
             return View();
         }
 

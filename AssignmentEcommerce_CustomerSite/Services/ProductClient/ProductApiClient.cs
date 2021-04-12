@@ -14,69 +14,57 @@ namespace AssignmentEcommerce_CustomerSite.Services
 {
     public class ProductApiClient : IProductApiClient
     {
-        private readonly IHttpClientFactory _httpClientFactory;
-        private readonly IHttpContextAccessor _httpContextAccessor;
+        private readonly HttpClient _client;
 
-        public ProductApiClient(IHttpClientFactory httpClientFactory,
-            IHttpContextAccessor httpContextAccessor)
+        public ProductApiClient(HttpClient client)
         {
-            _httpClientFactory = httpClientFactory;
-            _httpContextAccessor = httpContextAccessor;
+            _client = client;
         }
 
         public async Task<IList<ProductVm>> GetProduct()
         {
-            var client = _httpClientFactory.CreateClient();
-            var response = await client.GetAsync("https://localhost:44311/api/product");
+            var response = await _client.GetAsync("api/product");
             response.EnsureSuccessStatusCode();
             return await response.Content.ReadAsAsync<IList<ProductVm>>();
         }
 
         public async Task<ProductVm> GetProductById(string id)
         {
-            var client = _httpClientFactory.CreateClient();
-            var response = await client.GetAsync("https://localhost:44311/api/product/getproductbyid/" + id);
+            var response = await _client.GetAsync("api/product/getproductbyid/" + id);
             response.EnsureSuccessStatusCode();
             return await response.Content.ReadAsAsync<ProductVm>();
         }
 
         public async Task<IList<ProductVm>> GetProductSameCategory(string id)
         {
-            var client = _httpClientFactory.CreateClient();
-            var response = await client.GetAsync("https://localhost:44311/api/product/getproductsamecategory/" + id);
+            var response = await _client.GetAsync("api/product/getproductsamecategory/" + id);
             response.EnsureSuccessStatusCode();
             return await response.Content.ReadAsAsync<IList<ProductVm>>();
         }
 
         public async Task<IList<ProductVm>> GetProductByCategory(string id)
         {
-            var client = _httpClientFactory.CreateClient();
-            var response = await client.GetAsync("https://localhost:44311/api/product/getproductbycategory/" + id);
+            var response = await _client.GetAsync("api/product/getproductbycategory/" + id);
             response.EnsureSuccessStatusCode();
             return await response.Content.ReadAsAsync<IList<ProductVm>>();
         }
 
         public async Task<IList<ReviewVm>> GetReviews(string id)
         {
-            var client = _httpClientFactory.CreateClient();
-            var response = await client.GetAsync("https://localhost:44311/api/reviews/getreviews/" + id);
+            var response = await _client.GetAsync("api/reviews/getreviews/" + id);
             response.EnsureSuccessStatusCode();
             return await response.Content.ReadAsAsync<IList<ReviewVm>>();
         }
 
         public async Task<ReviewFormRequest> PostReview(ReviewFormRequest reviewFormRequest)
         {
-            var client = _httpClientFactory.CreateClient();
-            var accessToken = await _httpContextAccessor.HttpContext.GetTokenAsync("access_token");
-            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", accessToken);
-
             var json = JsonConvert.SerializeObject(reviewFormRequest);
             var data = new StringContent(json, Encoding.UTF8, "application/json");
 
-            var response = await client.PostAsync("https://localhost:44311/api/reviews/postreview", data);
+            var response = await _client.PostAsync("api/reviews/postreview", data);
 
             response.EnsureSuccessStatusCode();
-            
+
             return await response.Content.ReadAsAsync<ReviewFormRequest>();
         }
     }

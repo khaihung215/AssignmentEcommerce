@@ -14,23 +14,16 @@ namespace AssignmentEcommerce_CustomerSite.Services
 {
     public class CartApiClient : ICartApiClient
     {
-        private readonly IHttpClientFactory _httpClientFactory;
-        private readonly IHttpContextAccessor _httpContextAccessor;
+        private readonly HttpClient _client;
 
-        public CartApiClient(IHttpClientFactory httpClientFactory,
-            IHttpContextAccessor httpContextAccessor)
+        public CartApiClient(HttpClient client)
         {
-            _httpClientFactory = httpClientFactory;
-            _httpContextAccessor = httpContextAccessor;
+            _client = client;
         }
 
         public async Task<IList<CartRespond>> GetCart()
         {
-            var client = _httpClientFactory.CreateClient();
-            var accessToken = await _httpContextAccessor.HttpContext.GetTokenAsync("access_token");
-            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", accessToken);
-
-            var response = await client.GetAsync("https://localhost:44311/api/carts/getcart");
+            var response = await _client.GetAsync("api/carts/getcart");
 
             response.EnsureSuccessStatusCode();
 
@@ -39,14 +32,10 @@ namespace AssignmentEcommerce_CustomerSite.Services
 
         public async Task<CartCreateRequest> PostCart(CartCreateRequest cartCreateRequest)
         {
-            var client = _httpClientFactory.CreateClient();
-            var accessToken = await _httpContextAccessor.HttpContext.GetTokenAsync("access_token");
-            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", accessToken);
-
             var json = JsonConvert.SerializeObject(cartCreateRequest);
             var data = new StringContent(json, Encoding.UTF8, "application/json");
 
-            var response = await client.PostAsync("https://localhost:44311/api/carts/postcart", data);
+            var response = await _client.PostAsync("api/carts/postcart", data);
 
             response.EnsureSuccessStatusCode();
 
@@ -55,11 +44,7 @@ namespace AssignmentEcommerce_CustomerSite.Services
 
         public async Task<CartRespond> RemoveCart(string id)
         {
-            var client = _httpClientFactory.CreateClient();
-            var accessToken = await _httpContextAccessor.HttpContext.GetTokenAsync("access_token");
-            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", accessToken);
-
-            var response = await client.DeleteAsync("https://localhost:44311/api/carts/removecart/" + id);
+            var response = await _client.DeleteAsync("api/carts/removecart/" + id);
 
             response.EnsureSuccessStatusCode();
 
@@ -68,14 +53,10 @@ namespace AssignmentEcommerce_CustomerSite.Services
 
         public async Task<CartRespond> UpdateCart(CartUpdateRequest cartUpdateRequest)
         {
-            var client = _httpClientFactory.CreateClient();
-            var accessToken = await _httpContextAccessor.HttpContext.GetTokenAsync("access_token");
-            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", accessToken);
-
             var json = JsonConvert.SerializeObject(cartUpdateRequest);
             var data = new StringContent(json, Encoding.UTF8, "application/json");
 
-            var response = await client.PutAsync("https://localhost:44311/api/carts/updatecart", data);
+            var response = await _client.PutAsync("api/carts/updatecart", data);
 
             response.EnsureSuccessStatusCode();
 

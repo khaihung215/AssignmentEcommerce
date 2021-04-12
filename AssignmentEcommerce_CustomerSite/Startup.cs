@@ -1,18 +1,17 @@
-using AssignmentEcommerce_CustomerSite.Services;
+using System;
+using System.Net.Http;
+using System.Net.Http.Headers;
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.Extensions.Hosting;
 using Microsoft.IdentityModel.Tokens;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net.Http;
-using System.Threading.Tasks;
+using AssignmentEcommerce_CustomerSite.Services;
+
 namespace AssignmentEcommerce_CustomerSite
 {
     public class Startup
@@ -28,12 +27,6 @@ namespace AssignmentEcommerce_CustomerSite
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddHttpClient();
-            services.TryAddSingleton<IHttpContextAccessor, HttpContextAccessor>();
-
-            services.AddTransient<ICategoryApiClient, CategoryApiClient>();
-            services.AddTransient<IProductApiClient, ProductApiClient>();
-            services.AddTransient<ICartApiClient, CartApiClient>();
-
 
             services.AddAuthentication(options =>
             {
@@ -63,6 +56,20 @@ namespace AssignmentEcommerce_CustomerSite
                         RoleClaimType = "role"
                     };
                 });
+
+            var configureClient = new Action<IServiceProvider, HttpClient>(async (provider, client) =>
+            {
+                var httpContextAccessor = provider.GetRequiredService<IHttpContextAccessor>();
+                var accessToken = await httpContextAccessor.HttpContext.GetTokenAsync("access_token");
+
+                client.BaseAddress = new Uri(Configuration["BackEndUrl"]);
+                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", accessToken);
+            });
+
+            services.TryAddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+            services.AddHttpClient<ICategoryApiClient, CategoryApiClient>(configureClient);
+            services.AddHttpClient<IProductApiClient, ProductApiClient>(configureClient);
+            services.AddHttpClient<ICartApiClient, CartApiClient>(configureClient);
 
             services.AddControllersWithViews();
         }

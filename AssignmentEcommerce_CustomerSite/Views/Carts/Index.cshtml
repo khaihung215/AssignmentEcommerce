@@ -15,9 +15,16 @@
                 <div class="panel-body">
                     <div class="checkout-cart">
                         <div class="content">
-                            @foreach (var cartItem in ViewBag.Carts)
+                            @if (ViewBag.TotalItem < 1)
                             {
-                                @await Component.InvokeAsync("CartItem", cartItem);
+                                <h2>@ViewBag.CartNull</h2>
+                            }
+                            else
+                            {
+                                @foreach (var cartItem in ViewBag.Carts)
+                                {
+                                    @await Component.InvokeAsync("CartItem", cartItem);
+                                }
                             }
                         </div>
                     </div>
