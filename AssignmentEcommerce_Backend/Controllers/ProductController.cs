@@ -150,6 +150,7 @@ namespace AssignmentEcommerce_Backend.Controllers
             product.ProductId = Guid.NewGuid().ToString();
             product.CreatedDate = DateTime.Now.Date;
             product.UpdatedDate = DateTime.Now.Date;
+            product.Rating = 0;
 
             if (productCreateRequest.Images != null)
             {
@@ -170,7 +171,7 @@ namespace AssignmentEcommerce_Backend.Controllers
 
         [HttpDelete("{id}")]
         [Authorize(Roles = "admin")]
-        public async Task<IActionResult> DeleteProduct(string id)
+        public async Task<ActionResult<ProductVm>> DeleteProduct(string id)
         {
             var product = await _context.Products.FindAsync(id);
             if (product == null)
@@ -178,10 +179,12 @@ namespace AssignmentEcommerce_Backend.Controllers
                 return NotFound();
             }
 
+            var productRes = _mapper.Map<ProductVm>(product);
+
             _context.Products.Remove(product);
             await _context.SaveChangesAsync();
 
-            return NoContent();
+            return productRes;
         }
 
         private async Task<string> SaveFile(IFormFile file)
