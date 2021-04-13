@@ -9,7 +9,7 @@ using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 
-namespace AssignmentEcommerce_Test
+namespace AssignmentEcommerce_Test.Controller
 {
     public class ProductControllerTests : IClassFixture<SqliteInMemoryFixture>
     {
