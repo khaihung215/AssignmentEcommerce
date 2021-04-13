@@ -68,7 +68,7 @@ namespace AssignmentEcommerce_Backend.Controllers
 
         [HttpPut("{id}")]
         [Authorize(Roles = "admin")]
-        public async Task<ActionResult<CategoryVm>> PutCategory(string id,[FromForm] CategoryCreateRequest categoryCreateRequest)
+        public async Task<ActionResult<CategoryVm>> PutCategory(string id, CategoryCreateRequest categoryCreateRequest)
         {
             var category = await _context.Categories.FindAsync(id);
 
@@ -93,7 +93,7 @@ namespace AssignmentEcommerce_Backend.Controllers
 
         [HttpPost]
         [Authorize(Roles = "admin")]
-        public async Task<ActionResult<CategoryVm>> PostCategory([FromForm] CategoryCreateRequest categoryCreateRequest)
+        public async Task<ActionResult<CategoryVm>> PostCategory(CategoryCreateRequest categoryCreateRequest)
         {
             var category = _mapper.Map<Category>(categoryCreateRequest);
             category.CategoryId = Guid.NewGuid().ToString();
@@ -116,7 +116,7 @@ namespace AssignmentEcommerce_Backend.Controllers
 
         [HttpDelete("{id}")]
         [Authorize(Roles = "admin")]
-        public async Task<IActionResult> DeleteCategory(string id)
+        public async Task<ActionResult<CategoryVm>> DeleteCategory(string id)
         {
             var category = await _context.Categories.FindAsync(id);
             if (category == null)
@@ -124,10 +124,12 @@ namespace AssignmentEcommerce_Backend.Controllers
                 return NotFound();
             }
 
+            var categoryRes = _mapper.Map<CategoryVm>(category);
+
             _context.Categories.Remove(category);
             await _context.SaveChangesAsync();
 
-            return NoContent();
+            return categoryRes;
         }
 
         private async Task<string> SaveFile(IFormFile file)

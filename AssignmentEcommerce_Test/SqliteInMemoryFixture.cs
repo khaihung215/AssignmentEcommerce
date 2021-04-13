@@ -6,7 +6,7 @@ using System;
 
 namespace AssignmentEcommerce_Test
 {
-    class SqliteInMemoryFixture: IDisposable
+    public class SqliteInMemoryFixture: IDisposable
     {
         private IServiceScope _serviceScope;
         private SqliteConnection _connection;
