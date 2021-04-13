@@ -7,7 +7,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AssignmentEcommerce_Backend
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AssignmentEcommerce_CustomerSite", "AssignmentEcommerce_CustomerSite\AssignmentEcommerce_CustomerSite.csproj", "{A7551FEC-BBB4-469F-B9EF-BAD376667B37}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AssignmentEcommerce_Shared", "AssignmentEcommerce_Shared\AssignmentEcommerce_Shared.csproj", "{F97F57D4-7E53-44B0-B38B-F317ADE9B941}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AssignmentEcommerce_Shared", "AssignmentEcommerce_Shared\AssignmentEcommerce_Shared.csproj", "{F97F57D4-7E53-44B0-B38B-F317ADE9B941}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AssignmentEcommerce_Test", "AssignmentEcommerce_Test\AssignmentEcommerce_Test.csproj", "{40F6D6E7-5246-4A9F-9D83-C8CA6506DE7D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -27,6 +29,10 @@ Global
 		{F97F57D4-7E53-44B0-B38B-F317ADE9B941}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F97F57D4-7E53-44B0-B38B-F317ADE9B941}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F97F57D4-7E53-44B0-B38B-F317ADE9B941}.Release|Any CPU.Build.0 = Release|Any CPU
+		{40F6D6E7-5246-4A9F-9D83-C8CA6506DE7D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{40F6D6E7-5246-4A9F-9D83-C8CA6506DE7D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{40F6D6E7-5246-4A9F-9D83-C8CA6506DE7D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{40F6D6E7-5246-4A9F-9D83-C8CA6506DE7D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

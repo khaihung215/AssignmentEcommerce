@@ -118,7 +118,7 @@ namespace AssignmentEcommerce_Backend.Controllers
 
         [HttpPut("{id}")]
         [Authorize(Roles = "admin")]
-        public async Task<ActionResult<ProductVm>> PutProduct(string id,[FromForm] ProductUpdateRequest productUpdateRequest)
+        public async Task<ActionResult<ProductVm>> PutProduct(string id, ProductUpdateRequest productUpdateRequest)
         {
             var product = await _context.Products.FindAsync(id);
 
@@ -143,7 +143,7 @@ namespace AssignmentEcommerce_Backend.Controllers
 
         [HttpPost]
         [Authorize(Roles = "admin")]
-        public async Task<ActionResult<ProductVm>> PostProduct([FromForm] ProductCreateRequest productCreateRequest)
+        public async Task<ActionResult<ProductVm>> PostProduct(ProductCreateRequest productCreateRequest)
         {
             var product = _mapper.Map<Product>(productCreateRequest);
 
