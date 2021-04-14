@@ -75,6 +75,56 @@ namespace AssignmentEcommerce_Test.Controller
         }
 
         [Fact]
+        public async Task PostCart_Success()
+        {
+            //Arrange
+            var dbContext = _fixture.Context;
+
+            var mapper = CartMapper.Get();
+
+            var fileService = FileStorageService.IStorageService();
+
+            var user = new User { Id = "IDUSER" };
+            await dbContext.AddAsync(user);
+            await dbContext.SaveChangesAsync();
+
+            var product = new Product { ProductId = "IDPRODUCT" };
+            await dbContext.AddAsync(product);
+            await dbContext.SaveChangesAsync();
+
+            var cart = new Cart
+            {
+                CartId = Guid.NewGuid().ToString(),
+                UserId = user.Id,
+            };
+            await dbContext.AddAsync(cart);
+            await dbContext.SaveChangesAsync();
+
+            var cartCreateRequest = new CartCreateRequest
+            {
+                ProductId = product.ProductId,
+                Quantity = 1
+            };
+
+            var mockHttpContextAccessor = new Mock<IHttpContextAccessor>();
+            mockHttpContextAccessor.Setup(x => x.HttpContext.User.FindFirst(It.IsAny<string>()))
+            .Returns(new Claim("id", "IDUSER"));
+
+            var cartController = new CartsController(dbContext, mapper, fileService, mockHttpContextAccessor.Object);
+
+            // Act
+            var result = await cartController.PostCart(cartCreateRequest);
+
+            // Assert
+            var postCartResult = Assert.IsType<ActionResult<CartDetail>>(result);
+            var resultValue = Assert.IsType<CartDetail>(postCartResult.Value);
+
+            Assert.Equal(cart.CartId, resultValue.CartId);
+            Assert.Equal(product.ProductId, resultValue.ProductId);
+            Assert.Equal(cartCreateRequest.Quantity, resultValue.Quantity);
+        }
+
+        [Fact]
         public async Task UpdateCart_Success()
         {
             // Arrange
