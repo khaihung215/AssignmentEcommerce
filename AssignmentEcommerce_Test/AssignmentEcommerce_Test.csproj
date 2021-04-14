@@ -24,6 +24,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\AssignmentEcommerce_Backend\AssignmentEcommerce_Backend.csproj" />
+    <ProjectReference Include="..\AssignmentEcommerce_CustomerSite\AssignmentEcommerce_CustomerSite.csproj" />
   </ItemGroup>
 
 </Project>

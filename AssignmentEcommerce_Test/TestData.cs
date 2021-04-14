@@ -38,6 +38,18 @@ namespace AssignmentEcommerce_Test
             Rating = 5
         };
 
+        public static ProductVm ProductVmTestData() => new ProductVm
+        {
+            ProductId = "IdProduct",
+            Name = "Name Product Test",
+            Description = "Description Product Test",
+            Images = "noimage.png",
+            Price = 100000,
+            CategoryId = "IdCategory",
+            NameCategory = "Name Category Test",
+            Rating = 5
+        };
+
         public static ProductCreateRequest ProductCreateTestData() => new ProductCreateRequest
         {
             Name = "Name Product Test",
