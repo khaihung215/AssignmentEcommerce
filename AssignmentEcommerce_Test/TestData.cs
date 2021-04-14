@@ -56,5 +56,24 @@ namespace AssignmentEcommerce_Test
             UpdatedDate = DateTime.Now.Date,
             CategoryId = "IdCategory"
         };
+
+        public static Review ReviewTestData() => new Review
+        {
+            ReviewId = "IdReview",
+            Content = "Content Test",
+            Rating = 5,
+            ProductId = "IdProduct",
+            UserId = "IdUser",
+            UserName = "Khai Hung",
+            DateReview = DateTime.Now.Date
+        };
+
+        public static ReviewFormRequest ReviewFormTestData() => new ReviewFormRequest
+        {
+            Content = "Content Test",
+            Rating = 5,
+            ProductId = "IdProduct",
+            UserName = "Khai Hung"
+        };
     }
 }

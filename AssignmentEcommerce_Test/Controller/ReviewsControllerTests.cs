@@ -36,24 +36,15 @@ namespace AssignmentEcommerce_Test.Controller
             var mockHttpContextAccessor = new Mock<IHttpContextAccessor>();
             mockHttpContextAccessor.Setup(o => o.HttpContext.User.Identity.Name).Returns(It.IsAny<string>());
 
-            var product = new Product { ProductId = "IDPRODUCT" };
+            var product = new Product { ProductId = "IdProduct" };
             await dbContext.AddAsync(product);
             await dbContext.SaveChangesAsync();
 
-            var user = new User { Id = "IDUSER" };
+            var user = new User { Id = "IdUser" };
             await dbContext.AddAsync(user);
             await dbContext.SaveChangesAsync();
 
-            var review = new Review
-            {
-                ReviewId = Guid.NewGuid().ToString(),
-                Content = "Content Test",
-                Rating = 5,
-                ProductId = "IDPRODUCT",
-                UserId = "IDUSER",
-                UserName = "Khai Hung",
-                DateReview = DateTime.Now.Date
-            };
+            var review = TestData.ReviewTestData();
             await dbContext.AddAsync(review);
             await dbContext.SaveChangesAsync();
 
@@ -77,19 +68,13 @@ namespace AssignmentEcommerce_Test.Controller
 
             var mockHttpContextAccessor = new Mock<IHttpContextAccessor>();
             mockHttpContextAccessor.Setup(x => x.HttpContext.User.FindFirst(It.IsAny<string>()))
-            .Returns(new Claim("id", "IDUSER"));
+            .Returns(new Claim("id", "IdUser"));
 
-            var product = new Product { ProductId = "IDPRODUCT" };
+            var product = new Product { ProductId = "IdProduct" };
             await dbContext.AddAsync(product);
             await dbContext.SaveChangesAsync();
 
-            var reviewFormRequest = new ReviewFormRequest
-            {
-                Content = "Content Test",
-                Rating = 5,
-                ProductId = "IDPRODUCT",
-                UserName = "Khai Hung",
-            };
+            var reviewFormRequest = TestData.ReviewFormTestData();
 
             var reviewController = new ReviewsController(dbContext, mapper, mockHttpContextAccessor.Object);
 
@@ -102,8 +87,8 @@ namespace AssignmentEcommerce_Test.Controller
 
             Assert.Equal("Content Test", resultValue.Content);
             Assert.Equal(5, resultValue.Rating);
-            Assert.Equal("IDUSER", resultValue.UserId);
-            Assert.Equal("IDPRODUCT", resultValue.ProductId);
+            Assert.Equal("IdUser", resultValue.UserId);
+            Assert.Equal("IdProduct", resultValue.ProductId);
             Assert.Equal("Khai Hung", resultValue.UserName);
         }
     }
