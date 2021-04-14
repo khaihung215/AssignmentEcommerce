@@ -18,6 +18,13 @@ namespace AssignmentEcommerce_Test
             Images = "noimage.png"
         };
 
+        public static CategoryCreateRequest CateCreateTestData() => new CategoryCreateRequest
+        {
+            NameCategory = "Name Category Test New",
+            Description = "Description Category Test New",
+            ThumbnailImages = null
+        };
+
         public static Product ProductTestData() => new Product
         {
             ProductId = "IdProduct",

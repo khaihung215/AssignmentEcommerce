@@ -31,12 +31,7 @@ namespace AssignmentEcommerce_Test.Controller
 
             var fileService = FileStorageService.IStorageService();
 
-            var categoryCreateRequest = new CategoryCreateRequest
-            {
-                NameCategory = "Name Category Test",
-                Description = "Description Category Test",
-                ThumbnailImages = null
-            };
+            var categoryCreateRequest = TestData.CateCreateTestData();
 
             var categoriesController = new CategoriesController(dbContext, mapper, fileService);
 
@@ -47,8 +42,8 @@ namespace AssignmentEcommerce_Test.Controller
             var postCategoryResult = Assert.IsType<ActionResult<CategoryVm>>(result);
             var resultValue = Assert.IsType<CategoryVm>(postCategoryResult.Value);
 
-            Assert.Equal("Name Category Test", resultValue.NameCategory);
-            Assert.Equal("Description Category Test", resultValue.Description);
+            Assert.Equal("Name Category Test New", resultValue.NameCategory);
+            Assert.Equal("Description Category Test New", resultValue.Description);
             Assert.Equal("noimage.png", resultValue.Images);
         }
 
@@ -62,22 +57,11 @@ namespace AssignmentEcommerce_Test.Controller
 
             var fileService = FileStorageService.IStorageService();
 
-            var oldCategory = new Category
-            {
-                CategoryId = Guid.NewGuid().ToString(),
-                NameCategory = "Name Category Test",
-                Description = "Description Category Test",
-                Images = "noimage.png"
-            };
+            var oldCategory = TestData.CateTestData();
             await dbContext.AddAsync(oldCategory);
             await dbContext.SaveChangesAsync();
 
-            var newCategory = new CategoryCreateRequest
-            {
-                NameCategory = "Name Category Test New",
-                Description = "Description Category Test New",
-                ThumbnailImages = null
-            };
+            var newCategory = TestData.CateCreateTestData();
 
             var categoriesController = new CategoriesController(dbContext, mapper, fileService);
 
@@ -103,13 +87,7 @@ namespace AssignmentEcommerce_Test.Controller
 
             var fileService = FileStorageService.IStorageService();
 
-            var newCategory = new Category
-            {
-                CategoryId = Guid.NewGuid().ToString(),
-                NameCategory = "Name Category Test",
-                Description = "Description Category Test",
-                Images = "noimage.png"
-            };
+            var newCategory = TestData.CateTestData();
             await dbContext.AddAsync(newCategory);
             await dbContext.SaveChangesAsync();
 
@@ -133,13 +111,7 @@ namespace AssignmentEcommerce_Test.Controller
 
             var fileService = FileStorageService.IStorageService();
 
-            var newCategory = new Category
-            {
-                CategoryId = Guid.NewGuid().ToString(),
-                NameCategory = "Name Category Test",
-                Description = "Description Category Test",
-                Images = "imageTest.png"
-            };
+            var newCategory = TestData.CateTestData();
             await dbContext.AddAsync(newCategory);
             await dbContext.SaveChangesAsync();
 
@@ -166,13 +138,7 @@ namespace AssignmentEcommerce_Test.Controller
 
             var fileService = FileStorageService.IStorageService();
 
-            var newCategory = new Category
-            {
-                CategoryId = Guid.NewGuid().ToString(),
-                NameCategory = "Name Category Test",
-                Description = "Description Category Test",
-                Images = "imageTest.png"
-            };
+            var newCategory = TestData.CateTestData();
             await dbContext.AddAsync(newCategory);
             await dbContext.SaveChangesAsync();
 
