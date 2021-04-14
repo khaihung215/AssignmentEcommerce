@@ -76,7 +76,8 @@ namespace AssignmentEcommerce_Test.Controller
             var mapper = ReviewMapper.Get();
 
             var mockHttpContextAccessor = new Mock<IHttpContextAccessor>();
-            mockHttpContextAccessor.Setup(o => o.HttpContext.User.Identity.Name).Returns(It.IsAny<string>());
+            mockHttpContextAccessor.Setup(x => x.HttpContext.User.FindFirst(It.IsAny<string>()))
+            .Returns(new Claim("id", "IDUSER"));
 
             var product = new Product { ProductId = "IDPRODUCT" };
             await dbContext.AddAsync(product);
@@ -101,6 +102,7 @@ namespace AssignmentEcommerce_Test.Controller
 
             Assert.Equal("Content Test", resultValue.Content);
             Assert.Equal(5, resultValue.Rating);
+            Assert.Equal("IDUSER", resultValue.UserId);
             Assert.Equal("IDPRODUCT", resultValue.ProductId);
             Assert.Equal("Khai Hung", resultValue.UserName);
         }

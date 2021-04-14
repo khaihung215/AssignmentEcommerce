@@ -51,7 +51,7 @@ namespace AssignmentEcommerce_Backend.Controllers
             review.ReviewId = Guid.NewGuid().ToString();
             review.DateReview = DateTime.Now.Date;
 
-            var userId = _httpContextAccessor.HttpContext.User.FindFirstValue("sub");
+            var userId = _httpContextAccessor.HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value;
             review.UserId = userId;
 
             _context.Reviews.Add(review);
