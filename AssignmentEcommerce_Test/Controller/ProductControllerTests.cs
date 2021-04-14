@@ -164,6 +164,67 @@ namespace AssignmentEcommerce_Test.Controller
         }
 
         [Fact]
+        public async Task GetProductSameCategory_Success()
+        {
+            // Arrange
+            var dbContext = _fixture.Context;
+
+            var mapper = ProductMapper.Get();
+
+            var fileService = FileStorageService.IStorageService();
+
+            var category = new Category
+            {
+                CategoryId = Guid.NewGuid().ToString(),
+                NameCategory = "Name Category Test",
+                Description = "Description Category Test",
+                Images = "noimage.png"
+            };
+            await dbContext.AddAsync(category);
+            await dbContext.SaveChangesAsync();
+
+            var product1 = new Product
+            {
+                ProductId = Guid.NewGuid().ToString(),
+                Name = "Name Product Test",
+                Description = "Description Product Test",
+                Images = "noimage.png",
+                Price = 100000,
+                CreatedDate = DateTime.Now.Date,
+                UpdatedDate = DateTime.Now.Date,
+                CategoryId = category.CategoryId,
+                Rating = 5
+            };
+            await dbContext.AddAsync(product1);
+            await dbContext.SaveChangesAsync();
+
+            var product2 = new Product
+            {
+                ProductId = Guid.NewGuid().ToString(),
+                Name = "Name Product Test 2",
+                Description = "Description Product Test 2",
+                Images = "noimage.png",
+                Price = 200000,
+                CreatedDate = DateTime.Now.Date,
+                UpdatedDate = DateTime.Now.Date,
+                CategoryId = category.CategoryId,
+                Rating = 5
+            };
+
+            await dbContext.AddAsync(product2);
+            await dbContext.SaveChangesAsync();
+
+            var productController = new ProductController(dbContext, mapper, fileService);
+
+            // Act
+            var result = await productController.GetProductSameCategory(product1.ProductId);
+
+            // Assert
+            var postProductResult = Assert.IsAssignableFrom<IEnumerable<ProductVm>>(result);
+            Assert.NotEmpty(postProductResult);
+        }
+
+        [Fact]
         public async Task PostProduct_Success()
         {
             // Arrange
