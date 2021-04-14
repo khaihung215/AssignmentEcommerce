@@ -23,18 +23,20 @@ namespace AssignmentEcommerce_Backend.Controllers
         private readonly ApplicationDbContext _context;
         private readonly IMapper _mapper;
         private readonly IStorageService _storageService;
+        private readonly IHttpContextAccessor _httpContextAccessor;
 
-        public CartsController(ApplicationDbContext context, IMapper mapper, IStorageService storageService)
+        public CartsController(ApplicationDbContext context, IMapper mapper, IStorageService storageService, IHttpContextAccessor httpContextAccessor)
         {
             _context = context;
             _mapper = mapper;
             _storageService = storageService;
+            _httpContextAccessor = httpContextAccessor;
         }
 
         [HttpGet("GetCart")]
         public async Task<IEnumerable<CartRespond>> GetCart()
         {
-            var userId = User.FindFirst(ClaimTypes.NameIdentifier).Value;
+            var userId = _httpContextAccessor.HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value;
 
             var cart = await _context.Carts.FirstOrDefaultAsync(x => x.UserId.Equals(userId));
 
@@ -57,7 +59,7 @@ namespace AssignmentEcommerce_Backend.Controllers
         [HttpPost("PostCart")]
         public async Task<ActionResult<CartDetail>> PostCart(CartCreateRequest cartCreateRequest)
         {
-            var userId = User.FindFirst(ClaimTypes.NameIdentifier).Value;
+            var userId = _httpContextAccessor.HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value;
 
             var check = CheckUserCart(userId);
 
