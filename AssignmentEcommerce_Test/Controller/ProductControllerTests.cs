@@ -31,28 +31,11 @@ namespace AssignmentEcommerce_Test.Controller
 
             var fileService = FileStorageService.IStorageService();
 
-            var category = new Category
-            {
-                CategoryId = Guid.NewGuid().ToString(),
-                NameCategory = "Name Category Test",
-                Description = "Description Category Test",
-                Images = "noimage.png"
-            };
+            var category = TestData.CateTestData();
             await dbContext.AddAsync(category);
             await dbContext.SaveChangesAsync();
 
-            var product = new Product
-            {
-                ProductId = Guid.NewGuid().ToString(),
-                Name = "Name Product Test",
-                Description = "Description Product Test",
-                Images = "noimage.png",
-                Price = 100000,
-                CreatedDate = DateTime.Now.Date,
-                UpdatedDate = DateTime.Now.Date,
-                CategoryId = category.CategoryId,
-                Rating = 5
-            };
+            var product = TestData.ProductTestData();
             await dbContext.AddAsync(product);
             await dbContext.SaveChangesAsync();
 
@@ -76,28 +59,11 @@ namespace AssignmentEcommerce_Test.Controller
 
             var fileService = FileStorageService.IStorageService();
 
-            var category = new Category
-            {
-                CategoryId = Guid.NewGuid().ToString(),
-                NameCategory = "Name Category Test",
-                Description = "Description Category Test",
-                Images = "noimage.png"
-            };
+            var category = TestData.CateTestData();
             await dbContext.AddAsync(category);
             await dbContext.SaveChangesAsync();
 
-            var product = new Product
-            {
-                ProductId = Guid.NewGuid().ToString(),
-                Name = "Name Product Test",
-                Description = "Description Product Test",
-                Images = "noimage.png",
-                Price = 100000,
-                CreatedDate = DateTime.Now.Date,
-                UpdatedDate = DateTime.Now.Date,
-                CategoryId = category.CategoryId,
-                Rating = 5
-            };
+            var product = TestData.ProductTestData();
             await dbContext.AddAsync(product);
             await dbContext.SaveChangesAsync();
 
@@ -128,28 +94,11 @@ namespace AssignmentEcommerce_Test.Controller
 
             var fileService = FileStorageService.IStorageService();
 
-            var category = new Category
-            {
-                CategoryId = Guid.NewGuid().ToString(),
-                NameCategory = "Name Category Test",
-                Description = "Description Category Test",
-                Images = "noimage.png"
-            };
+            var category = TestData.CateTestData();
             await dbContext.AddAsync(category);
             await dbContext.SaveChangesAsync();
 
-            var product = new Product
-            {
-                ProductId = Guid.NewGuid().ToString(),
-                Name = "Name Product Test",
-                Description = "Description Product Test",
-                Images = "noimage.png",
-                Price = 100000,
-                CreatedDate = DateTime.Now.Date,
-                UpdatedDate = DateTime.Now.Date,
-                CategoryId = category.CategoryId,
-                Rating = 5
-            };
+            var product = TestData.ProductTestData();
             await dbContext.AddAsync(product);
             await dbContext.SaveChangesAsync();
 
@@ -173,44 +122,16 @@ namespace AssignmentEcommerce_Test.Controller
 
             var fileService = FileStorageService.IStorageService();
 
-            var category = new Category
-            {
-                CategoryId = Guid.NewGuid().ToString(),
-                NameCategory = "Name Category Test",
-                Description = "Description Category Test",
-                Images = "noimage.png"
-            };
+            var category = TestData.CateTestData();
             await dbContext.AddAsync(category);
             await dbContext.SaveChangesAsync();
 
-            var product1 = new Product
-            {
-                ProductId = Guid.NewGuid().ToString(),
-                Name = "Name Product Test",
-                Description = "Description Product Test",
-                Images = "noimage.png",
-                Price = 100000,
-                CreatedDate = DateTime.Now.Date,
-                UpdatedDate = DateTime.Now.Date,
-                CategoryId = category.CategoryId,
-                Rating = 5
-            };
+            var product1 = TestData.ProductTestData();
             await dbContext.AddAsync(product1);
             await dbContext.SaveChangesAsync();
 
-            var product2 = new Product
-            {
-                ProductId = Guid.NewGuid().ToString(),
-                Name = "Name Product Test 2",
-                Description = "Description Product Test 2",
-                Images = "noimage.png",
-                Price = 200000,
-                CreatedDate = DateTime.Now.Date,
-                UpdatedDate = DateTime.Now.Date,
-                CategoryId = category.CategoryId,
-                Rating = 5
-            };
-
+            var product2 = TestData.ProductTestData();
+            product2.ProductId = "IdProduct2";
             await dbContext.AddAsync(product2);
             await dbContext.SaveChangesAsync();
 
@@ -234,25 +155,11 @@ namespace AssignmentEcommerce_Test.Controller
 
             var fileService = FileStorageService.IStorageService();
 
-            var category = new Category
-            {
-                CategoryId = Guid.NewGuid().ToString(),
-                NameCategory = "Name Category Test",
-                Description = "Description Category Test",
-                Images = "noimage.png"
-            };
+            var category = TestData.CateTestData();
             await dbContext.AddAsync(category);
             await dbContext.SaveChangesAsync();
 
-            var productCreateRequest = new ProductCreateRequest
-            {
-                Name = "Name Product Test",
-                Description = "Description Product Test",
-                Price = 100000,
-                Images = null,
-                CreatedDate = DateTime.Now.Date,
-                CategoryId = category.CategoryId,
-            };
+            var productCreateRequest = TestData.ProductCreateTestData();
 
             var productController = new ProductController(dbContext, mapper, fileService);
 
@@ -282,39 +189,15 @@ namespace AssignmentEcommerce_Test.Controller
 
             var fileService = FileStorageService.IStorageService();
 
-            var category = new Category
-            {
-                CategoryId = Guid.NewGuid().ToString(),
-                NameCategory = "Name Category Test",
-                Description = "Description Category Test",
-                Images = "noimage.png"
-            };
+            var category = TestData.CateTestData();
             await dbContext.AddAsync(category);
             await dbContext.SaveChangesAsync();
 
-            var product = new Product
-            {
-                ProductId = Guid.NewGuid().ToString(),
-                Name = "Name Product Test",
-                Description = "Description Product Test",
-                Images = "noimage.png",
-                Price = 100000,
-                CreatedDate = DateTime.Now.Date,
-                UpdatedDate = DateTime.Now.Date,
-                CategoryId = category.CategoryId,
-                Rating = 5
-            };
+            var product = TestData.ProductTestData();
             await dbContext.AddAsync(product);
             await dbContext.SaveChangesAsync();
 
-            var productUpdateRequest = new ProductUpdateRequest
-            {
-                Name = "Name Product Test Update",
-                Description = "Description Product Test Update",
-                Price = 2000000,
-                UpdatedDate = DateTime.Now.Date,
-                CategoryId = category.CategoryId,
-            };
+            var productUpdateRequest = TestData.ProductUpdateTestData();
 
             var productController = new ProductController(dbContext, mapper, fileService);
 
@@ -343,28 +226,11 @@ namespace AssignmentEcommerce_Test.Controller
 
             var fileService = FileStorageService.IStorageService();
 
-            var category = new Category
-            {
-                CategoryId = Guid.NewGuid().ToString(),
-                NameCategory = "Name Category Test",
-                Description = "Description Category Test",
-                Images = "noimage.png"
-            };
+            var category = TestData.CateTestData();
             await dbContext.AddAsync(category);
             await dbContext.SaveChangesAsync();
 
-            var product = new Product
-            {
-                ProductId = Guid.NewGuid().ToString(),
-                Name = "Name Product Test",
-                Description = "Description Product Test",
-                Images = "noimage.png",
-                Price = 100000,
-                CreatedDate = DateTime.Now.Date,
-                UpdatedDate = DateTime.Now.Date,
-                CategoryId = category.CategoryId,
-                Rating = 5
-            };
+            var product = TestData.ProductTestData();
             await dbContext.AddAsync(product);
             await dbContext.SaveChangesAsync();
 
