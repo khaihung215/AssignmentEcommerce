@@ -11,6 +11,7 @@ using System.Collections.Generic;
 using System.Security.Claims;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Authentication;
+using Moq;
 
 namespace AssignmentEcommerce_Test.Controller
 {
@@ -31,6 +32,9 @@ namespace AssignmentEcommerce_Test.Controller
             var dbContext = _fixture.Context;
 
             var mapper = ReviewMapper.Get();
+
+            var mockHttpContextAccessor = new Mock<IHttpContextAccessor>();
+            mockHttpContextAccessor.Setup(o => o.HttpContext.User.Identity.Name).Returns(It.IsAny<string>());
 
             var product = new Product { ProductId = "IDPRODUCT" };
             await dbContext.AddAsync(product);
@@ -53,7 +57,7 @@ namespace AssignmentEcommerce_Test.Controller
             await dbContext.AddAsync(review);
             await dbContext.SaveChangesAsync();
 
-            var reviewController = new ReviewsController(dbContext, mapper);
+            var reviewController = new ReviewsController(dbContext, mapper, mockHttpContextAccessor.Object);
 
             // Act
             var result = await reviewController.GetReviews(review.ProductId);
@@ -63,39 +67,42 @@ namespace AssignmentEcommerce_Test.Controller
             Assert.NotEmpty(postReviewResult);
         }
 
-        //[Fact]
-        //public async Task PostReview_Success()
-        //{
-        //    // Arrange
-        //    var dbContext = _fixture.Context;
+        [Fact]
+        public async Task PostReview_Success()
+        {
+            // Arrange
+            var dbContext = _fixture.Context;
 
-        //    var mapper = ReviewMapper.Get();
+            var mapper = ReviewMapper.Get();
 
-        //    var product = new Product { ProductId = "IDPRODUCT" };
-        //    await dbContext.AddAsync(product);
-        //    await dbContext.SaveChangesAsync();
+            var mockHttpContextAccessor = new Mock<IHttpContextAccessor>();
+            mockHttpContextAccessor.Setup(o => o.HttpContext.User.Identity.Name).Returns(It.IsAny<string>());
 
-        //    var reviewFormRequest = new ReviewFormRequest
-        //    {
-        //        Content = "Content Test",
-        //        Rating = 5,
-        //        ProductId = "IDPRODUCT",
-        //        UserName = "Khai Hung",
-        //    };
+            var product = new Product { ProductId = "IDPRODUCT" };
+            await dbContext.AddAsync(product);
+            await dbContext.SaveChangesAsync();
 
-        //    var reviewController = new ReviewsController(dbContext, mapper);
+            var reviewFormRequest = new ReviewFormRequest
+            {
+                Content = "Content Test",
+                Rating = 5,
+                ProductId = "IDPRODUCT",
+                UserName = "Khai Hung",
+            };
 
-        //    // Act
-        //    var result = await reviewController.PostReview(reviewFormRequest);
+            var reviewController = new ReviewsController(dbContext, mapper, mockHttpContextAccessor.Object);
 
-        //    // Assert
-        //    var postReviewResult = Assert.IsType<ActionResult<ReviewVm>>(result);
-        //    var resultValue = Assert.IsType<ReviewVm>(postReviewResult.Value);
+            // Act
+            var result = await reviewController.PostReview(reviewFormRequest);
 
-        //    Assert.Equal("Content Test", resultValue.Content);
-        //    Assert.Equal(5, resultValue.Rating);
-        //    Assert.Equal("IDPRODUCT", resultValue.ProductId);
-        //    Assert.Equal("Khai Hung", resultValue.UserName);
-        //}
+            // Assert
+            var postReviewResult = Assert.IsType<ActionResult<ReviewVm>>(result);
+            var resultValue = Assert.IsType<ReviewVm>(postReviewResult.Value);
+
+            Assert.Equal("Content Test", resultValue.Content);
+            Assert.Equal(5, resultValue.Rating);
+            Assert.Equal("IDPRODUCT", resultValue.ProductId);
+            Assert.Equal("Khai Hung", resultValue.UserName);
+        }
     }
 }

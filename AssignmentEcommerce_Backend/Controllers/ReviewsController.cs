@@ -21,11 +21,13 @@ namespace AssignmentEcommerce_Backend.Controllers
     {
         private readonly ApplicationDbContext _context;
         private readonly IMapper _mapper;
+        private readonly IHttpContextAccessor _httpContextAccessor;
 
-        public ReviewsController(ApplicationDbContext context, IMapper mapper)
+        public ReviewsController(ApplicationDbContext context, IMapper mapper, IHttpContextAccessor httpContextAccessor)
         {
             _context = context;
             _mapper = mapper;
+            _httpContextAccessor = httpContextAccessor;
         }
 
         [HttpGet("GetReviews/{id}")]
@@ -49,13 +51,13 @@ namespace AssignmentEcommerce_Backend.Controllers
             review.ReviewId = Guid.NewGuid().ToString();
             review.DateReview = DateTime.Now.Date;
 
-            var userId = User.FindFirst(ClaimTypes.NameIdentifier).Value;
+            var userId = _httpContextAccessor.HttpContext.User.FindFirstValue("sub");
             review.UserId = userId;
 
             _context.Reviews.Add(review);
             await _context.SaveChangesAsync();
 
-            var sumRating =  _context.Reviews.Where(x => x.ProductId.Equals(review.ProductId)).Average(p => p.Rating);
+            var sumRating = _context.Reviews.Where(x => x.ProductId.Equals(review.ProductId)).Average(p => p.Rating);
 
             var product = await _context.Products.FindAsync(review.ProductId);
             product.Rating = Convert.ToInt32(sumRating);

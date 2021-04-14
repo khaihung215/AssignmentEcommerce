@@ -53,6 +53,8 @@ namespace AssignmentEcommerce_Backend
                .AddProfileService<CustomProfileService>()
                .AddDeveloperSigningCredential(); // not recommended for production - you need to store your key material somewhere secure
 
+            services.AddHttpContextAccessor();
+
             services.AddAuthentication()
                 .AddLocalApi("Bearer", option =>
                 {
