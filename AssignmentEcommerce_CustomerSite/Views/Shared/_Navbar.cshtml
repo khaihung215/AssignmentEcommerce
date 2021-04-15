@@ -21,7 +21,7 @@
             <ul class="nav navbar-nav navbar-right">
                 @if (User.Identity.IsAuthenticated)
                 {
-                    <li><a asp-controller="Account" asp-action="MyProfile"><span><i class="ion-ios-contact"></i> @User.Identity.Name</span></a></li>
+                    <li><a><span><i class="ion-ios-contact"></i> @User.Identity.Name</span></a></li>
                     <li><a asp-controller="Carts" asp-action="Index"><i class="ion-android-cart"></i> Cart </a></li>
                     <li><a asp-controller="Account" asp-action="SignOut"> <i class="ion-android-exit"></i> Logout </a></li>
                 }

@@ -26,7 +26,19 @@
         else
         {
             <a asp-controller="Product" asp-action="Detail" asp-route-id="@Model.ProductId" class="btn btn-link"> Details</a>
-            <button class="btn btn-primary btn-rounded btn-sm"> <i class="ion-bag"></i> Add to cart</button>
+            <button data-toggle="modal" data-target="#myModal" class="btn btn-primary btn-rounded btn-sm"> <i class="ion-bag"></i> Add to cart</button>
+            <div class="modal fade" id="myModal">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-body">
+                            <div class="text-center">
+                                <h3>Please login before add to cart !</h3>
+                                <a asp-controller="Account" asp-action="SignIn"> Login </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         }
     </div>
 </div>
