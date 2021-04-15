@@ -20,7 +20,7 @@ namespace AssignmentEcommerce_CustomerSite.ViewComponents
         {
             var categorys = await _categoryApiClient.GetCategory();
 
-            return View(categorys);
+            return View("Default", categorys);
         }
     }
 }

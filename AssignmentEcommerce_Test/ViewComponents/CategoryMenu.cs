@@ -23,9 +23,22 @@ namespace AssignmentEcommerce_Test.ViewComponents
         public async Task CategoryMenu_ShouldReturns_NotNullView()
         {
             //Arrange
-            var _categoryApiClient = Mock.Of<ICategoryApiClient>();
+            IList<CategoryVm> cateList = new List<CategoryVm>();
 
-            var viewComponent = new CategoryMenuViewComponent(_categoryApiClient);
+            var category = new CategoryVm
+            {
+                CategoryId = "IdCategory",
+                NameCategory = "Name Category",
+                Description = "Description Category",
+                Images = "noimage.png"
+            };
+
+            cateList.Add(category);
+
+            var _categoryApiClient = new Mock<ICategoryApiClient>();
+            _categoryApiClient.Setup(x => x.GetCategory().Result).Returns((cateList));
+
+            var viewComponent = new CategoryMenuViewComponent(_categoryApiClient.Object);
 
             //Act
             var result = await viewComponent.InvokeAsync() as ViewViewComponentResult;
@@ -38,15 +51,84 @@ namespace AssignmentEcommerce_Test.ViewComponents
         public async Task CategoryMenu_ShouldReturns_CorrectViewType()
         {
             //Arrange
-            var _categoryApiClient = Mock.Of<ICategoryApiClient>();
+            IList<CategoryVm> cateList = new List<CategoryVm>();
 
-            var viewComponent = new CategoryMenuViewComponent(_categoryApiClient);
+            var category = new CategoryVm
+            {
+                CategoryId = "IdCategory",
+                NameCategory = "Name Category",
+                Description = "Description Category",
+                Images = "noimage.png"
+            };
+
+            cateList.Add(category);
+
+            var _categoryApiClient = new Mock<ICategoryApiClient>();
+            _categoryApiClient.Setup(x => x.GetCategory().Result).Returns((cateList));
+
+            var viewComponent = new CategoryMenuViewComponent(_categoryApiClient.Object);
 
             //Act
             var result = await viewComponent.InvokeAsync() as ViewViewComponentResult;
 
             //Assert
             Assert.IsType<ViewViewComponentResult>(result);
+        }
+
+        [Fact]
+        public async Task CategoryMenu_ShouldReturns_CorrectModelType()
+        {
+            //Arrange
+            IList<CategoryVm> cateList = new List<CategoryVm>();
+
+            var category = new CategoryVm
+            {
+                CategoryId = "IdCategory",
+                NameCategory = "Name Category",
+                Description = "Description Category",
+                Images = "noimage.png"
+            };
+
+            cateList.Add(category);
+
+            var _categoryApiClient = new Mock<ICategoryApiClient>();
+            _categoryApiClient.Setup(x => x.GetCategory().Result).Returns((cateList));
+
+            var viewComponent = new CategoryMenuViewComponent(_categoryApiClient.Object);
+
+            //Act
+            var result = await viewComponent.InvokeAsync() as ViewViewComponentResult;
+
+            //Assert
+            Assert.IsAssignableFrom<IList<CategoryVm>>(result?.ViewData.Model);
+        }
+
+        [Fact]
+        public async Task CategoryMenu_ShouldReturns_CorrectViewName()
+        {
+            //Arrange
+            IList<CategoryVm> cateList = new List<CategoryVm>();
+
+            var category = new CategoryVm
+            {
+                CategoryId = "IdCategory",
+                NameCategory = "Name Category",
+                Description = "Description Category",
+                Images = "noimage.png"
+            };
+
+            cateList.Add(category);
+
+            var _categoryApiClient = new Mock<ICategoryApiClient>();
+            _categoryApiClient.Setup(x => x.GetCategory().Result).Returns((cateList));
+
+            var viewComponent = new CategoryMenuViewComponent(_categoryApiClient.Object);
+
+            //Act
+            var result = await viewComponent.InvokeAsync() as ViewViewComponentResult;
+
+            //Assert
+            Assert.Equal("Default", result?.ViewName);
         }
     }
 }
