@@ -80,6 +80,17 @@ namespace AssignmentEcommerce_Test
             DateReview = DateTime.Now.Date
         };
 
+        public static ReviewVm ReviewVmTestData() => new ReviewVm
+        {
+            ReviewId = "IdReview",
+            Content = "Content Test",
+            Rating = 5,
+            ProductId = "IdProduct",
+            UserId = "IdUser",
+            UserName = "Khai Hung",
+            DateReview = DateTime.Now.Date
+        };
+
         public static ReviewFormRequest ReviewFormTestData() => new ReviewFormRequest
         {
             Content = "Content Test",
