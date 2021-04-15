@@ -9,11 +9,11 @@ using Xunit;
 
 namespace AssignmentEcommerce_Test.ViewComponents
 {
-    public class CategoryMenu : IClassFixture<SqliteInMemoryFixture>
+    public class CategoryMenuTest : IClassFixture<SqliteInMemoryFixture>
     {
         private readonly SqliteInMemoryFixture _fixture;
 
-        public CategoryMenu(SqliteInMemoryFixture fixture)
+        public CategoryMenuTest(SqliteInMemoryFixture fixture)
         {
             _fixture = fixture;
             _fixture.CreateDatabase();

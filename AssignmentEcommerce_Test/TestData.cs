@@ -87,5 +87,15 @@ namespace AssignmentEcommerce_Test
             ProductId = "IdProduct",
             UserName = "Khai Hung"
         };
+
+        public static CartRespond CartRespondTestData() => new CartRespond
+        {
+            CartDetailId = "IdCartDetail",
+            ProductId = "IdProduct",
+            ProductName = "Name Product",
+            Price = 100000,
+            Quantity = 1,
+            Image = "noimage.png"
+        };
     }
 }
