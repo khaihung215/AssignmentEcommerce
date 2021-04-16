@@ -25,7 +25,7 @@ const Header = () => {
               <NavLink href="/product">Product</NavLink>
             </NavItem>
             <NavItem>
-              <NavLink href="#">Category</NavLink>
+              <NavLink href="/category">Category</NavLink>
             </NavItem>
           </Nav>
           <NavLink href="#">Logout</NavLink>

@@ -1,6 +1,7 @@
 import Layout from './containers/Layout';
 import Home from './containers/Home/index.jsx'
 import Product from './containers/Product';
+import Category from './containers/Category';
 
 import { BrowserRouter, Route } from 'react-router-dom';
 import './App.css';
@@ -16,6 +17,10 @@ function App() {
 
         <Route path="/product" >
           <Product />
+        </Route>
+
+        <Route path="/category" >
+          <Category />
         </Route>
 
       </Layout>
