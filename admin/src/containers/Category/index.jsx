@@ -1,12 +1,15 @@
 import React from 'react';
 import { Table, Button } from 'reactstrap';
 import { PenFill, TrashFill, PlusCircleFill } from 'react-bootstrap-icons';
+import { Link } from 'react-router-dom';
 
 const Category = () => {
   return (
     <>
       <h2 className="text-center p-3">Category</h2>
-      <Button color="success" className="mb-2 ml-2"><PlusCircleFill color="white" size={20} className="mr-2"/>Create new category</Button>
+      <Button color="success" className="mb-2 ml-2"><PlusCircleFill color="white" size={20} className="mr-2" />
+        <Link to="/formcategory" className="text-decoration-none text-white">Create new category</Link>
+      </Button>
       <Table striped className="text-center">
         <thead>
           <tr>
@@ -24,7 +27,11 @@ const Category = () => {
             <td>Macbook</td>
             <td>Description of macbook</td>
             <td>
-              <Button color="secondary" className="mr-2"><PenFill color="white" size={20} /></Button>
+              <Button color="secondary" className="mr-2">
+                <Link to="/formcategory">
+                  <PenFill color="white" size={20} />
+                </Link>
+              </Button>
               <Button color="danger" className="mr-2"><TrashFill color="white" size={20} /></Button>
             </td>
           </tr>
@@ -35,7 +42,11 @@ const Category = () => {
             <td>Hybird</td>
             <td>Description of hybird</td>
             <td>
-              <Button color="secondary" className="mr-2"><PenFill color="white" size={20} /></Button>
+              <Button color="secondary" className="mr-2">
+                <Link to="/formcategory">
+                  <PenFill color="white" size={20} />
+                </Link>
+              </Button>
               <Button color="danger" className="mr-2"><TrashFill color="white" size={20} /></Button>
             </td>
           </tr>
@@ -46,7 +57,11 @@ const Category = () => {
             <td>Laptop</td>
             <td>Description of laptop</td>
             <td>
-              <Button color="secondary" className="mr-2"><PenFill color="white" size={20} /></Button>
+              <Button color="secondary" className="mr-2">
+                <Link to="/formcategory">
+                  <PenFill color="white" size={20} />
+                </Link>
+              </Button>
               <Button color="danger" className="mr-2"><TrashFill color="white" size={20} /></Button>
             </td>
           </tr>
