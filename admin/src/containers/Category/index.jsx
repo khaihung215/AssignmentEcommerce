@@ -1,9 +1,13 @@
-import React from 'react';
-import { Table, Button } from 'reactstrap';
+import React, { useState } from 'react';
+import { Table, Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 import { PenFill, TrashFill, PlusCircleFill } from 'react-bootstrap-icons';
 import { Link } from 'react-router-dom';
 
 const Category = () => {
+  const [modal, setModal] = useState(false);
+
+  const toggle = () => setModal(!modal);
+
   return (
     <>
       <h2 className="text-center p-3">Category</h2>
@@ -32,7 +36,7 @@ const Category = () => {
                   <PenFill color="white" size={20} />
                 </Link>
               </Button>
-              <Button color="danger" className="mr-2"><TrashFill color="white" size={20} /></Button>
+              <Button color="danger" className="mr-2"><TrashFill color="white" size={20} onClick={toggle}/></Button>
             </td>
           </tr>
           <tr>
@@ -47,7 +51,7 @@ const Category = () => {
                   <PenFill color="white" size={20} />
                 </Link>
               </Button>
-              <Button color="danger" className="mr-2"><TrashFill color="white" size={20} /></Button>
+              <Button color="danger" className="mr-2"><TrashFill color="white" size={20} onClick={toggle}/></Button>
             </td>
           </tr>
           <tr>
@@ -62,11 +66,24 @@ const Category = () => {
                   <PenFill color="white" size={20} />
                 </Link>
               </Button>
-              <Button color="danger" className="mr-2"><TrashFill color="white" size={20} /></Button>
+              <Button color="danger" className="mr-2"><TrashFill color="white" size={20} onClick={toggle}/></Button>
             </td>
           </tr>
         </tbody>
       </Table>
+
+      <div>
+        <Modal isOpen={modal} toggle={toggle}>
+          <ModalHeader toggle={toggle}>Delete</ModalHeader>
+          <ModalBody>
+            Do you want to delete this category ?
+          </ModalBody>
+          <ModalFooter>
+            <Button color="secondary" onClick={toggle}>No</Button>{' '}
+            <Button color="danger" onClick={toggle}>Yes</Button>{' '}
+          </ModalFooter>
+        </Modal>
+      </div>
     </>
   );
 }
