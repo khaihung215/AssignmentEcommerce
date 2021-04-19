@@ -3,7 +3,7 @@ import { GetProducts } from "../Services/productAPI";
 
 export const ProductContext = createContext({});
 
-export default ({ children }) => {
+const ProductContextProvider = ({ children }) => {
     const [productItems, setProductItems] = useState([]);
 
     useEffect(() => {
@@ -22,3 +22,5 @@ export default ({ children }) => {
         </ProductContext.Provider>
     );
 };
+
+export default ProductContextProvider;

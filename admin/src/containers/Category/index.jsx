@@ -26,7 +26,7 @@ const Category = () => {
         <tbody>
           <tr>
             <td>
-              <img src="./mac.jpg" width="150px" height="150px"></img>
+              <img src="./mac.jpg" alt="" width="150px" height="150px"></img>
             </td>
             <td>Macbook</td>
             <td>Description of macbook</td>
@@ -36,12 +36,12 @@ const Category = () => {
                   <PenFill color="white" size={20} />
                 </Link>
               </Button>
-              <Button color="danger" className="mr-2"><TrashFill color="white" size={20} onClick={toggle}/></Button>
+              <Button color="danger" className="mr-2"><TrashFill color="white" size={20} onClick={toggle} /></Button>
             </td>
           </tr>
           <tr>
             <td>
-              <img src="./mac.jpg" width="150px" height="150px"></img>
+              <img src="./mac.jpg" alt="" width="150px" height="150px"></img>
             </td>
             <td>Hybird</td>
             <td>Description of hybird</td>
@@ -51,12 +51,12 @@ const Category = () => {
                   <PenFill color="white" size={20} />
                 </Link>
               </Button>
-              <Button color="danger" className="mr-2"><TrashFill color="white" size={20} onClick={toggle}/></Button>
+              <Button color="danger" className="mr-2"><TrashFill color="white" size={20} onClick={toggle} /></Button>
             </td>
           </tr>
           <tr>
             <td>
-              <img src="./mac.jpg" width="150px" height="150px"></img>
+              <img src="./mac.jpg" alt="" width="150px" height="150px"></img>
             </td>
             <td>Laptop</td>
             <td>Description of laptop</td>
@@ -66,7 +66,7 @@ const Category = () => {
                   <PenFill color="white" size={20} />
                 </Link>
               </Button>
-              <Button color="danger" className="mr-2"><TrashFill color="white" size={20} onClick={toggle}/></Button>
+              <Button color="danger" className="mr-2"><TrashFill color="white" size={20} onClick={toggle} /></Button>
             </td>
           </tr>
         </tbody>

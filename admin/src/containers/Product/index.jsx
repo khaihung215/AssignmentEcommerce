@@ -33,13 +33,13 @@ const Product = () => {
         <tbody>
           {
             productItems && productItems.map(product =>
-              <tr>
+              <tr key={product.productId}>
                 <td>
-                  <img src={product.images} width="150px" height="150px"></img>
+                  <img src={product.images} alt={product.name} width="150px" height="150px"></img>
                 </td>
                 <td>{product.name}</td>
                 <td>{product.description}</td>
-                <td>{product.price}</td>
+                <td>{product.price} VND</td>
                 <td>{product.nameCategory}</td>
                 <td>
                   {Array.from(Array(product.rating), () => {
