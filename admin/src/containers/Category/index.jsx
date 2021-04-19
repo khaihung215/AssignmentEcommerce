@@ -3,7 +3,7 @@ import { Table, Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'react
 import { PenFill, TrashFill, PlusCircleFill } from 'react-bootstrap-icons';
 import { Link } from 'react-router-dom';
 
-import CategoryContextProvider, { CategoryContext } from '../../Context/categoryContext';
+import { CategoryContext } from '../../Context/categoryContext';
 
 const Category = () => {
   const [modal, setModal] = useState(false);
@@ -13,7 +13,7 @@ const Category = () => {
   const { categoryItems } = useContext(CategoryContext);
 
   return (
-    <CategoryContextProvider>
+    <>
       <h2 className="text-center p-3">Category</h2>
       <Button color="success" className="mb-2 ml-2"><PlusCircleFill color="white" size={20} className="mr-2" />
         <Link to="/formcategory" className="text-decoration-none text-white">Create new category</Link>
@@ -61,7 +61,7 @@ const Category = () => {
           </ModalFooter>
         </Modal>
       </div>
-    </CategoryContextProvider>
+    </>
   );
 }
 
