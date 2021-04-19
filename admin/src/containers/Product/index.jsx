@@ -1,12 +1,16 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { Table, Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 import { StarFill, PenFill, TrashFill, PlusCircleFill } from 'react-bootstrap-icons';
 import { Link } from 'react-router-dom';
+
+import { ProductContext } from '../../Context/productContext';
 
 const Product = () => {
   const [modal, setModal] = useState(false);
 
   const toggle = () => setModal(!modal);
+
+  const { productItems } = useContext(ProductContext);
 
   return (
     <>
@@ -27,75 +31,31 @@ const Product = () => {
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td>
-              <img src="./mac.jpg" width="150px" height="150px"></img>
-            </td>
-            <td>Macbook Pro 2021</td>
-            <td>Description of macbook pro 2021</td>
-            <td>59.990.000 VND</td>
-            <td>Macbook</td>
-            <td>
-              <StarFill color="#ffdd59" size={20} />
-              <StarFill color="#ffdd59" size={20} />
-              <StarFill color="#ffdd59" size={20} />
-              <StarFill color="#ffdd59" size={20} />
-              <StarFill color="#ffdd59" size={20} />
-            </td>
-            <td>
-              <Button color="secondary" className="mr-2">
-                <Link to="/formproduct">
-                  <PenFill color="white" size={20} />
-                </Link>
-              </Button>
-              <Button color="danger" className="mr-2"><TrashFill color="white" size={20} onClick={toggle} /></Button>
-            </td>
-          </tr>
-          <tr>
-            <td>
-              <img src="./mac.jpg" width="150px" height="150px"></img>
-            </td>
-            <td>Macbook Pro 2021</td>
-            <td>Description of macbook pro 2021</td>
-            <td>59.990.000 VND</td>
-            <td>Macbook</td>
-            <td>
-              <StarFill color="#ffdd59" size={20} />
-              <StarFill color="#ffdd59" size={20} />
-              <StarFill color="#ffdd59" size={20} />
-              <StarFill color="#ffdd59" size={20} />
-            </td>
-            <td>
-              <Button color="secondary" className="mr-2">
-                <Link to="/formproduct">
-                  <PenFill color="white" size={20} />
-                </Link>
-              </Button>
-              <Button color="danger" className="mr-2"><TrashFill color="white" size={20} onClick={toggle} /></Button>
-            </td>
-          </tr>
-          <tr>
-            <td>
-              <img src="./mac.jpg" width="150px" height="150px"></img>
-            </td>
-            <td>Macbook Pro 2021</td>
-            <td>Description of macbook pro 2021</td>
-            <td>59.990.000 VND</td>
-            <td>Macbook</td>
-            <td>
-              <StarFill color="#ffdd59" size={20} />
-              <StarFill color="#ffdd59" size={20} />
-              <StarFill color="#ffdd59" size={20} />
-            </td>
-            <td>
-              <Button color="secondary" className="mr-2">
-                <Link to="/formproduct">
-                  <PenFill color="white" size={20} />
-                </Link>
-              </Button>
-              <Button color="danger" className="mr-2"><TrashFill color="white" size={20} onClick={toggle} /></Button>
-            </td>
-          </tr>
+          {
+            productItems && productItems.map(product =>
+              <tr>
+                <td>
+                  <img src={product.images} width="150px" height="150px"></img>
+                </td>
+                <td>{product.name}</td>
+                <td>{product.description}</td>
+                <td>{product.price}</td>
+                <td>{product.nameCategory}</td>
+                <td>
+                  {Array.from(Array(product.rating), () => {
+                    return <StarFill color="#ffdd59" size={20} />
+                  })}
+                </td>
+                <td>
+                  <Button color="secondary" className="mr-2">
+                    <Link to="/formproduct">
+                      <PenFill color="white" size={20} />
+                    </Link>
+                  </Button>
+                  <Button color="danger" className="mr-2"><TrashFill color="white" size={20} onClick={toggle} /></Button>
+                </td>
+              </tr>
+            )}
         </tbody>
       </Table>
 
