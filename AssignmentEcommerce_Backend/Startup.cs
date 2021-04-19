@@ -129,6 +129,8 @@ namespace AssignmentEcommerce_Backend
             app.UseIdentityServer();
             app.UseAuthorization();
 
+            app.UseCors(option => { option.AllowAnyHeader().AllowAnyMethod().AllowCredentials().SetIsOriginAllowed(host => true); });
+
             app.UseSwagger();
             app.UseSwaggerUI(c =>
             {
