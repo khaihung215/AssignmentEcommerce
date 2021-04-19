@@ -3,17 +3,13 @@ import ReactDOM from 'react-dom';
 
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import ProductProdvider from './Context/productContext';
 
 import './index.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-
 ReactDOM.render(
   <React.StrictMode>
-    <ProductProdvider>
-      <App />
-    </ProductProdvider>
+    <App />
   </React.StrictMode>,
   document.getElementById('root')
 );

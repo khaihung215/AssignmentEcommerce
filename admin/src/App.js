@@ -4,6 +4,8 @@ import Product from './containers/Product';
 import Category from './containers/Category';
 import FormProduct from './containers/Product/FormProduct';
 import FormCategory from './containers/Category/FormCategory';
+import ProductProdvider from './Context/productContext';
+import CategoryProdvider from './Context/categoryContext';
 
 import { BrowserRouter, Route } from 'react-router-dom';
 import './App.css';
@@ -17,21 +19,25 @@ function App() {
           <Home />
         </Route>
 
-        <Route path="/product" >
-          <Product />
-        </Route>
+        <ProductProdvider>
+          <Route path="/product" >
+            <Product />
+          </Route>
 
-        <Route path="/formproduct" >
-          <FormProduct />
-        </Route>
+          <Route path="/formproduct" >
+            <FormProduct />
+          </Route>
+        </ProductProdvider>
 
-        <Route path="/category" >
-          <Category />
-        </Route>
+        <CategoryProdvider>
+          <Route path="/category" >
+            <Category />
+          </Route>
 
-        <Route path="/formcategory" >
-          <FormCategory />
-        </Route>
+          <Route path="/formcategory" >
+            <FormCategory />
+          </Route>
+        </CategoryProdvider>
 
       </Layout>
     </BrowserRouter>
