@@ -1,6 +1,6 @@
-﻿using IdentityServer4;
+﻿using System.Collections.Generic;
+using IdentityServer4;
 using IdentityServer4.Models;
-using System.Collections.Generic;
 
 namespace AssignmentEcommerce_Backend.IdentityServer
 {
@@ -19,9 +19,9 @@ namespace AssignmentEcommerce_Backend.IdentityServer
                   new ApiScope("assignmentecommerce.api", "Assignment Ecommerce API")
              };
 
-        public static IEnumerable<Client> Clients =>
+        public static IEnumerable<Client> Clients(Dictionary<string, string> clientUrls) =>
             new List<Client>
-            {
+             {
                 // machine to machine client
                 new Client
                 {
@@ -41,9 +41,9 @@ namespace AssignmentEcommerce_Backend.IdentityServer
 
                     AllowedGrantTypes = GrantTypes.Code,
 
-                    RedirectUris = { "https://localhost:44307/signin-oidc" },
+                    RedirectUris = { $"{clientUrls["CustomerSite"]}/signin-oidc" },
 
-                    PostLogoutRedirectUris = { "https://localhost:44307/signout-callback-oidc" },
+                    PostLogoutRedirectUris = { $"{clientUrls["CustomerSite"]}/signout-callback-oidc" },
 
                     AllowedScopes = new List<string>
                     {
@@ -62,9 +62,9 @@ namespace AssignmentEcommerce_Backend.IdentityServer
                     RequireConsent = false,
                     RequirePkce = true,
 
-                    RedirectUris =           { $"https://localhost:44311/swagger/oauth2-redirect.html" },
-                    PostLogoutRedirectUris = { $"https://localhost:44311/swagger/oauth2-redirect.html" },
-                    AllowedCorsOrigins =     { $"https://localhost:44311" },
+                    RedirectUris =           { $"{clientUrls["Backend"]}/swagger/oauth2-redirect.html" },
+                    PostLogoutRedirectUris = { $"{clientUrls["Backend"]}/swagger/oauth2-redirect.html" },
+                    AllowedCorsOrigins =     { $"{clientUrls["Backend"]}" },
 
                     AllowedScopes = new List<string>
                     {
@@ -73,6 +73,6 @@ namespace AssignmentEcommerce_Backend.IdentityServer
                         "assignmentecommerce.api"
                     }
                 },
-            };
+             };
     }
 }
