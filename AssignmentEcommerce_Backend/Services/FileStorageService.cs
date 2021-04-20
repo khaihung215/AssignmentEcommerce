@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System.Collections.Generic;
+using System.IO;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Hosting;
 
@@ -16,7 +17,7 @@ namespace AssignmentEcommerce_Backend.Services
 
         public string GetFileUrl(string fileName)
         {
-            return $"https://localhost:44311/{IMG_SOURCE_FOLDER_NAME}/{fileName}";
+            return $"{Startup.clientUrls["Backend"]}/{IMG_SOURCE_FOLDER_NAME}/{fileName}";
         }
 
         public async Task SaveFileAsync(Stream mediaBinaryStream, string fileName)

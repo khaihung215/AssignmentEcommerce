@@ -17,7 +17,7 @@ using AssignmentEcommerce_Backend.Services;
 namespace AssignmentEcommerce_Backend
 {
     public class Startup
-    {
+    { 
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
@@ -25,10 +25,12 @@ namespace AssignmentEcommerce_Backend
 
         public IConfiguration Configuration { get; }
 
+        public static Dictionary<string, string> clientUrls;
+
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            var clientUrls = new Dictionary<string, string>
+            clientUrls = new Dictionary<string, string>
             {
                 ["CustomerSite"] = Configuration["ClientUrl:CustomerSite"],
                 ["Backend"] = Configuration["ClientUrl:Backend"],
