@@ -11,6 +11,7 @@ using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.Extensions.Hosting;
 using Microsoft.IdentityModel.Tokens;
 using AssignmentEcommerce_CustomerSite.Services;
+using System.Collections.Generic;
 
 namespace AssignmentEcommerce_CustomerSite
 {
@@ -23,9 +24,16 @@ namespace AssignmentEcommerce_CustomerSite
 
         public IConfiguration Configuration { get; }
 
+        public static Dictionary<string, string> clientUrls;
+
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            clientUrls = new Dictionary<string, string>
+            {
+                ["Backend"] = Configuration["ClientUrl:Backend"],
+            };
+
             services.AddHttpClient();
 
             services.AddAuthentication(options =>
@@ -36,7 +44,7 @@ namespace AssignmentEcommerce_CustomerSite
                 .AddCookie("Cookies")
                 .AddOpenIdConnect("oidc", options =>
                 {
-                    options.Authority = "https://localhost:44311";
+                    options.Authority = $"{clientUrls["Backend"]}";
                     options.RequireHttpsMetadata = false;
                     options.GetClaimsFromUserInfoEndpoint = true;
 
