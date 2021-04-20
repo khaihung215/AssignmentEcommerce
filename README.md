@@ -24,6 +24,7 @@ The Unit Test do not need to have a high coverage number but should demonstrate 
 # Online demo (Azure Website)
 - Backend: https://khaihungrookies.azurewebsites.net
 - Frontend: https://unistorerookies.azurewebsites.net
+
 Account:
 - Admin => Email: admin@gmail.com / Password: #Admin123
 - Customer => Email: hungluong@gmail.com / Password: #Hung123
