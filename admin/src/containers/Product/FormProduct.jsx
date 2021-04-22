@@ -10,8 +10,8 @@ const initialValues = {
     name: '',
     description: '',
     price: 0,
-    category: '',
-    image: null,
+    categoryId: '',
+    images: null,
 };
 
 const FormProduct = () => {
@@ -23,16 +23,15 @@ const FormProduct = () => {
             actions.setSubmitting(true);
             setTimeout(() => {
                 var formData = new FormData();
-                formData.append('name', values.name);
-                formData.append('description', values.description);
-                formData.append('price', values.price);
-                formData.append('categoryId', values.category);
-                formData.append('images', values.image);
+
+                Object.keys(values).forEach(key => {
+                    formData.append(key, values[key])
+                });
 
                 postProduct(formData);
 
                 actions.setSubmitting(false);
-            }, 3000);
+            }, 2000);
         }
     });
 
@@ -67,7 +66,7 @@ const FormProduct = () => {
                             <InputGroupAddon addonType="prepend">
                                 <InputGroupText><Icon.Collection /></InputGroupText>
                             </InputGroupAddon>
-                            <Input type="select" name="category" value={formik.values.category} onChange={formik.handleChange}>
+                            <Input type="select" name="categoryId" value={formik.values.categoryId} onChange={formik.handleChange}>
                                 {
                                     categoryItems && categoryItems.map(category =>
                                         <option value={category.categoryId}>{category.nameCategory}</option>
@@ -76,8 +75,8 @@ const FormProduct = () => {
                         </InputGroup>
                         <br />
                         <InputGroup>
-                            <input name="image" type="file" onChange={(event) => {
-                                formik.setFieldValue("image", event.currentTarget.files[0]);
+                            <input name="images" type="file" onChange={(event) => {
+                                formik.setFieldValue("images", event.currentTarget.files[0]);
                             }} />
                         </InputGroup>
                         <br />
