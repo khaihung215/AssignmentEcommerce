@@ -27,8 +27,8 @@ const User = () => {
             <Table striped className="text-center">
                 <thead>
                     <tr>
-                        <th>Id</th>
                         <th>Full Name</th>
+                        <th>Phone</th>
                         <th>Email</th>
                     </tr>
                 </thead>
@@ -36,8 +36,8 @@ const User = () => {
                     {
                         userList && userList.map(user =>
                             <tr key={user.id}>
-                                <td>{user.id}</td>
                                 <td>{user.fullName}</td>
+                                <td>{user.phoneNumber}</td>
                                 <td>{user.email}</td>
                             </tr>
                         )}
