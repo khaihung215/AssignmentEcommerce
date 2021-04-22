@@ -26,3 +26,18 @@ export const PostCategory = (formData) => {
             return null;
         });
 };
+
+export const PutCategory = (id, formData) => {
+    return axios({
+        method: "put",
+        url: category_url + '/' + id,
+        data: formData,
+    })
+        .then((response) => {
+            return response.data;
+        })
+        .catch((error) => {
+            console.log(error.response);
+            return null;
+        });
+};

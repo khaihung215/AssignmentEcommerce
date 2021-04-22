@@ -68,7 +68,7 @@ namespace AssignmentEcommerce_Backend.Controllers
         [HttpPut("{id}")]
         [AllowAnonymous]
         //[Authorize(Roles = "admin")]
-        public async Task<ActionResult<CategoryVm>> PutCategory(string id,[FromForm] CategoryCreateRequest categoryCreateRequest)
+        public async Task<ActionResult<CategoryVm>> PutCategory(string id, [FromForm] CategoryCreateRequest categoryCreateRequest)
         {
             var category = await _context.Categories.FindAsync(id);
 

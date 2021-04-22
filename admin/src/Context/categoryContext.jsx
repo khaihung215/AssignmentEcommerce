@@ -1,5 +1,5 @@
 import React, { createContext, useEffect, useState } from 'react';
-import { GetCategories, PostCategory } from "../Services/categoryAPI";
+import { GetCategories, PostCategory, PutCategory } from "../Services/categoryAPI";
 
 export const CategoryContext = createContext({});
 
@@ -9,6 +9,14 @@ const CategoryContextProvider = ({ children }) => {
     const postCategory = (formData) => {
         (async () => {
             await PostCategory(formData);
+            setCategoryItems(await GetCategories());
+        }
+        )();
+    };
+
+    const putCategory = (id, formData) => {
+        (async () => {
+            await PutCategory(id, formData);
             setCategoryItems(await GetCategories());
         }
         )();
@@ -24,7 +32,8 @@ const CategoryContextProvider = ({ children }) => {
     return (
         <CategoryContext.Provider value={{
             categoryItems,
-            postCategory
+            postCategory,
+            putCategory
         }}>
             {children}
         </CategoryContext.Provider>

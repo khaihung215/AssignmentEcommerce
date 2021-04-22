@@ -12,7 +12,7 @@ const FormCategory = (props) => {
     const categoryId = props.location.categoryId;
     const initialValues = props.location.category;
 
-    const { postCategory } = useContext(CategoryContext);
+    const { postCategory, putCategory } = useContext(CategoryContext);
 
     const formik = useFormik({
         initialValues,
@@ -29,7 +29,7 @@ const FormCategory = (props) => {
                     postCategory(formData);
                 }
                 else {
-                    // putProduct(categoryId, formData);
+                    putCategory(categoryId, formData);
                 }
 
                 actions.setSubmitting(false);

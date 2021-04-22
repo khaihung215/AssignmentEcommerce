@@ -42,7 +42,15 @@ const Category = () => {
                 <td>{category.description}</td>
                 <td>
                   <Button color="secondary" className="mr-2">
-                    <Link to="/formcategory">
+                    <Link to={{
+                      pathname: '/formcategory',
+                      categoryId: category.categoryId,
+                      category: {
+                        nameCategory: category.nameCategory,
+                        description: category.description,
+                        images: null,
+                      }
+                    }}>
                       <PenFill color="white" size={20} />
                     </Link>
                   </Button>
