@@ -35,7 +35,7 @@ const FormProduct = (props) => {
                 actions.setSubmitting(false);
 
                 history.push('/product')
-            }, 1500);
+            }, 1000);
         }
     });
 

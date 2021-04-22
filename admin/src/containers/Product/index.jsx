@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom';
 import { ProductContext } from '../../Context/productContext';
 
 const Product = () => {
-  const { productItems } = useContext(ProductContext);
+  const { productItems, deleteProduct } = useContext(ProductContext);
 
   return (
     <>
@@ -68,7 +68,7 @@ const Product = () => {
                       <PenFill color="white" size={20} />
                     </Link>
                   </Button>
-                  <Button color="danger" className="mr-2">
+                  <Button color="danger" className="mr-2" onClick={() => deleteProduct(product.productId)}>
                     <TrashFill color="white" size={20} />
                   </Button>
                 </td>
