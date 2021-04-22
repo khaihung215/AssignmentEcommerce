@@ -1,12 +1,14 @@
 import React, { useContext } from 'react';
 import { InputGroup, InputGroupAddon, InputGroupText, Input, Button, Container } from 'reactstrap';
 import * as Icon from 'react-bootstrap-icons';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import { useFormik } from 'formik';
 
 import { ProductContext } from '../../Context/productContext';
 
 const FormProduct = (props) => {
+    let history = useHistory();
+
     const productId = props.location.productId;
     const initialValues = props.location.product;
 
@@ -32,8 +34,9 @@ const FormProduct = (props) => {
                 }
 
                 actions.setSubmitting(false);
-            }, 1500);
 
+                history.push('/product')
+            }, 1500);
         }
     });
 
