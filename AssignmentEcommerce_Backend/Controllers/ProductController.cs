@@ -117,15 +117,16 @@ namespace AssignmentEcommerce_Backend.Controllers
         }
 
         [HttpPut("{id}")]
-        [Authorize(Roles = "admin")]
-        public async Task<ActionResult<ProductVm>> PutProduct(string id, ProductUpdateRequest productUpdateRequest)
+        [AllowAnonymous]
+        //[Authorize(Roles = "admin")]
+        public async Task<ActionResult<ProductVm>> PutProduct(string id, [FromForm] ProductUpdateRequest productUpdateRequest)
         {
             var product = await _context.Products.FindAsync(id);
 
             if (product == null)
             {
                 return NotFound();
-            }   
+            }
 
             if (productUpdateRequest.ThumbnailImages != null)
             {
@@ -142,8 +143,9 @@ namespace AssignmentEcommerce_Backend.Controllers
         }
 
         [HttpPost]
-        [Authorize(Roles = "admin")]
-        public async Task<ActionResult<ProductVm>> PostProduct(ProductCreateRequest productCreateRequest)
+        [AllowAnonymous]
+        //[Authorize(Roles = "admin")]
+        public async Task<ActionResult<ProductVm>> PostProduct([FromForm] ProductCreateRequest productCreateRequest)
         {
             var product = _mapper.Map<Product>(productCreateRequest);
 
@@ -170,7 +172,8 @@ namespace AssignmentEcommerce_Backend.Controllers
         }
 
         [HttpDelete("{id}")]
-        [Authorize(Roles = "admin")]
+        [AllowAnonymous]
+        //[Authorize(Roles = "admin")]
         public async Task<ActionResult<ProductVm>> DeleteProduct(string id)
         {
             var product = await _context.Products.FindAsync(id);

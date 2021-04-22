@@ -11,3 +11,18 @@ export const GetProducts = () => {
             return [];
         });
 };
+
+export const PostProduct = (formData) => {
+    return axios({
+        method: "post",
+        url: product_url,
+        data: formData,
+    })
+        .then((response) => {
+            return response.data;
+        })
+        .catch((error) => {
+            console.log(error.response);
+            return null;
+        });
+};
