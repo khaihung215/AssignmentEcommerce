@@ -202,7 +202,7 @@ namespace AssignmentEcommerce_Test.Controller
             var productController = new ProductController(dbContext, mapper, fileService);
 
             // Act
-            var result = await productController.PutProduct(product.ProductId, productUpdateRequest);
+            var result = await productController.PutProduct(productUpdateRequest);
 
             // Assert
             var postProductResult = Assert.IsType<ActionResult<ProductVm>>(result);

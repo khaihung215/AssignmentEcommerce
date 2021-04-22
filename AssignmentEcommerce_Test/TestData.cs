@@ -62,6 +62,7 @@ namespace AssignmentEcommerce_Test
 
         public static ProductUpdateRequest ProductUpdateTestData() => new ProductUpdateRequest
         {
+            ProductId = "IdProduct",
             Name = "Name Product Test Update",
             Description = "Description Product Test Update",
             Price = 2000000,

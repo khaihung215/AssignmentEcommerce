@@ -116,25 +116,29 @@ namespace AssignmentEcommerce_Backend.Controllers
             return productVm;
         }
 
-        [HttpPut("{id}")]
+        [HttpPut]
         [AllowAnonymous]
         //[Authorize(Roles = "admin")]
-        public async Task<ActionResult<ProductVm>> PutProduct(string id, [FromForm] ProductUpdateRequest productUpdateRequest)
+        public async Task<ActionResult<ProductVm>> PutProduct([FromForm] ProductUpdateRequest productUpdateRequest)
         {
-            var product = await _context.Products.FindAsync(id);
+            var product = await _context.Products.FindAsync(productUpdateRequest.ProductId);
 
             if (product == null)
             {
                 return NotFound();
             }
 
-            if (productUpdateRequest.ThumbnailImages != null)
+            if (productUpdateRequest.Images != null)
             {
-                product.Images = await SaveFile(productUpdateRequest.ThumbnailImages);
+                product.Images = await SaveFile(productUpdateRequest.Images);
             }
 
-            _context.Entry(product).CurrentValues.SetValues(productUpdateRequest);
+            product.Name = productUpdateRequest.Name;
+            product.Description = productUpdateRequest.Description;
+            product.Price = productUpdateRequest.Price;
+            product.CategoryId = productUpdateRequest.CategoryId;
             product.UpdatedDate = DateTime.Now.Date;
+
             await _context.SaveChangesAsync();
 
             var productRes = _mapper.Map<ProductVm>(product);
