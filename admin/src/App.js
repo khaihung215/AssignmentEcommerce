@@ -33,8 +33,7 @@ function App() {
             <Category />
           </Route>
 
-          <Route path="/formcategory" >
-            <FormCategory />
+          <Route path="/formcategory" component={FormCategory}>
           </Route>
         </CategoryProdvider>
 

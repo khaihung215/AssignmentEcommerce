@@ -1,22 +1,30 @@
 import React, { createContext, useEffect, useState } from 'react';
-import { GetCategories } from "../Services/categoryAPI";
+import { GetCategories, PostCategory } from "../Services/categoryAPI";
 
 export const CategoryContext = createContext({});
 
 const CategoryContextProvider = ({ children }) => {
     const [categoryItems, setCategoryItems] = useState([]);
 
-    useEffect(() => {
-        const fetchData = async () => {
+    const postCategory = (formData) => {
+        (async () => {
+            await PostCategory(formData);
             setCategoryItems(await GetCategories());
-        };
+        }
+        )();
+    };
 
-        fetchData();
+    useEffect(() => {
+        (async () => {
+            setCategoryItems(await GetCategories());
+        }
+        )();
     }, []);
 
     return (
         <CategoryContext.Provider value={{
             categoryItems,
+            postCategory
         }}>
             {children}
         </CategoryContext.Provider>

@@ -11,3 +11,18 @@ export const GetCategories = () => {
             return [];
         });
 };
+
+export const PostCategory = (formData) => {
+    return axios({
+        method: "post",
+        url: category_url,
+        data: formData,
+    })
+        .then((response) => {
+            return response.data;
+        })
+        .catch((error) => {
+            console.log(error.response);
+            return null;
+        });
+};
