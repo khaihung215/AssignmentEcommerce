@@ -1,5 +1,5 @@
 import React, { createContext, useEffect, useState } from 'react';
-import { GetProducts, PostProduct } from "../Services/productAPI";
+import { GetProducts, PostProduct, PutProduct } from "../Services/productAPI";
 import { GetCategories } from "../Services/categoryAPI";
 
 export const ProductContext = createContext({});
@@ -11,6 +11,14 @@ const ProductContextProvider = ({ children }) => {
     const postProduct = (formData) => {
         (async () => {
             await PostProduct(formData);
+            setProductItems(await GetProducts());
+        }
+        )();
+    };
+
+    const putProduct = (formData) => {
+        (async () => {
+            await PutProduct(formData);
             setProductItems(await GetProducts());
         }
         )();
@@ -28,7 +36,8 @@ const ProductContextProvider = ({ children }) => {
         <ProductContext.Provider value={{
             productItems,
             categoryItems,
-            postProduct
+            postProduct,
+            putProduct
         }}>
             {children}
         </ProductContext.Provider>

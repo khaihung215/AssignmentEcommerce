@@ -24,8 +24,7 @@ function App() {
             <Product />
           </Route>
 
-          <Route path="/formproduct" >
-            <FormProduct />
+          <Route path="/formproduct" component={FormProduct}>
           </Route>
         </ProductProdvider>
 

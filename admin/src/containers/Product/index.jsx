@@ -1,22 +1,28 @@
-import React, { useState, useContext } from 'react';
-import { Table, Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
+import React, { useContext } from 'react';
+import { Table, Button } from 'reactstrap';
 import { StarFill, PenFill, TrashFill, PlusCircleFill } from 'react-bootstrap-icons';
 import { Link } from 'react-router-dom';
 
 import { ProductContext } from '../../Context/productContext';
 
 const Product = () => {
-  const [modal, setModal] = useState(false);
-
-  const toggle = () => setModal(!modal);
-
   const { productItems } = useContext(ProductContext);
 
   return (
     <>
       <h2 className="text-center p-3">Product</h2>
       <Button color="success" className="mb-2 ml-2"><PlusCircleFill color="white" size={20} className="mr-2" />
-        <Link to="/formproduct" className="text-decoration-none text-white">Create new product</Link>
+        <Link to={{
+          pathname: '/formproduct',
+          productId: '',
+          product: {
+            name: '',
+            description: '',
+            price: 0,
+            categoryId: '',
+            images: null,
+          }
+        }} className="text-decoration-none text-white">Create new product</Link>
       </Button>
       <Table striped className="text-center">
         <thead>
@@ -48,29 +54,28 @@ const Product = () => {
                 </td>
                 <td>
                   <Button color="secondary" className="mr-2">
-                    <Link to="/formproduct">
+                    <Link to={{
+                      pathname: '/formproduct',
+                      productId: product.productId,
+                      product: {
+                        name: product.name,
+                        description: product.description,
+                        price: product.price,
+                        categoryId: product.categoryId,
+                        images: null,
+                      }
+                    }}>
                       <PenFill color="white" size={20} />
                     </Link>
                   </Button>
-                  <Button color="danger" className="mr-2"><TrashFill color="white" size={20} onClick={toggle} /></Button>
+                  <Button color="danger" className="mr-2">
+                    <TrashFill color="white" size={20} />
+                  </Button>
                 </td>
               </tr>
             )}
         </tbody>
       </Table>
-
-      <div>
-        <Modal isOpen={modal} toggle={toggle}>
-          <ModalHeader toggle={toggle}>Delete</ModalHeader>
-          <ModalBody>
-            Do you want to delete this product ?
-          </ModalBody>
-          <ModalFooter>
-            <Button color="secondary" onClick={toggle}>No</Button>{' '}
-            <Button color="danger" onClick={toggle}>Yes</Button>{' '}
-          </ModalFooter>
-        </Modal>
-      </div>
     </>
   );
 }

@@ -6,16 +6,11 @@ import { useFormik } from 'formik';
 
 import { ProductContext } from '../../Context/productContext';
 
-const initialValues = {
-    name: '',
-    description: '',
-    price: 0,
-    categoryId: '',
-    images: null,
-};
+const FormProduct = (props) => {
+    const productId = props.location.productId;
+    const initialValues = props.location.product;
 
-const FormProduct = () => {
-    const { categoryItems, postProduct } = useContext(ProductContext);
+    const { categoryItems, postProduct, putProduct } = useContext(ProductContext);
 
     const formik = useFormik({
         initialValues,
@@ -28,10 +23,17 @@ const FormProduct = () => {
                     formData.append(key, values[key])
                 });
 
-                postProduct(formData);
+                if (productId === '') {
+                    postProduct(formData);
+                }
+                else {
+                    formData.append('productId', productId);
+                    putProduct(formData);
+                }
 
                 actions.setSubmitting(false);
-            }, 2000);
+            }, 1500);
+
         }
     });
 
@@ -69,7 +71,7 @@ const FormProduct = () => {
                             <Input type="select" name="categoryId" value={formik.values.categoryId} onChange={formik.handleChange}>
                                 {
                                     categoryItems && categoryItems.map(category =>
-                                        <option value={category.categoryId}>{category.nameCategory}</option>
+                                        <option selected value={category.categoryId}>{category.nameCategory}</option>
                                     )}
                             </Input>
                         </InputGroup>
@@ -81,7 +83,7 @@ const FormProduct = () => {
                         </InputGroup>
                         <br />
                         <div className="text-center">
-                            <Button color="secondary" className="mr-2">
+                            <Button color="secondary" className="mr-2" type="button">
                                 <Link to="/product" className="text-decoration-none text-white">Close</Link>
                             </Button>
                             <Button disabled={formik.isSubmitting} type='submit' color="success">Submit</Button>

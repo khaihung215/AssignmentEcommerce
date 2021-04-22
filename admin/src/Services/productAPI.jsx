@@ -26,3 +26,18 @@ export const PostProduct = (formData) => {
             return null;
         });
 };
+
+export const PutProduct = (formData) => {
+    return axios({
+        method: "put",
+        url: product_url,
+        data: formData,
+    })
+        .then((response) => {
+            return response.data;
+        })
+        .catch((error) => {
+            console.log(error.response);
+            return null;
+        });
+};
