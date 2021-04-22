@@ -116,12 +116,12 @@ namespace AssignmentEcommerce_Backend.Controllers
             return productVm;
         }
 
-        [HttpPut]
+        [HttpPut("{id}")]
         [AllowAnonymous]
         //[Authorize(Roles = "admin")]
-        public async Task<ActionResult<ProductVm>> PutProduct([FromForm] ProductUpdateRequest productUpdateRequest)
+        public async Task<ActionResult<ProductVm>> PutProduct(string id, [FromForm] ProductUpdateRequest productUpdateRequest)
         {
-            var product = await _context.Products.FindAsync(productUpdateRequest.ProductId);
+            var product = await _context.Products.FindAsync(id);
 
             if (product == null)
             {

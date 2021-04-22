@@ -5,8 +5,6 @@ namespace AssignmentEcommerce_Shared
 {
     public class ProductUpdateRequest
     {
-        public string ProductId { get; set; }
-
         public string Name { get; set; }
 
         public string Description { get; set; }

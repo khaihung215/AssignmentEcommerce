@@ -16,9 +16,9 @@ const ProductContextProvider = ({ children }) => {
         )();
     };
 
-    const putProduct = (formData) => {
+    const putProduct = (id, formData) => {
         (async () => {
-            await PutProduct(formData);
+            await PutProduct(id, formData);
             setProductItems(await GetProducts());
         }
         )();

@@ -27,10 +27,10 @@ export const PostProduct = (formData) => {
         });
 };
 
-export const PutProduct = (formData) => {
+export const PutProduct = (id, formData) => {
     return axios({
         method: "put",
-        url: product_url,
+        url: product_url + '/' + id,
         data: formData,
     })
         .then((response) => {

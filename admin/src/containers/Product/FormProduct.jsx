@@ -29,8 +29,7 @@ const FormProduct = (props) => {
                     postProduct(formData);
                 }
                 else {
-                    formData.append('productId', productId);
-                    putProduct(formData);
+                    putProduct(productId, formData);
                 }
 
                 actions.setSubmitting(false);
