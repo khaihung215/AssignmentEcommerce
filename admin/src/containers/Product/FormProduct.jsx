@@ -76,7 +76,9 @@ const FormProduct = () => {
                         </InputGroup>
                         <br />
                         <InputGroup>
-                            <Input name='image' value={formik.values.image} onChange={formik.handleChange} type="file" />
+                            <input name="image" type="file" onChange={(event) => {
+                                formik.setFieldValue("image", event.currentTarget.files[0]);
+                            }} />
                         </InputGroup>
                         <br />
                         <div className="text-center">
