@@ -40,6 +40,18 @@ namespace AssignmentEcommerce_Backend.Controllers
 
             var cart = await _context.Carts.FirstOrDefaultAsync(x => x.UserId.Equals(userId));
 
+            if(cart == null)
+            {
+                cart = new Cart
+                {
+                    CartId = Guid.NewGuid().ToString(),
+                    UserId = userId,
+                };
+
+                await _context.Carts.AddAsync(cart);
+                await _context.SaveChangesAsync();
+            }
+
             var cartDetails = await _context.CartDetails
                 .Include(p => p.Product)
                 .Where(p => p.CartId.Equals(cart.CartId))
