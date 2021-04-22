@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom';
 import { CategoryContext } from '../../Context/categoryContext';
 
 const Category = () => {
-  const { categoryItems } = useContext(CategoryContext);
+  const { categoryItems, deleteCategory } = useContext(CategoryContext);
 
   return (
     <>
@@ -54,7 +54,9 @@ const Category = () => {
                       <PenFill color="white" size={20} />
                     </Link>
                   </Button>
-                  <Button color="danger" className="mr-2"><TrashFill color="white" size={20} /></Button>
+                  <Button color="danger" className="mr-2" onClick={() => deleteCategory(category.categoryId)}>
+                    <TrashFill color="white" size={20} />
+                  </Button>
                 </td>
               </tr>
             )}

@@ -41,3 +41,17 @@ export const PutCategory = (id, formData) => {
             return null;
         });
 };
+
+export const DeleteCategory = (id) => {
+    return axios({
+        method: "delete",
+        url: category_url + '/' + id,
+    })
+        .then((response) => {
+            return response.data;
+        })
+        .catch((error) => {
+            console.log(error.response);
+            return null;
+        });
+};
