@@ -1,6 +1,7 @@
 import axios from "axios";
+import { Backend_url } from "../config"
 
-const product_url = "https://localhost:44311/api/product";
+const product_url = Backend_url + "/api/product";
 
 export const GetProducts = () => {
     return axios.get(product_url)

@@ -1,6 +1,7 @@
 import axios from "axios";
+import { Backend_url } from "../config"
 
-const category_url = "https://localhost:44311/api/categories";
+const category_url = Backend_url + "/api/categories";
 
 export const GetCategories = () => {
     return axios.get(category_url)

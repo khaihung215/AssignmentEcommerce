@@ -1,0 +1,1 @@
+export const Backend_url = "https://localhost:44311";
