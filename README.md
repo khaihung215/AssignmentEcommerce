@@ -21,6 +21,14 @@ The project should apply as many techniques of ASP.NET MVC Core as possible. For
 
 The Unit Test do not need to have a high coverage number but should demonstrate the ability to write unit test for common components: Controllers, ViewComponents, Services,…
 
+# Online demo (Azure Website)
+- Backend: https://khaihungrookies.azurewebsites.net
+- Frontend: https://unistorerookies.azurewebsites.net
+
+Account:
+- Admin => Email: admin@gmail.com / Password: #Admin123
+- Customer => Email: hungluong@gmail.com / Password: #Hung123
+
 # Reference Source
 - https://github.com/thiennn/myshop
 - https://github.com/onggieoi
