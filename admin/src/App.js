@@ -1,3 +1,4 @@
+import React from 'react';
 import Layout from './containers/Layout';
 import Home from './containers/Home/index.jsx'
 import Product from './containers/Product';
@@ -7,42 +8,49 @@ import FormProduct from './containers/Product/FormProduct';
 import FormCategory from './containers/Category/FormCategory';
 import ProductProdvider from './Context/productContext';
 import CategoryProdvider from './Context/categoryContext';
+import SignInCallBack from './containers/Auth/SignInCallBack';
+import SignOutCallBack from './containers/Auth/SignOutCallBack';
 
-import { BrowserRouter, Route } from 'react-router-dom';
+import { BrowserRouter, Switch } from 'react-router-dom';
 import './App.css';
+import { PrivateRoute, PublicRoute } from './utils/route';
 
 function App() {
   return (
     <BrowserRouter>
-      <Layout>
+      <Switch>
+        <Layout>
 
-        <Route path="/" exact>
-          <Home />
-        </Route>
+          <PublicRoute path="/" exact component={Home}>
+          </PublicRoute>
 
-        <ProductProdvider>
-          <Route path="/product" >
-            <Product />
-          </Route>
+          <ProductProdvider>
+            <PrivateRoute exact path="/product" component={Product}>
+            </PrivateRoute>
 
-          <Route path="/formproduct" component={FormProduct}>
-          </Route>
-        </ProductProdvider>
+            <PrivateRoute path="/formproduct" component={FormProduct}>
+            </PrivateRoute>
+          </ProductProdvider>
 
-        <CategoryProdvider>
-          <Route path="/category" >
-            <Category />
-          </Route>
+          <CategoryProdvider>
+            <PrivateRoute exact path="/category" component={Category}>
+            </PrivateRoute>
 
-          <Route path="/formcategory" component={FormCategory}>
-          </Route>
-        </CategoryProdvider>
+            <PrivateRoute path="/formcategory" component={FormCategory}>
+            </PrivateRoute>
+          </CategoryProdvider>
 
-        <Route path="/user" >
-          <User />
-        </Route>
+          <PrivateRoute path="/user" component={User}>
+          </PrivateRoute>
 
-      </Layout>
+          <PublicRoute path="/signin-callback" component={SignInCallBack}>
+          </PublicRoute>
+
+          <PublicRoute path="/signout-callback" component={SignOutCallBack}>
+          </PublicRoute>
+
+        </Layout>
+      </Switch>
     </BrowserRouter>
   );
 }
