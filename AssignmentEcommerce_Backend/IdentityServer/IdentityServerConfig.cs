@@ -79,14 +79,15 @@ namespace AssignmentEcommerce_Backend.IdentityServer
                     ClientId = "admin",
                     AllowedGrantTypes = GrantTypes.Implicit,
 
+                    AllowAccessTokensViaBrowser = true,
                     RequireClientSecret = false,
                     RequireConsent = false,
 
                     AlwaysSendClientClaims = true,
                     AlwaysIncludeUserClaimsInIdToken = true,
 
-                    RedirectUris =           { $"{clientUrls["Admin"]}/authentication/login-callback" },
-                    PostLogoutRedirectUris = { $"{clientUrls["Admin"]}/authentication/logout-callback" },
+                    RedirectUris =           { $"{clientUrls["Admin"]}/signin-callback" },
+                    PostLogoutRedirectUris = { $"{clientUrls["Admin"]}/signout-callback" },
                     AllowedCorsOrigins =     { $"{clientUrls["Admin"]}" },
 
                     AllowedScopes = new List<string>

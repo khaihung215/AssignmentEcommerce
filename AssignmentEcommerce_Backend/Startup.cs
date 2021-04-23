@@ -133,12 +133,16 @@ namespace AssignmentEcommerce_Backend
             app.UseHttpsRedirection();
             app.UseStaticFiles();
 
+            app.UseCors(option => {
+                option.AllowAnyOrigin();
+                option.AllowAnyMethod();
+                option.AllowAnyHeader();
+            });
+
             app.UseRouting();
 
             app.UseIdentityServer();
             app.UseAuthorization();
-
-            app.UseCors(option => { option.AllowAnyHeader().AllowAnyMethod().AllowCredentials().SetIsOriginAllowed(host => true); });
 
             app.UseSwagger();
             app.UseSwaggerUI(c =>
