@@ -73,6 +73,29 @@ namespace AssignmentEcommerce_Backend.IdentityServer
                         "assignmentecommerce.api"
                     }
                 },
+
+                new Client {
+                    ClientName = "admin",
+                    ClientId = "admin",
+                    AllowedGrantTypes = GrantTypes.Implicit,
+
+                    RequireClientSecret = false,
+                    RequireConsent = false,
+
+                    AlwaysSendClientClaims = true,
+                    AlwaysIncludeUserClaimsInIdToken = true,
+
+                    RedirectUris =           { $"{clientUrls["Admin"]}/authentication/login-callback" },
+                    PostLogoutRedirectUris = { $"{clientUrls["Admin"]}/authentication/logout-callback" },
+                    AllowedCorsOrigins =     { $"{clientUrls["Admin"]}" },
+
+                    AllowedScopes = new List<string>
+                    {
+                        IdentityServerConstants.StandardScopes.OpenId,
+                        IdentityServerConstants.StandardScopes.Profile,
+                        "assignmentecommerce.api"
+                    }
+                },
              };
     }
 }

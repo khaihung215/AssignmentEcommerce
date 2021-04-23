@@ -34,6 +34,7 @@ namespace AssignmentEcommerce_Backend
             {
                 ["CustomerSite"] = Configuration["ClientUrl:CustomerSite"],
                 ["Backend"] = Configuration["ClientUrl:Backend"],
+                ["Admin"] = Configuration["ClientUrl:Admin"]
             };
 
             services.AddDbContext<ApplicationDbContext>(options =>
