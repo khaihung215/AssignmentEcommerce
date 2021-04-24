@@ -4,26 +4,17 @@ import Login from "../containers/Auth/Login";
 
 import { AuthContext } from '../Context/authContext';
 
-export function PrivateRoute({ children, component: Component, ...rest }) {
+export const PrivateRoute = ({ component: Component, ...rest }) => {
     const { isAuth } = useContext(AuthContext);
 
-    if (!isAuth) {
-        Login();
-    }
-
     return (
-        <Route
-            {...rest}
-            render={({ location }) =>
-                isAuth ? (
-                    children
-                ) : (
-                    <Login />
-                )
-            }
-        />
-    )
-}
+        <Route {...rest} render={props => (
+            isAuth ?
+                <Component {...props} />
+                : <Login />
+        )} />
+    );
+};
 
 export function PublicRoute({ children, ...rest }) {
     return (
