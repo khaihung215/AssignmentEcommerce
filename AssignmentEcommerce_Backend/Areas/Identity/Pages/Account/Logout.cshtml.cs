@@ -33,6 +33,7 @@ namespace AssignmentEcommerce_Backend.Areas.Identity.Pages.Account
 
         public async Task<IActionResult> OnPost(string returnUrl = null)
         {
+            var returnPage = HttpContext.Request.Headers["Referer"].ToString();
             await _signInManager.SignOutAsync();
             _logger.LogInformation("User logged out.");
 
@@ -53,7 +54,7 @@ namespace AssignmentEcommerce_Backend.Areas.Identity.Pages.Account
                 }
                 else
                 {
-                    return Page();
+                    return this.Redirect(returnPage);
                 }
             }
             else

@@ -8,6 +8,8 @@ import FormProduct from './containers/Product/FormProduct';
 import FormCategory from './containers/Category/FormCategory';
 import SignInCallBack from './containers/Auth/SignInCallBack';
 import SignOutCallBack from './containers/Auth/SignOutCallBack';
+import Logout from './containers/Auth/Logout';
+import Login from './containers/Auth/Login';
 
 import { Route, Switch } from 'react-router-dom';
 import { PrivateRoute } from './utils/route';
@@ -34,6 +36,12 @@ function App() {
 
         <PrivateRoute exact path="/user" component={User}>
         </PrivateRoute>
+
+        <Route exact path="/login" component={Login}>
+        </Route>
+
+        <Route exact path="/logout" component={Logout}>
+        </Route>
 
         <Route exact path="/signin-callback" component={SignInCallBack}>
         </Route>

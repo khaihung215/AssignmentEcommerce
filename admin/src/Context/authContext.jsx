@@ -1,5 +1,5 @@
 import React, { createContext, useState } from 'react';
-import { signinRedirectCallback } from '../Services/authService';
+import { signinRedirectCallback, signoutRedirectCallback } from '../Services/authService';
 import RequestService from "../Services/request";
 
 export const AuthContext = createContext({});
@@ -26,12 +26,23 @@ const AuthContextProvider = ({ children }) => {
             .catch(err => console.log(err));
     };
 
+    const signOutRedirectCallback = () => {
+        signoutRedirectCallback()
+            .then(() => {
+                setAuth(false);
+                setAuthor(false);
+                setUser(null);
+            })
+            .catch(err => console.log(err));
+    };
+
     return (
         <AuthContext.Provider value={{
             isAuth,
             isAuthor,
             user,
-            signInRedirectCallback
+            signInRedirectCallback,
+            signOutRedirectCallback
         }}>
             {children}
         </AuthContext.Provider>

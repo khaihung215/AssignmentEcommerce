@@ -1,17 +1,17 @@
 import React from "react";
 import { Button } from "reactstrap";
-import { signinRedirect } from "../../Services/authService";
+import { signoutRedirect } from "../../Services/authService";
 
-export default function Login() {
+export default function Logout() {
     const handleClick = () => {
-        signinRedirect();
+        signoutRedirect();
     };
     return (
         <>
             <div class="text-center">
-                <p>Please click the button to login !</p>
+                <p>Please click the button to logout !</p>
                 <Button color="primary" onClick={handleClick}>
-                    Login
+                    Logout
                 </Button>
             </div>
         </>

@@ -1,16 +1,16 @@
-import React, { useEffect } from "react";
-import { signoutRedirectCallback } from "../../Services/authService";
+import React, { useEffect, useContext } from "react";
 import { useHistory } from "react-router-dom";
+import { AuthContext } from '../../Context/authContext';
 
 const SignOutCallBack = () => {
+    const { signoutRedirectCallback } = useContext(AuthContext)
+
     const history = useHistory();
+
     useEffect(() => {
-        async function signoutAsync() {
-            await signoutRedirectCallback();
-            history.push("/");
-        }
-        signoutAsync();
-    }, [history]);
+        signoutRedirectCallback();
+        history.push("/");
+    }, [history, signoutRedirectCallback]);
 
     return <div>Sign Out Redirecting...</div>;
 };

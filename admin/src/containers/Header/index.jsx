@@ -1,18 +1,14 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { Link } from 'react-router-dom';
-import {
-    Collapse,
-    Navbar,
-    NavbarToggler,
-    NavbarBrand,
-    Nav,
-    NavItem,
-} from 'reactstrap';
+import { Collapse, Navbar, NavbarToggler, NavbarBrand, Nav, NavItem, } from 'reactstrap';
+import { AuthContext } from '../../Context/authContext';
 
 const Header = () => {
     const [isOpen, setIsOpen] = useState(false);
 
     const toggle = () => setIsOpen(!isOpen);
+
+    const { isAuth } = useContext(AuthContext)
 
     return (
         <div>
@@ -31,10 +27,14 @@ const Header = () => {
                             <Link className="text-secondary text-decoration-none mr-2" to="/user">User</Link>
                         </NavItem>
                     </Nav>
-                    <Link className="text-secondary text-decoration-none mr-2" to="/logout">Logout</Link>
+                    {
+                        isAuth ?
+                            <Link className="text-primary text-decoration-none mr-2" to="/logout">Logout</Link>
+                            : <Link className="text-primary text-decoration-none mr-2" to="/login">Login</Link>
+                    }
                 </Collapse>
             </Navbar>
-        </div>
+        </div >
     );
 }
 

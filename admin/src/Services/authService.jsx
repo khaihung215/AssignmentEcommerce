@@ -36,4 +36,3 @@ export function signoutRedirectCallback() {
 }
 
 export default userManager;
-
