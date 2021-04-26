@@ -77,6 +77,13 @@ namespace AssignmentEcommerce_Backend
                     policy.AddAuthenticationSchemes("Bearer");
                     policy.RequireAuthenticatedUser();
                 });
+
+                options.AddPolicy("admin", policy =>
+                {
+                    policy.AddAuthenticationSchemes("Bearer");
+                    policy.RequireAuthenticatedUser();
+                    policy.RequireRole("admin");
+                });
             });
 
             services.AddControllersWithViews()

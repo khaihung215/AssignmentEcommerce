@@ -117,8 +117,7 @@ namespace AssignmentEcommerce_Backend.Controllers
         }
 
         [HttpPut("{id}")]
-        [AllowAnonymous]
-        //[Authorize(Roles = "admin")]
+        [Authorize(Roles = "admin")]
         public async Task<ActionResult<ProductVm>> PutProduct(string id, [FromForm] ProductUpdateRequest productUpdateRequest)
         {
             var product = await _context.Products.FindAsync(id);
@@ -147,8 +146,7 @@ namespace AssignmentEcommerce_Backend.Controllers
         }
 
         [HttpPost]
-        [AllowAnonymous]
-        //[Authorize(Roles = "admin")]
+        [Authorize(Roles = "admin")]
         public async Task<ActionResult<ProductVm>> PostProduct([FromForm] ProductCreateRequest productCreateRequest)
         {
             var product = _mapper.Map<Product>(productCreateRequest);
@@ -176,8 +174,7 @@ namespace AssignmentEcommerce_Backend.Controllers
         }
 
         [HttpDelete("{id}")]
-        [AllowAnonymous]
-        //[Authorize(Roles = "admin")]
+        [Authorize(Roles = "admin")]
         public async Task<ActionResult<ProductVm>> DeleteProduct(string id)
         {
             var product = await _context.Products.FindAsync(id);

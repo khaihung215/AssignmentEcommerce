@@ -30,7 +30,7 @@ namespace AssignmentEcommerce_Backend.Controllers
         }
 
         [HttpGet]
-        [AllowAnonymous]
+        [Authorize(Roles = "admin")]
         public async Task<IEnumerable<IdentityUser>> GetUsers()
         {
             var users = await _context.Users.AsNoTracking().ToListAsync();

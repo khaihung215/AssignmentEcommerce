@@ -66,8 +66,7 @@ namespace AssignmentEcommerce_Backend.Controllers
         }
 
         [HttpPut("{id}")]
-        [AllowAnonymous]
-        //[Authorize(Roles = "admin")]
+        [Authorize(Roles = "admin")]
         public async Task<ActionResult<CategoryVm>> PutCategory(string id, [FromForm] CategoryCreateRequest categoryCreateRequest)
         {
             var category = await _context.Categories.FindAsync(id);
@@ -92,8 +91,7 @@ namespace AssignmentEcommerce_Backend.Controllers
         }
 
         [HttpPost]
-        [AllowAnonymous]
-        //[Authorize(Roles = "admin")]
+        [Authorize(Roles = "admin")]
         public async Task<ActionResult<CategoryVm>> PostCategory([FromForm] CategoryCreateRequest categoryCreateRequest)
         {
             var category = _mapper.Map<Category>(categoryCreateRequest);
@@ -116,8 +114,7 @@ namespace AssignmentEcommerce_Backend.Controllers
         }
 
         [HttpDelete("{id}")]
-        [AllowAnonymous]
-        //[Authorize(Roles = "admin")]
+        [Authorize(Roles = "admin")]
         public async Task<ActionResult<CategoryVm>> DeleteCategory(string id)
         {
             var category = await _context.Categories.FindAsync(id);
