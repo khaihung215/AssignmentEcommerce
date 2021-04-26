@@ -7,7 +7,6 @@ import {
   NavbarBrand,
   Nav,
   NavItem,
-  NavLink,
 } from 'reactstrap';
 
 const Header = () => {
@@ -23,22 +22,16 @@ const Header = () => {
         <Collapse isOpen={isOpen} navbar>
           <Nav className="mr-auto" navbar>
             <NavItem>
-              <NavLink>
-                <Link className="text-secondary text-decoration-none" to="/product">Product</Link>
-              </NavLink>
+              <Link className="text-secondary text-decoration-none mr-2" to="/product">Product</Link>
             </NavItem>
             <NavItem>
-              <NavLink>
-                <Link className="text-secondary text-decoration-none" to="/category">Category</Link>
-              </NavLink>
+              <Link className="text-secondary text-decoration-none mr-2" to="/category">Category</Link>
             </NavItem>
             <NavItem>
-              <NavLink>
-                <Link className="text-secondary text-decoration-none" to="/user">User</Link>
-              </NavLink>
+              <Link className="text-secondary text-decoration-none mr-2" to="/user">User</Link>
             </NavItem>
           </Nav>
-          <NavLink href="#">Logout</NavLink>
+          <Link className="text-secondary text-decoration-none mr-2" to="/logout">Logout</Link>
         </Collapse>
       </Navbar>
     </div>

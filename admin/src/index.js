@@ -1,19 +1,26 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { BrowserRouter } from "react-router-dom";
 
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import AuthContextProvider from './Context/authContext';
+import ProductProdvider from './Context/productContext';
+import CategoryProdvider from './Context/categoryContext';
 
 import './index.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 ReactDOM.render(
-  <React.StrictMode>
+  <BrowserRouter>
     <AuthContextProvider>
-      <App />
+      <ProductProdvider>
+        <CategoryProdvider>
+          <App />
+        </CategoryProdvider>
+      </ProductProdvider>
     </AuthContextProvider>
-  </React.StrictMode>,
+  </BrowserRouter>,
   document.getElementById('root')
 );
 

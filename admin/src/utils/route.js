@@ -6,10 +6,10 @@ import UnAuthorization from "../containers/Auth/UnAuthorization";
 
 import { AuthContext } from '../Context/authContext';
 
-export const PrivateRoute = ({ children, component: Component, ...rest }) => {
+export const PrivateRoute = ({ component: Component, ...rest }) => {
     const { isAuth, isAuthor } = useContext(AuthContext);
 
-    if (!isAuth) return <Route><Login /></Route>
+    if (!isAuth) return <Login />
 
     if (isAuth && !isAuthor) return <UnAuthorization />
 
