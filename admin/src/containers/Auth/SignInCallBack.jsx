@@ -10,7 +10,7 @@ const SignInCallBack = () => {
     useEffect(() => {
         signInRedirectCallback();
         history.push("/");
-    }, [history]);
+    }, [history, signInRedirectCallback]);
 
     return <div>Sign In Redirecting...</div>;
 };

@@ -1,10 +1,10 @@
-import axios from "axios";
+import RequestService from "../Services/request";
 import { Backend_url } from "../config"
 
 const category_url = Backend_url + "/api/categories";
 
 export const GetCategories = () => {
-    return axios.get(category_url)
+    return RequestService.axios.get(category_url)
         .then(response => response.data)
         .catch((error) => {
             console.log(error.response);
@@ -13,7 +13,7 @@ export const GetCategories = () => {
 };
 
 export const PostCategory = (formData) => {
-    return axios({
+    return RequestService.axios({
         method: "post",
         url: category_url,
         data: formData,
@@ -28,7 +28,7 @@ export const PostCategory = (formData) => {
 };
 
 export const PutCategory = (id, formData) => {
-    return axios({
+    return RequestService.axios({
         method: "put",
         url: category_url + '/' + id,
         data: formData,
@@ -43,7 +43,7 @@ export const PutCategory = (id, formData) => {
 };
 
 export const DeleteCategory = (id) => {
-    return axios({
+    return RequestService.axios({
         method: "delete",
         url: category_url + '/' + id,
     })

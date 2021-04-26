@@ -1,10 +1,10 @@
-import axios from "axios";
+import RequestService from "../Services/request";
 import { Backend_url } from "../config"
 
 const product_url = Backend_url + "/api/product";
 
 export const GetProducts = () => {
-    return axios.get(product_url)
+    return RequestService.axios.get(product_url)
         .then(response => response.data)
         .catch((error) => {
             console.log(error.response);
@@ -13,7 +13,7 @@ export const GetProducts = () => {
 };
 
 export const PostProduct = (formData) => {
-    return axios({
+    return RequestService.axios({
         method: "post",
         url: product_url,
         data: formData,
@@ -28,7 +28,7 @@ export const PostProduct = (formData) => {
 };
 
 export const PutProduct = (id, formData) => {
-    return axios({
+    return RequestService.axios({
         method: "put",
         url: product_url + '/' + id,
         data: formData,
@@ -43,7 +43,7 @@ export const PutProduct = (id, formData) => {
 };
 
 export const DeleteProduct = (id) => {
-    return axios({
+    return RequestService.axios({
         method: "delete",
         url: product_url + '/' + id,
     })
