@@ -5,6 +5,7 @@ import { Link, useHistory } from 'react-router-dom';
 import { useFormik } from 'formik';
 
 import { ProductContext } from '../../Context/productContext';
+import { Thumb } from '../../utils/thumb';
 
 const FormProduct = (props) => {
     let history = useHistory();
@@ -83,8 +84,9 @@ const FormProduct = (props) => {
                                 formik.setFieldValue("images", event.currentTarget.files[0]);
                             }} />
                         </InputGroup>
+                        <Thumb file={formik.values.images} />
                         <br />
-                        <div className="text-center">
+                        <div className="text-center m-3">
                             <Button color="secondary" className="mr-2" type="button">
                                 <Link to="/product" className="text-decoration-none text-white">Close</Link>
                             </Button>

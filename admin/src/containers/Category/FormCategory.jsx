@@ -5,6 +5,7 @@ import { Link, useHistory } from 'react-router-dom';
 import { useFormik } from 'formik';
 
 import { CategoryContext } from '../../Context/categoryContext';
+import { Thumb } from '../../utils/thumb';
 
 const FormCategory = (props) => {
     let history = useHistory();
@@ -64,6 +65,7 @@ const FormCategory = (props) => {
                                 formik.setFieldValue("thumbnailImages", event.currentTarget.files[0]);
                             }} />
                         </InputGroup>
+                        <Thumb file={formik.values.thumbnailImages} />
                         <br />
                         <div className="text-center">
                             <Button color="secondary" className="mr-2" type="button">
@@ -76,6 +78,7 @@ const FormCategory = (props) => {
             </div>
         </>
     );
+
 }
 
 export default FormCategory;
