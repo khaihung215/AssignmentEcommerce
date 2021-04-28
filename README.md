@@ -2,7 +2,7 @@
 
 Build an ecommerce web site with minimum functionality below:
 
-For customers:
+### For customers:
 -	Home page: category menu, features products
 -	View products by category
 -	View product details
@@ -11,7 +11,7 @@ For customers:
 -	Login/Logout
 -	Optional (shopping cart, ordering)
 
-For admin:
+### For admin:
 -	Login/logout
 -	Manage product categories (Name, Description)
 -	Manage products (Name, Category, Description, Price, Images, CreatedDate, UpdatedDate)
@@ -20,6 +20,24 @@ For admin:
 The project should apply as many techniques of ASP.NET MVC Core as possible. For example: TagHelpers, ViewComponents, Razor Pages and have Unit Test.
 
 The Unit Test do not need to have a high coverage number but should demonstrate the ability to write unit test for common components: Controllers, ViewComponents, Services,…
+
+# Feature
+
+### For customer site:
+- Home page: category menu, features products
+- View products by category
+-	View product details
+-	Product rating
+-	Product review
+-	Register
+-	Login/Logout
+- Shopping cart (Add, Update, Remove)
+
+### For admin site:
+- Login/Logout
+- Manage product categories (Create, Edit, Delete)
+- Manage products (Create, Edit, Delete)
+- View customers
 
 # Online demo (Azure Website)
 - Backend: https://khaihungrookies.azurewebsites.net
