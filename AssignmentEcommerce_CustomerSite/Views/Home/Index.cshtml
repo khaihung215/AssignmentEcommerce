@@ -94,7 +94,7 @@
         {
             <div class="col-sm-3 align-center">
                 <a asp-controller="Product" asp-action="Index" asp-route-id="@cate.CategoryId">
-                    <img src="@cate.Images" alt="Blog" class="image"/>
+                    <img src="@cate.Images" alt="Blog" class="image" />
                 </a>
                 <br><br>
 
@@ -105,6 +105,18 @@
 </div>
 <br>
 <br>
+<hr />
+<div class="container">
+    <div class="col-sm-12 products">
+        <h1 class="text-center">Hot Products</h1>
+        <div class="row">
+            @foreach (var product in ViewBag.HotProducts)
+            {
+                @await Component.InvokeAsync("ProductCard", product);
+            }
+        </div>
+    </div>
+</div>
 <hr />
 <div class="container">
     <div class="col-sm-12 products">

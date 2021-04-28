@@ -28,6 +28,13 @@ namespace AssignmentEcommerce_CustomerSite.Services
             return await response.Content.ReadAsAsync<IList<ProductVm>>();
         }
 
+        public async Task<IList<ProductVm>> GetHotProduct()
+        {
+            var response = await _client.GetAsync("api/product/gethotproduct");
+            response.EnsureSuccessStatusCode();
+            return await response.Content.ReadAsAsync<IList<ProductVm>>();
+        }
+
         public async Task<ProductVm> GetProductById(string id)
         {
             var response = await _client.GetAsync("api/product/getproductbyid/" + id);

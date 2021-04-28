@@ -28,6 +28,9 @@ namespace AssignmentEcommerce_CustomerSite.Controllers
             var categorys = await _categoryClient.GetCategory();
             ViewBag.Categorys = categorys;
 
+            var hotProducts = await _productClient.GetHotProduct();
+            ViewBag.HotProducts = hotProducts;
+
             var products = await _productClient.GetProduct();
             ViewBag.Products = products;
 
