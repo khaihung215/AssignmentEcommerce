@@ -37,6 +37,7 @@ namespace AssignmentEcommerce_Backend.Controllers
             var reviews = await _context.Reviews
                 .Include(review => review.Product)
                 .Where(review => review.ProductId.Equals(id))
+                .OrderBy(review => review.DateReview)
                 .AsNoTracking()
                 .ToListAsync();
 
