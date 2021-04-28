@@ -31,8 +31,8 @@ namespace AssignmentEcommerce_CustomerSite.Controllers
             var hotProducts = await _productClient.GetHotProduct();
             ViewBag.HotProducts = hotProducts;
 
-            var products = await _productClient.GetProduct();
-            ViewBag.Products = products;
+            var newProducts = await _productClient.GetNewProduct();
+            ViewBag.NewProducts = newProducts;
 
             return View();
         }

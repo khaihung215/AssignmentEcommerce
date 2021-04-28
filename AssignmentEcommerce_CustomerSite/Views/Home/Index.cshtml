@@ -120,9 +120,9 @@
 <hr />
 <div class="container">
     <div class="col-sm-12 products">
-        <h1 class="text-center">Products</h1>
+        <h1 class="text-center">New Products</h1>
         <div class="row">
-            @foreach (var product in ViewBag.Products)
+            @foreach (var product in ViewBag.NewProducts)
             {
                 @await Component.InvokeAsync("ProductCard", product);
             }

@@ -12,6 +12,8 @@ namespace AssignmentEcommerce_CustomerSite.Services
 
         Task<IList<ProductVm>> GetHotProduct();
 
+        Task<IList<ProductVm>> GetNewProduct();
+
         Task<ProductVm> GetProductById(string id);
 
         Task<IList<ProductVm>> GetProductSameCategory(string id);

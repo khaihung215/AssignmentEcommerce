@@ -35,6 +35,13 @@ namespace AssignmentEcommerce_CustomerSite.Services
             return await response.Content.ReadAsAsync<IList<ProductVm>>();
         }
 
+        public async Task<IList<ProductVm>> GetNewProduct()
+        {
+            var response = await _client.GetAsync("api/product/getnewproduct");
+            response.EnsureSuccessStatusCode();
+            return await response.Content.ReadAsAsync<IList<ProductVm>>();
+        }
+
         public async Task<ProductVm> GetProductById(string id)
         {
             var response = await _client.GetAsync("api/product/getproductbyid/" + id);
