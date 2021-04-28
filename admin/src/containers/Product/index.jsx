@@ -2,6 +2,8 @@ import React, { useContext, useState } from 'react';
 import { Table, Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 import { StarFill, PenFill, TrashFill, PlusCircleFill } from 'react-bootstrap-icons';
 import { Link } from 'react-router-dom';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 import { ProductContext } from '../../Context/productContext';
 
@@ -26,6 +28,7 @@ const Product = () => {
     deleteProduct(props)
     setModal(false);
     setProductId("");
+    toast.success("Delete success !");
   }
 
   return (
@@ -107,6 +110,8 @@ const Product = () => {
           <Button color="danger" onClick={() => deletePro(productId)}>Delete</Button>
         </ModalFooter>
       </Modal>
+
+      <ToastContainer />
     </>
   );
 }

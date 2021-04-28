@@ -2,6 +2,8 @@ import React, { useContext, useState } from 'react';
 import { Table, Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 import { PenFill, TrashFill, PlusCircleFill } from 'react-bootstrap-icons';
 import { Link } from 'react-router-dom';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 import { CategoryContext } from '../../Context/categoryContext';
 
@@ -26,6 +28,7 @@ const Category = () => {
     deleteCategory(props)
     setModal(false);
     setCategoryId("");
+    toast.success("Delete success !");
   }
 
   return (
@@ -93,6 +96,8 @@ const Category = () => {
           <Button color="danger" onClick={() => deleteCate(categoryId)}>Delete</Button>
         </ModalFooter>
       </Modal>
+
+      <ToastContainer />
     </>
   );
 }

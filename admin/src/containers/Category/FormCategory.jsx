@@ -3,6 +3,8 @@ import { InputGroup, InputGroupAddon, InputGroupText, Input, Button, Container }
 import * as Icon from 'react-bootstrap-icons';
 import { Link, useHistory } from 'react-router-dom';
 import { useFormik } from 'formik';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 import { CategoryContext } from '../../Context/categoryContext';
 import { Thumb } from '../../utils/thumb';
@@ -26,17 +28,14 @@ const FormCategory = (props) => {
                     formData.append(key, values[key])
                 });
 
-                if (categoryId === '') {
-                    postCategory(formData);
-                }
-                else {
-                    putCategory(categoryId, formData);
-                }
+                (!categoryId) ? postCategory(formData) : putCategory(categoryId, formData)
 
                 actions.setSubmitting(false);
 
                 history.push('/category')
-            }, 1000);
+            }, 1500);
+
+            (!categoryId) ? toast.success("Create new category success !") : toast.success("Edit category success !")
         }
     });
 
@@ -76,9 +75,10 @@ const FormCategory = (props) => {
                     </Container>
                 </form>
             </div>
+
+            <ToastContainer hideProgressBar />
         </>
     );
-
 }
 
 export default FormCategory;

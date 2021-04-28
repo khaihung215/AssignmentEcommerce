@@ -3,6 +3,8 @@ import { InputGroup, InputGroupAddon, InputGroupText, Input, Button, Container }
 import * as Icon from 'react-bootstrap-icons';
 import { Link, useHistory } from 'react-router-dom';
 import { useFormik } from 'formik';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 import { ProductContext } from '../../Context/productContext';
 import { Thumb } from '../../utils/thumb';
@@ -26,17 +28,14 @@ const FormProduct = (props) => {
                     formData.append(key, values[key])
                 });
 
-                if (productId === '') {
-                    postProduct(formData);
-                }
-                else {
-                    putProduct(productId, formData);
-                }
+                (!productId) ? postProduct(formData) : putProduct(productId, formData)
 
                 actions.setSubmitting(false);
 
                 history.push('/product')
-            }, 1000);
+            }, 1500);
+
+            (!productId) ? toast.success("Create new product success !") : toast.success("Edit product success !")
         }
     });
 
@@ -95,6 +94,8 @@ const FormProduct = (props) => {
                     </Container>
                 </form>
             </div>
+
+            <ToastContainer hideProgressBar />
         </>
     );
 }
