@@ -183,6 +183,18 @@ namespace AssignmentEcommerce_Backend.Controllers
                 return NotFound();
             }
 
+            var carts = await _context.CartDetails.Where(x => x.ProductId.Equals(product.ProductId)).ToListAsync();
+            foreach (var cart in carts)
+            {
+                _context.CartDetails.Remove(cart);
+            }
+
+            var reviews = await _context.Reviews.Where(x => x.ProductId.Equals(product.ProductId)).ToListAsync();
+            foreach(var review in reviews)
+            {
+                _context.Reviews.Remove(review);
+            }
+
             var productRes = _mapper.Map<ProductVm>(product);
 
             _context.Products.Remove(product);
