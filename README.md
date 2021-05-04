@@ -21,7 +21,7 @@ The project should apply as many techniques of ASP.NET MVC Core as possible. For
 
 The Unit Test do not need to have a high coverage number but should demonstrate the ability to write unit test for common components: Controllers, ViewComponents, Services,…
 
-# Feature
+# Features
 
 ### For customer site:
 - Home page: category menu, features products
@@ -39,9 +39,17 @@ The Unit Test do not need to have a high coverage number but should demonstrate 
 - Manage products (Create, Edit, Delete)
 - View customers
 
+### Framework and library used
+- [Entity Framework Core](https://docs.microsoft.com/en-us/ef/)
+- [IdentityServer4](https://identityserver4.readthedocs.io/en/latest/)
+- [OAuth 2.0](https://tools.ietf.org/html/rfc6749)
+- [AutoMapper](https://automapper.org/)
+- [React](https://reactjs.org/)
+
 # Online demo (Azure Website)
-- Backend: https://khaihungrookies.azurewebsites.net
-- Frontend: https://unistorerookies.azurewebsites.net
+- Backend: https://backend-khaihung215.azurewebsites.net
+- Frontend: https://customersite-khaihung215.azurewebsites.net
+- Admin: https://sakhaihung215.z23.web.core.windows.net
 
 Account:
 - Admin => Email: admin@gmail.com / Password: #Admin123
