@@ -1,0 +1,27 @@
+.section-footer .title {
+  font-weight: 600;
+  margin-bottom: 16px;
+  color: #212529;
+}
+
+.section-footer ul a {
+  color: inherit;
+}
+
+.section-footer ul li {
+  margin-bottom: 5px;
+}
+
+.list-unstyled {
+  padding-left: 0;
+  list-style: none;
+}
+
+.padding-y {
+  padding-top: 40px;
+  padding-bottom: 40px;
+}
+
+.bg {
+  background-color: #f8f9fa;
+}
