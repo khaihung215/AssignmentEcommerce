@@ -1,0 +1,28 @@
+.img-product {
+  width: 100%;
+  height: auto;
+}
+
+.detail {
+  margin-top: 50px;
+}
+
+.btn-order {
+  background-color: black;
+  color: white;
+  border: 1px solid white;
+}
+
+.btn-order:hover {
+  background-color: white;
+  color: black;
+  border: 1px solid black;
+}
+
+.icon {
+  color: #f0e68c !important;
+}
+
+.container {
+  margin-top: 20px;
+}
