@@ -1,8 +1,20 @@
-.nav-title:hover {
-  color: white !important;
-}
-
 .nav-icon {
   margin-left: 5px;
   margin-right: 5px;
+}
+
+.nav-custom {
+  background-color: white !important;
+}
+
+.nav-custom .navbar-nav .nav-link {
+  color: black !important;
+}
+
+.nav-custom .navbar-nav .nav-link:hover {
+  color: grey !important;
+}
+
+.logo {
+  height: 50px;
 }
