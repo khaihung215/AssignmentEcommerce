@@ -1,19 +1,5 @@
-.card-detail {
-  margin-top: 40px;
-  margin-bottom: 40px;
-}
-
-.fa-5x {
-  text-align: center;
-  padding: 10px;
-}
-
 .card-body {
   text-align: center;
-}
-
-.card {
-  margin: 20px;
 }
 
 .btn-order {
@@ -26,4 +12,17 @@
   background-color: white;
   color: black;
   border: 1px solid black;
+}
+
+.icon {
+  color: #f0e68c !important;
+}
+
+.card {
+  border-radius: 10px;
+  margin: 20px;
+}
+
+.img-product {
+  padding: 10px;
 }
