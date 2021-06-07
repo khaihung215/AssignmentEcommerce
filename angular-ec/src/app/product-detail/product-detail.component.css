@@ -26,3 +26,8 @@
 .container {
   margin-top: 20px;
 }
+
+.name-product {
+  font-weight: bold;
+  font-size: 32px;
+}
