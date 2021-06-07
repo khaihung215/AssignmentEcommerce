@@ -41,18 +41,48 @@
               Danh Mục
             </a>
             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <a class="dropdown-item" href="#">Danh mục 1</a>
-              <a class="dropdown-item" href="#">Danh mục 2</a>
-              <a class="dropdown-item" href="#">Danh mục 3</a>
+              <a class="dropdown-item" href="#">Áo thun</a>
+              <a class="dropdown-item" href="#">Hoddie</a>
+              <a class="dropdown-item" href="#">Sweater</a>
             </div>
           </li>
         </ul>
-        <button type="button" class="btn btn-success nav-icon">
+
+        <button
+          type="button"
+          class="btn btn-success nav-icon"
+          routerLink="/Cart"
+          routerLinkActive="active"
+        >
           <i class="fas fa-shopping-cart"></i>
         </button>
-        <button type="button" class="btn btn-info nav-icon">
-          <i class="fas fa-user"></i>
-        </button>
+
+        <div class="dropdown">
+          <button
+            class="btn btn-info nav-icon dropdown-toggle"
+            type="button"
+            id="dropdownMenuButton"
+            data-toggle="dropdown"
+            aria-haspopup="true"
+            aria-expanded="false"
+          >
+            <i class="fas fa-user"></i>
+          </button>
+          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+            <a
+              class="dropdown-item"
+              routerLink="/ManageProduct"
+              routerLinkActive="active"
+              >Quản lý sản phẩm</a
+            >
+            <a
+              class="dropdown-item"
+              routerLink="/ManageCategory"
+              routerLinkActive="active"
+              >Quản lý danh mục</a
+            >
+          </div>
+        </div>
       </div>
     </div>
   </nav>

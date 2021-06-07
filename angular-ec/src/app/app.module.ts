@@ -12,6 +12,13 @@ import { ProductComponent } from './home/product/product.component';
 import { NotfoundComponent } from './notfound/notfound.component';
 import { ProductDetailComponent } from './product-detail/product-detail.component';
 import { ProductPageComponent } from './product-page/product-page.component';
+import { CartComponent } from './cart/cart.component';
+import { ManageProductComponent } from './manage-product/manage-product.component';
+import { ManageCategoryComponent } from './manage-category/manage-category.component';
+import { AddProductComponent } from './manage-product/add-product/add-product.component';
+import { EditProductComponent } from './manage-product/edit-product/edit-product.component';
+import { AddCategoryComponent } from './manage-category/add-category/add-category.component';
+import { EditCategoryComponent } from './manage-category/edit-category/edit-category.component';
 
 @NgModule({
   declarations: [
@@ -26,6 +33,13 @@ import { ProductPageComponent } from './product-page/product-page.component';
     ProductDetailComponent,
     ProductComponent,
     ProductPageComponent,
+    CartComponent,
+    ManageProductComponent,
+    ManageCategoryComponent,
+    AddProductComponent,
+    EditProductComponent,
+    AddCategoryComponent,
+    EditCategoryComponent,
   ],
   imports: [BrowserModule, AppRoutingModule],
   providers: [],
