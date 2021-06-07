@@ -1,0 +1,96 @@
+<div class="container">
+  <div class="card">
+    <div class="row">
+      <div class="col-md-8 cart">
+        <div class="title">
+          <div class="row">
+            <div class="col">
+              <h4><b>Giỏ hàng</b></h4>
+            </div>
+            <div class="col align-self-center text-right text-muted">
+              3 sản phẩm
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="row main align-items-center">
+            <div class="col-2">
+              <img class="img-fluid" src="{{ product1 }}" />
+            </div>
+            <div class="col">
+              <div class="row text-muted">Áo thun</div>
+              <div class="row">Áo 1</div>
+            </div>
+            <div class="col"><a>-</a><a class="border">1</a><a>+</a></div>
+            <div class="col">
+              100.000.000 VNĐ<span class="close">&#10005;</span>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="row main align-items-center">
+            <div class="col-2">
+              <img class="img-fluid" src="{{ product2 }}" />
+            </div>
+            <div class="col">
+              <div class="row text-muted">Áo thun</div>
+              <div class="row">Áo 2</div>
+            </div>
+            <div class="col"><a>-</a><a class="border">1</a><a>+</a></div>
+            <div class="col">
+              100.000.000 VNĐ<span class="close">&#10005;</span>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="row main align-items-center">
+            <div class="col-2">
+              <img class="img-fluid" src="{{ product1 }}" />
+            </div>
+            <div class="col">
+              <div class="row text-muted">Áo thun</div>
+              <div class="row">Áo 3</div>
+            </div>
+            <div class="col"><a>-</a><a class="border">1</a><a>+</a></div>
+            <div class="col">
+              100.000.000 VNĐ<span class="close">&#10005;</span>
+            </div>
+          </div>
+        </div>
+        <div class="back-to-shop">
+          <a class="text-muted" routerLink="/Home" routerLinkActive="active"
+            >Trở về trang chủ</a
+          >
+        </div>
+      </div>
+      <div class="col-md-4 summary">
+        <div>
+          <h5><b>Tổng cộng</b></h5>
+        </div>
+        <hr />
+        <div class="row">
+          <div class="col" style="padding-left: 0">Tất cả sản phẩm</div>
+          <div class="col text-right">300.000.000 VNĐ</div>
+        </div>
+        <form>
+          <p>Vận chuyển</p>
+          <select>
+            <option class="text-muted">Giao hàng nhanh</option>
+            <option class="text-muted">Giao hàng vừa</option>
+            <option class="text-muted">Giao hàng chậm</option>
+          </select>
+          <p>Mã khuyến mãi</p>
+          <input id="code" placeholder="Nhập mã khuyến mãi" />
+        </form>
+        <div
+          class="row"
+          style="border-top: 1px solid rgba(0, 0, 0, 0.1); padding: 2vh 0"
+        >
+          <div class="col">Tổng tiền</div>
+          <div class="col text-right">300.000.000 VNĐ</div>
+        </div>
+        <button class="btn">Thanh toán</button>
+      </div>
+    </div>
+  </div>
+</div>
