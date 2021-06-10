@@ -13,24 +13,18 @@
     <div class="controls">
         <div class="input-group">
             <form asp-action="UpdateCart" asp-controller="Carts" method="post" style="display: inline">
-                <span class="input-group-btn">
-                    <input type="hidden" name="cartDetailId" value="@Model.CartDetailId" />
-                    <input type="hidden" name="quantity" value="-1" />
-                    <button class="btn btn-default btn-sm" type="submit"><i class="ion-minus-round"></i></button>
-                </span>
+                <input type="hidden" name="cartDetailId" value="@Model.CartDetailId" />
+                <input type="hidden" name="quantity" value="-1" />
+                <button class="btn btn-default btn-sm" type="submit"><i class="ion-minus-round"></i></button>
             </form>
             <form asp-action="UpdateCart" asp-controller="Carts" method="post" style="display: inline">
-                <span class="input-group-btn">
-                    <input type="hidden" name="cartDetailId" value="@Model.CartDetailId" />
-                    <input type="hidden" name="quantity" value="1" />
-                    <button class="btn btn-default btn-sm" type="submit"><i class="ion-plus-round"></i></button>
-                </span>
+                <input type="hidden" name="cartDetailId" value="@Model.CartDetailId" />
+                <input type="hidden" name="quantity" value="1" />
+                <button class="btn btn-default btn-sm" type="submit"><i class="ion-plus-round"></i></button>
             </form>
             <form asp-action="RemoveCart" asp-controller="Carts" method="post" style="display: inline">
-                <span class="input-group-btn">
-                    <input name="id" type="hidden" value="@Model.CartDetailId" />
-                    <button type="submit" class="btn btn-default btn-sm"><i class="ion-trash-b"></i></button>
-                </span>
+                <input name="id" type="hidden" value="@Model.CartDetailId" />
+                <button type="submit" class="btn btn-default btn-sm"><i class="ion-trash-b"></i></button>
             </form>
             <input type="text" class="form-control input-sm" placeholder="Qty" value="@Model.Quantity" readonly="">
         </div>
