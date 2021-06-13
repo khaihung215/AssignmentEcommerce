@@ -7,6 +7,15 @@
   margin-top: 50px;
 }
 
+.card {
+  margin: 20px;
+  border-radius: 10px;
+}
+
+.card-body {
+  text-align: center;
+}
+
 .btn-order {
   background-color: black;
   color: white;

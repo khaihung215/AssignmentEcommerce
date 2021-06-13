@@ -5,7 +5,7 @@
     <div *ngFor="let product of listHotProducts">
       <div class="col-md-4">
         <div class="card" style="width: 18rem">
-          <a routerLink="/ProductDetail" routerLinkActive="active">
+          <a [routerLink]="['/ProductDetail', product.productId]">
             <img
               class="card-img-top img-product"
               src="{{ product.images }}"
@@ -37,7 +37,7 @@
     <div *ngFor="let product of listNewProducts">
       <div class="col-md-4">
         <div class="card" style="width: 18rem">
-          <a routerLink="/ProductDetail" routerLinkActive="active">
+          <a [routerLink]="['/ProductDetail', product.productId]">
             <img
               class="card-img-top img-product"
               src="{{ product.images }}"

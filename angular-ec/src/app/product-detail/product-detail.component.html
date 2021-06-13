@@ -1,19 +1,17 @@
 <div class="container">
   <div class="row">
     <div class="col-md-6">
-      <img src="{{ product2 }}" class="img-product" />
+      <img src="{{ product.images }}" class="img-product" />
     </div>
     <div class="col-md-6 detail">
-      <p class="name-product">Áo 1</p>
-      <p>100.000.000 VNĐ</p>
+      <p class="name-product">{{ product.name }}</p>
+      <p>{{ product.price | number: "1.0":"en-US" }} VNĐ</p>
       <p>
-        <i class="fas fa-star icon"></i>
-        <i class="fas fa-star icon"></i>
-        <i class="fas fa-star icon"></i>
-        <i class="fas fa-star icon"></i>
-        <i class="fas fa-star icon"></i>
+        <span *ngFor="let i of [].constructor(product.rating)">
+          <i class="fas fa-star icon"></i>
+        </span>
       </p>
-      <p>Mô tả sản phẩm</p>
+      <p>{{ product.description }}</p>
       <button class="btn btn-primary btn-order">Thêm vào giỏ hàng</button>
     </div>
   </div>
@@ -22,73 +20,36 @@
     <h2>Sản phẩm liên quan</h2>
     <hr />
     <div class="row">
-      <div class="col-md-4">
-        <div class="card" style="width: 18rem">
-          <a routerLink="/ProductDetail" routerLinkActive="active">
-            <img
-              class="card-img-top img-product"
-              src="{{ product1 }}"
-              alt="Card image cap"
-            />
-          </a>
-          <div class="card-body">
-            <h5 class="card-title">Áo 1</h5>
-            <p class="card-text">100.000.000 VNĐ</p>
-            <p>
-              <i class="fas fa-star icon"></i>
-              <i class="fas fa-star icon"></i>
-              <i class="fas fa-star icon"></i>
-              <i class="fas fa-star icon"></i>
-              <i class="fas fa-star icon"></i>
-            </p>
-            <button class="btn btn-primary btn-order">Thêm vào giỏ hàng</button>
-          </div>
-        </div>
-      </div>
-      <div class="col-md-4">
-        <div class="card" style="width: 18rem">
-          <img
-            class="card-img-top img-product"
-            src="{{ product2 }}"
-            alt="Card image cap"
-          />
-          <div class="card-body">
-            <h5 class="card-title">Áo 2</h5>
-            <p class="card-text">100.000.000 VNĐ</p>
-            <p>
-              <i class="fas fa-star icon"></i>
-              <i class="fas fa-star icon"></i>
-              <i class="fas fa-star icon"></i>
-              <i class="fas fa-star icon"></i>
-              <i class="fas fa-star icon"></i>
-            </p>
-            <button class="btn btn-primary btn-order">Thêm vào giỏ hàng</button>
-          </div>
-        </div>
-      </div>
-      <div class="col-md-4">
-        <div class="card" style="width: 18rem">
-          <img
-            class="card-img-top img-product"
-            src="{{ product1 }}"
-            alt="Card image cap"
-          />
-          <div class="card-body">
-            <h5 class="card-title">Áo 3</h5>
-            <p class="card-text">100.000.000 VNĐ</p>
-            <p>
-              <i class="fas fa-star icon"></i>
-              <i class="fas fa-star icon"></i>
-              <i class="fas fa-star icon"></i>
-              <i class="fas fa-star icon"></i>
-              <i class="fas fa-star icon"></i>
-            </p>
-            <button class="btn btn-primary btn-order">Thêm vào giỏ hàng</button>
+      <div *ngFor="let product of sameProducts">
+        <div class="col-md-4">
+          <div class="card" style="width: 18rem">
+            <a [routerLink]="['/ProductDetail', product.productId]">
+              <img
+                class="card-img-top img-product"
+                src="{{ product.images }}"
+                alt="{{ product.name }}"
+              />
+            </a>
+            <div class="card-body">
+              <h5 class="card-title">{{ product.name }}</h5>
+              <p class="card-text">
+                {{ product.price | number: "1.0":"en-US" }} VNĐ
+              </p>
+              <p>
+                <span *ngFor="let i of [].constructor(product.rating)">
+                  <i class="fas fa-star icon"></i>
+                </span>
+              </p>
+              <button class="btn btn-primary btn-order">
+                Thêm vào giỏ hàng
+              </button>
+            </div>
           </div>
         </div>
       </div>
     </div>
   </div>
+
   <div class="container">
     <h2>Bình luận</h2>
     <hr />

@@ -1,16 +1,41 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, ParamMap } from '@angular/router';
+import { Product } from 'src/models/product';
+import { ProductService } from 'src/services/productService';
 
 @Component({
   selector: 'app-product-detail',
   templateUrl: './product-detail.component.html',
   styleUrls: ['./product-detail.component.css'],
+  providers: [ProductService],
 })
 export class ProductDetailComponent implements OnInit {
-  product1 = 'assets/images/ao1.jpg';
-  product2 = 'assets/images/ao2.jpg';
   user = 'assets/images/user.jpg';
 
-  constructor() {}
+  product: Product;
+  sameProducts: Product[];
 
-  ngOnInit(): void {}
+  constructor(
+    private activatedRoute: ActivatedRoute,
+    private productService: ProductService
+  ) {}
+
+  ngOnInit(): void {
+    this.activatedRoute.paramMap.subscribe((paramMap: ParamMap) => {
+      this.getProductById(paramMap.get('id'));
+      this.getSameProducts(paramMap.get('id'));
+    });
+  }
+
+  getProductById(id: String) {
+    this.productService
+      .getProductById(id)
+      .subscribe((product) => (this.product = product));
+  }
+
+  getSameProducts(id: String) {
+    this.productService
+      .getSameProducts(id)
+      .subscribe((products) => (this.sameProducts = products));
+  }
 }

@@ -126,6 +126,7 @@ namespace AssignmentEcommerce_Backend.Controllers
                 .Include(p => p.Category)
                 .Where(p => p.CategoryId.Equals(product.CategoryId) && p.ProductId != product.ProductId)
                 .AsNoTracking()
+                .Take(3)
                 .ToListAsync();
 
             foreach (var item in productsSame)

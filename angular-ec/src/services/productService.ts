@@ -15,6 +15,18 @@ export class ProductService {
     return this.http.get(product_url).pipe(map((response: any) => response));
   }
 
+  getProductById(id: String): Observable<Product> {
+    return this.http
+      .get(product_url + '/getproductbyid/' + id)
+      .pipe(map((response: any) => response));
+  }
+
+  getSameProducts(id: String): Observable<Product[]> {
+    return this.http
+      .get(product_url + '/getproductsamecategory/' + id)
+      .pipe(map((response: any) => response));
+  }
+
   getHotProducts(): Observable<Product[]> {
     return this.http
       .get(product_url + '/gethotproduct')

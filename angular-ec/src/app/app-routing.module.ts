@@ -15,7 +15,7 @@ import { ProductPageComponent } from './product-page/product-page.component';
 const routes: Routes = [
   { path: 'Home', component: HomeComponent },
   { path: 'Product', component: ProductPageComponent },
-  { path: 'ProductDetail', component: ProductDetailComponent },
+  { path: 'ProductDetail/:id', component: ProductDetailComponent },
   { path: 'Cart', component: CartComponent },
   { path: 'ManageProduct', component: ManageProductComponent },
   { path: 'ManageProduct/Add', component: AddProductComponent },
@@ -28,7 +28,11 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [
+    RouterModule.forRoot(routes, {
+      scrollPositionRestoration: 'enabled',
+    }),
+  ],
   exports: [RouterModule],
 })
 export class AppRoutingModule {}
