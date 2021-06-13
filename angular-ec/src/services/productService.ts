@@ -21,6 +21,12 @@ export class ProductService {
       .pipe(map((response: any) => response));
   }
 
+  getProductsByCategory(id: String): Observable<Product[]> {
+    return this.http
+      .get(product_url + '/getproductbycategory/' + id)
+      .pipe(map((response: any) => response));
+  }
+
   getSameProducts(id: String): Observable<Product[]> {
     return this.http
       .get(product_url + '/getproductsamecategory/' + id)
