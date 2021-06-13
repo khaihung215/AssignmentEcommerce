@@ -1,15 +1,25 @@
 import { Component, OnInit } from '@angular/core';
+import { Product } from 'src/models/product';
+import { ProductService } from 'src/services/productService';
 
 @Component({
   selector: 'app-product-page',
   templateUrl: './product-page.component.html',
   styleUrls: ['./product-page.component.css'],
+  providers: [ProductService],
 })
 export class ProductPageComponent implements OnInit {
-  product1 = 'assets/images/ao1.jpg';
-  product2 = 'assets/images/ao2.jpg';
+  listProducts: Product[];
 
-  constructor() {}
+  constructor(private productService: ProductService) {}
 
-  ngOnInit(): void {}
+  ngOnInit() {
+    this.getProducts();
+  }
+
+  getProducts() {
+    this.productService
+      .getProducts()
+      .subscribe((products) => (this.listProducts = products));
+  }
 }
