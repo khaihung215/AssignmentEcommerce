@@ -1,0 +1,43 @@
+<div class="container">
+  <h2 class="text-center">{{ nameCategory }}</h2>
+  <div class="row">
+    <div *ngFor="let product of listProducts">
+      <div class="col-md-4">
+        <div class="card" style="width: 18rem">
+          <a [routerLink]="['/ProductDetail', product.productId]">
+            <img
+              class="card-img-top img-product"
+              src="{{ product.images }}"
+              alt="{{ product.name }}"
+            />
+          </a>
+          <div class="card-body">
+            <h5 class="card-title">{{ product.name }}</h5>
+            <p class="card-text">
+              {{ product.price | number: "1.0":"en-US" }} VNĐ
+            </p>
+            <p>
+              <span *ngFor="let i of [].constructor(product.rating)">
+                <i class="fas fa-star icon"></i>
+              </span>
+            </p>
+            <button class="btn btn-primary btn-order">Thêm vào giỏ hàng</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <nav aria-label="Page navigation example">
+    <ul class="pagination justify-content-center">
+      <li class="page-item disabled">
+        <a class="page-link" href="#" tabindex="-1">Previous</a>
+      </li>
+      <li class="page-item"><a class="page-link" href="#">1</a></li>
+      <li class="page-item"><a class="page-link" href="#">2</a></li>
+      <li class="page-item"><a class="page-link" href="#">3</a></li>
+      <li class="page-item">
+        <a class="page-link" href="#">Next</a>
+      </li>
+    </ul>
+  </nav>
+</div>

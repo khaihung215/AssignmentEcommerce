@@ -12,9 +12,14 @@
 }
 
 .nav-custom .navbar-nav .nav-link:hover {
-  color: grey !important;
+  font-weight: 500;
 }
 
 .logo {
   height: 50px;
+}
+
+.dropdown-item:hover {
+  background-color: black !important;
+  color: white !important;
 }

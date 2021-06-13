@@ -20,6 +20,7 @@ import { AddProductComponent } from './manage-product/add-product/add-product.co
 import { EditProductComponent } from './manage-product/edit-product/edit-product.component';
 import { AddCategoryComponent } from './manage-category/add-category/add-category.component';
 import { EditCategoryComponent } from './manage-category/edit-category/edit-category.component';
+import { CategoryPageComponent } from './category-page/category-page.component';
 
 @NgModule({
   declarations: [
@@ -41,6 +42,7 @@ import { EditCategoryComponent } from './manage-category/edit-category/edit-cate
     EditProductComponent,
     AddCategoryComponent,
     EditCategoryComponent,
+    CategoryPageComponent,
   ],
   imports: [BrowserModule, AppRoutingModule, HttpClientModule],
   providers: [],

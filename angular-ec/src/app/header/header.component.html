@@ -41,9 +41,17 @@
               Danh Mục
             </a>
             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <a class="dropdown-item" href="#">Áo thun</a>
-              <a class="dropdown-item" href="#">Hoddie</a>
-              <a class="dropdown-item" href="#">Sweater</a>
+              <div *ngFor="let category of listCategories">
+                <a
+                  class="dropdown-item"
+                  [routerLink]="[
+                    '/ProductByCategory',
+                    category.nameCategory,
+                    category.categoryId
+                  ]"
+                  >{{ category.nameCategory }}</a
+                >
+              </div>
             </div>
           </li>
         </ul>

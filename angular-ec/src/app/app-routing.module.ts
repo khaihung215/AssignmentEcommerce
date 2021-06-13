@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { CartComponent } from './cart/cart.component';
+import { CategoryPageComponent } from './category-page/category-page.component';
 import { HomeComponent } from './home/home.component';
 import { AddCategoryComponent } from './manage-category/add-category/add-category.component';
 import { EditCategoryComponent } from './manage-category/edit-category/edit-category.component';
@@ -15,6 +16,7 @@ import { ProductPageComponent } from './product-page/product-page.component';
 const routes: Routes = [
   { path: 'Home', component: HomeComponent },
   { path: 'Product', component: ProductPageComponent },
+  { path: 'ProductByCategory/:name/:id', component: CategoryPageComponent },
   { path: 'ProductDetail/:id', component: ProductDetailComponent },
   { path: 'Cart', component: CartComponent },
   { path: 'ManageProduct', component: ManageProductComponent },
