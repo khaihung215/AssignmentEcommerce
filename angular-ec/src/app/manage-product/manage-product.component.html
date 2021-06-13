@@ -19,17 +19,17 @@
       </tr>
     </thead>
     <tbody>
-      <tr>
-        <td><img src="{{ product1 }}" height="150px" width="150px" /></td>
-        <td>Áo 1</td>
-        <td>100.000.000 VNĐ</td>
-        <td>Áo thun</td>
+      <tr *ngFor="let product of listProducts">
+        <td><img src="{{ product.images }}" height="150px" width="150px" /></td>
+        <td>{{ product.name }}</td>
+        <td>{{ product.price | number: "1.0":"en-US" }} VNĐ</td>
+        <td>{{ product.nameCategory }}</td>
         <td>
-          <i class="fas fa-star icon"></i>
-          <i class="fas fa-star icon"></i>
-          <i class="fas fa-star icon"></i>
-          <i class="fas fa-star icon"></i>
-          <i class="fas fa-star icon"></i>
+          <p>
+            <span *ngFor="let i of [].constructor(product.rating)">
+              <i class="fas fa-star icon"></i>
+            </span>
+          </p>
         </td>
         <td>
           <button
@@ -46,48 +46,6 @@
             data-toggle="modal"
             data-target="#exampleModal"
           >
-            <i class="fas fa-trash"></i>
-          </button>
-        </td>
-      </tr>
-      <tr>
-        <td><img src="{{ product2 }}" height="150px" width="150px" /></td>
-        <td>Áo 2</td>
-        <td>100.000.000 VNĐ</td>
-        <td>Áo thun</td>
-        <td>
-          <i class="fas fa-star icon"></i>
-          <i class="fas fa-star icon"></i>
-          <i class="fas fa-star icon"></i>
-          <i class="fas fa-star icon"></i>
-          <i class="fas fa-star icon"></i>
-        </td>
-        <td>
-          <button type="button" class="btn btn-secondary nav-icon mr-2">
-            <i class="fas fa-edit"></i>
-          </button>
-          <button type="button" class="btn btn-danger nav-icon">
-            <i class="fas fa-trash"></i>
-          </button>
-        </td>
-      </tr>
-      <tr>
-        <td><img src="{{ product1 }}" height="150px" width="150px" /></td>
-        <td>Áo 3</td>
-        <td>100.000.000 VNĐ</td>
-        <td>Áo thun</td>
-        <td>
-          <i class="fas fa-star icon"></i>
-          <i class="fas fa-star icon"></i>
-          <i class="fas fa-star icon"></i>
-          <i class="fas fa-star icon"></i>
-          <i class="fas fa-star icon"></i>
-        </td>
-        <td>
-          <button type="button" class="btn btn-secondary nav-icon mr-2">
-            <i class="fas fa-edit"></i>
-          </button>
-          <button type="button" class="btn btn-danger nav-icon">
             <i class="fas fa-trash"></i>
           </button>
         </td>

@@ -3,7 +3,7 @@
   <div class="row">
     <div class="col-md-2"></div>
     <div class="col-md-8">
-      <form>
+      <form [formGroup]="addCategoryForm" (ngSubmit)="onSubmit()" novalidate>
         <div class="form-group row">
           <label for="name" class="col-sm-2 col-form-label">Tên DM</label>
           <div class="col-sm-10">
@@ -11,8 +11,18 @@
               type="text"
               class="form-control"
               id="name"
+              name="nameCategory"
+              formControlName="nameCategory"
               placeholder="Tên danh mục"
             />
+            <span
+              *ngIf="
+                !addCategoryForm.get('nameCategory').valid &&
+                addCategoryForm.get('nameCategory').touched
+              "
+              class="help-block"
+              >Vui lòng nhập tên danh mục</span
+            >
           </div>
         </div>
         <div class="form-group row">
@@ -24,14 +34,24 @@
               type="text"
               class="form-control"
               id="description"
+              name="description"
+              formControlName="description"
               placeholder="Mô tả danh mục"
             />
+            <span
+              *ngIf="
+                !addCategoryForm.get('description').valid &&
+                addCategoryForm.get('description').touched
+              "
+              class="help-block"
+              >Vui lòng nhập mô tả danh mục</span
+            >
           </div>
         </div>
         <div class="form-group row">
           <label for="image" class="col-sm-2 col-form-label">Hình ảnh</label>
           <div class="col-sm-10">
-            <input type="file" id="image" />
+            <input type="file" id="image" (change)="onFileChange($event)" />
           </div>
         </div>
         <div class="form-group row text-center">
@@ -44,7 +64,13 @@
             >
               Trở về
             </button>
-            <button type="submit" class="btn btn-success">Thêm</button>
+            <button
+              type="submit"
+              class="btn btn-success"
+              [disabled]="!addCategoryForm.valid"
+            >
+              Thêm
+            </button>
           </div>
         </div>
       </form>
@@ -52,3 +78,5 @@
     <div class="col-md-2"></div>
   </div>
 </div>
+
+<lib-toastify-toast-container [autoClose]="2000"></lib-toastify-toast-container>

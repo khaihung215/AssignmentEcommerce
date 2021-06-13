@@ -21,6 +21,8 @@ import { EditProductComponent } from './manage-product/edit-product/edit-product
 import { AddCategoryComponent } from './manage-category/add-category/add-category.component';
 import { EditCategoryComponent } from './manage-category/edit-category/edit-category.component';
 import { CategoryPageComponent } from './category-page/category-page.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ToastService, AngularToastifyModule } from 'angular-toastify';
 
 @NgModule({
   declarations: [
@@ -44,8 +46,15 @@ import { CategoryPageComponent } from './category-page/category-page.component';
     EditCategoryComponent,
     CategoryPageComponent,
   ],
-  imports: [BrowserModule, AppRoutingModule, HttpClientModule],
-  providers: [],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    HttpClientModule,
+    FormsModule,
+    ReactiveFormsModule,
+    AngularToastifyModule,
+  ],
+  providers: [ToastService],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

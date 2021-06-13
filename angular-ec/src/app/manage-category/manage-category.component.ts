@@ -1,15 +1,25 @@
 import { Component, OnInit } from '@angular/core';
+import { Category } from 'src/models/category';
+import { CategoryService } from 'src/services/categoryService';
 
 @Component({
   selector: 'app-manage-category',
   templateUrl: './manage-category.component.html',
   styleUrls: ['./manage-category.component.css'],
+  providers: [CategoryService],
 })
 export class ManageCategoryComponent implements OnInit {
-  product1 = 'assets/images/ao1.jpg';
-  product2 = 'assets/images/ao2.jpg';
+  listCategories: Category[];
 
-  constructor() {}
+  constructor(private categoryService: CategoryService) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.getCategories();
+  }
+
+  getCategories() {
+    this.categoryService
+      .getCategories()
+      .subscribe((categories) => (this.listCategories = categories));
+  }
 }
