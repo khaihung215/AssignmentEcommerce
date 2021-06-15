@@ -10,6 +10,7 @@ import { ProductService } from 'src/services/productService';
 })
 export class ManageProductComponent implements OnInit {
   listProducts: Product[];
+  productId: String = '';
 
   constructor(private productService: ProductService) {}
 
@@ -21,5 +22,22 @@ export class ManageProductComponent implements OnInit {
     this.productService
       .getProducts()
       .subscribe((products) => (this.listProducts = products));
+  }
+
+  getProductId(id: String) {
+    this.productId = id;
+  }
+
+  clearProductId() {
+    this.productId = '';
+  }
+
+  deleteProduct() {
+    this.productService.deleteProduct(this.productId);
+    this.productId = '';
+
+    setTimeout(() => {
+      window.location.reload();
+    }, 1500);
   }
 }

@@ -59,4 +59,11 @@ export class ProductService {
       (error) => this.toastService.error('Sửa sản phẩm thất bại !')
     );
   }
+
+  deleteProduct(id: any) {
+    return this.http.delete(product_url + '/' + id).subscribe(
+      (response) => this.toastService.success('Xoá sản phẩm thành công !'),
+      (error) => this.toastService.error('Xoá sản phẩm thất bại !')
+    );
+  }
 }

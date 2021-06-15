@@ -35,6 +35,9 @@ export class ManageCategoryComponent implements OnInit {
   deleteCategory() {
     this.categoryService.deleteCategory(this.categoryId);
     this.categoryId = '';
-    window.location.reload();
+
+    setTimeout(() => {
+      window.location.reload();
+    }, 1500);
   }
 }
