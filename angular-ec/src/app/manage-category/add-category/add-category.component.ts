@@ -12,7 +12,7 @@ export class AddCategoryComponent {
   addCategoryForm = new FormGroup({
     nameCategory: new FormControl('', [Validators.required]),
     description: new FormControl('', [Validators.required]),
-    images: new FormControl(''),
+    thumbnailImages: new FormControl(''),
   });
 
   constructor(private categoryService: CategoryService) {}
@@ -34,7 +34,7 @@ export class AddCategoryComponent {
   onFileChange(event) {
     if (event.target.files && event.target.files.length > 0) {
       const file = event.target.files[0] as File;
-      this.addCategoryForm.get('images').setValue(file);
+      this.addCategoryForm.get('thumbnailImages').setValue(file);
     }
   }
 }

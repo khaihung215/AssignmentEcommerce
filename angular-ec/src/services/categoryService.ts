@@ -35,4 +35,11 @@ export class CategoryService {
       (error) => this.toastService.error('Sửa danh mục thất bại !')
     );
   }
+
+  deleteCategory(id: any) {
+    return this.http.delete(category_url + '/' + id).subscribe(
+      (response) => this.toastService.success('Xoá danh mục thành công !'),
+      (error) => this.toastService.error('Xoá danh mục thất bại !')
+    );
+  }
 }

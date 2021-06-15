@@ -36,6 +36,7 @@
             class="btn btn-danger nav-icon"
             data-toggle="modal"
             data-target="#exampleModal"
+            (click)="getCategoryId(category.categoryId)"
           >
             <i class="fas fa-trash"></i>
           </button>
@@ -82,12 +83,26 @@
         </div>
         <div class="modal-body">Bạn có chắc chắn xoá danh mục này không ?</div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">
+          <button
+            type="button"
+            class="btn btn-secondary"
+            data-dismiss="modal"
+            (click)="clearCategoryId()"
+          >
             Đóng
           </button>
-          <button type="button" class="btn btn-danger">Xoá</button>
+          <button
+            type="button"
+            class="btn btn-danger"
+            data-dismiss="modal"
+            (click)="deleteCategory()"
+          >
+            Xoá
+          </button>
         </div>
       </div>
     </div>
   </div>
 </div>
+
+<lib-toastify-toast-container [autoClose]="2000"></lib-toastify-toast-container>

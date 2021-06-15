@@ -10,6 +10,7 @@ import { CategoryService } from 'src/services/categoryService';
 })
 export class ManageCategoryComponent implements OnInit {
   listCategories: Category[];
+  categoryId: String = '';
 
   constructor(private categoryService: CategoryService) {}
 
@@ -21,5 +22,19 @@ export class ManageCategoryComponent implements OnInit {
     this.categoryService
       .getCategories()
       .subscribe((categories) => (this.listCategories = categories));
+  }
+
+  getCategoryId(id: String) {
+    this.categoryId = id;
+  }
+
+  clearCategoryId() {
+    this.categoryId = '';
+  }
+
+  deleteCategory() {
+    this.categoryService.deleteCategory(this.categoryId);
+    this.categoryId = '';
+    window.location.reload();
   }
 }
