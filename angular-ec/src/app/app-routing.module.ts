@@ -24,7 +24,7 @@ const routes: Routes = [
   { path: 'ManageProduct/Edit', component: EditProductComponent },
   { path: 'ManageCategory', component: ManageCategoryComponent },
   { path: 'ManageCategory/Add', component: AddCategoryComponent },
-  { path: 'ManageCategory/Edit', component: EditCategoryComponent },
+  { path: 'ManageCategory/Edit/:id', component: EditCategoryComponent },
   { path: '', redirectTo: '/Home', pathMatch: 'full' },
   { path: '**', component: NotfoundComponent },
 ];

@@ -27,8 +27,7 @@
           <button
             type="button"
             class="btn btn-secondary nav-icon mr-2"
-            routerLink="/ManageCategory/Edit"
-            routerLinkActive="active"
+            [routerLink]="['/ManageCategory/Edit', category.categoryId]"
           >
             <i class="fas fa-edit"></i>
           </button>

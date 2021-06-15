@@ -16,10 +16,23 @@ export class CategoryService {
     return this.http.get(category_url).pipe(map((response: any) => response));
   }
 
+  getCategoryById(id: String): Observable<Category> {
+    return this.http
+      .get(category_url + '/' + id)
+      .pipe(map((response: any) => response));
+  }
+
   addCategory(formData: any) {
     return this.http.post(category_url, formData).subscribe(
       (response) => this.toastService.success('Thêm danh mục thành công !'),
       (error) => this.toastService.error('Thêm danh mục thất bại !')
+    );
+  }
+
+  editCategory(id: any, formData: any) {
+    return this.http.put(category_url + '/' + id, formData).subscribe(
+      (response) => this.toastService.success('Sửa danh mục thành công !'),
+      (error) => this.toastService.error('Sửa danh mục thất bại !')
     );
   }
 }
