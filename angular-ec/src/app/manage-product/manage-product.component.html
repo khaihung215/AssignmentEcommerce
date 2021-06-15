@@ -35,8 +35,7 @@
           <button
             type="button"
             class="btn btn-secondary nav-icon mr-2"
-            routerLink="/ManageProduct/Edit"
-            routerLinkActive="active"
+            [routerLink]="['/ManageProduct/Edit', product.productId]"
           >
             <i class="fas fa-edit"></i>
           </button>

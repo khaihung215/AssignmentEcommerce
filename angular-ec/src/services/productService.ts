@@ -52,4 +52,11 @@ export class ProductService {
       (error) => this.toastService.error('Thêm sản phẩm thất bại !')
     );
   }
+
+  editProduct(id: any, formData: any) {
+    return this.http.put(product_url + '/' + id, formData).subscribe(
+      (response) => this.toastService.success('Sửa sản phẩm thành công !'),
+      (error) => this.toastService.error('Sửa sản phẩm thất bại !')
+    );
+  }
 }
