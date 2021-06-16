@@ -70,7 +70,7 @@ namespace AssignmentEcommerce_Backend.Controllers
 
         [HttpPost("PostReviewV2")]
         [AllowAnonymous]
-        public async Task<ActionResult<ReviewVm>> PostReviewV2(ReviewFormRequest reviewFormRequest)
+        public async Task<IEnumerable<ReviewVm>> PostReviewV2([FromForm] ReviewFormRequest reviewFormRequest)
         {
             var review = _mapper.Map<Review>(reviewFormRequest);
             review.ReviewId = Guid.NewGuid().ToString();
@@ -86,7 +86,14 @@ namespace AssignmentEcommerce_Backend.Controllers
             product.Rating = Convert.ToInt32(sumRating);
             await _context.SaveChangesAsync();
 
-            var reviewRes = _mapper.Map<ReviewVm>(review);
+            var reviews = await _context.Reviews
+                .Include(review => review.Product)
+                .Where(review => review.ProductId.Equals(reviewFormRequest.ProductId))
+                .OrderBy(review => review.DateReview)
+                .AsNoTracking()
+                .ToListAsync();
+
+            var reviewRes = _mapper.Map<IEnumerable<ReviewVm>>(reviews);
             return reviewRes;
         }
     }

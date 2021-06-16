@@ -1,17 +1,17 @@
 <div class="container">
   <div class="row detail-product">
     <div class="col-md-6">
-      <img src="{{ product.images }}" class="img-product" />
+      <img src="{{ product.images }}" class="img-product" *ngIf="product" />
     </div>
     <div class="col-md-6 detail">
-      <p class="name-product">{{ product.name }}</p>
-      <p>{{ product.price | number: "1.0":"en-US" }} VNĐ</p>
-      <p>
+      <p class="name-product" *ngIf="product">{{ product.name }}</p>
+      <p *ngIf="product">{{ product.price | number: "1.0":"en-US" }} VNĐ</p>
+      <p *ngIf="product">
         <span *ngFor="let i of [].constructor(product.rating)">
           <i class="fas fa-star icon"></i>
         </span>
       </p>
-      <p>{{ product.description }}</p>
+      <p *ngIf="product">{{ product.description }}</p>
       <button class="btn btn-primary btn-order">Thêm vào giỏ hàng</button>
     </div>
   </div>
@@ -51,7 +51,21 @@
   </div>
 
   <div class="container">
-    <h2>Bình luận</h2>
+    <div class="row">
+      <div class="col-3">
+        <h2>Bình luận</h2>
+      </div>
+      <div class="col-6"></div>
+      <div class="col-3">
+        <button
+          class="btn btn-success float-right"
+          data-toggle="modal"
+          data-target="#exampleModalCenter"
+        >
+          Thêm bình luận
+        </button>
+      </div>
+    </div>
     <hr />
     <div class="media mt-2 mb-2" *ngFor="let review of listReviews">
       <img
@@ -73,4 +87,152 @@
       </div>
     </div>
   </div>
+
+  <div
+    class="modal fade"
+    id="exampleModalCenter"
+    tabindex="-1"
+    role="dialog"
+    aria-labelledby="exampleModalCenterTitle"
+    aria-hidden="true"
+  >
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Thêm bình luận</h5>
+          <button
+            type="button"
+            class="close"
+            data-dismiss="modal"
+            aria-label="Close"
+            #closebutton
+          >
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form [formGroup]="addReviewForm" (ngSubmit)="onSubmit()" novalidate>
+            <input
+              type="hidden"
+              class="form-control"
+              formControlName="productId"
+            />
+            <div class="form-group row">
+              <label for="name" class="col-sm-3 col-form-label">Họ tên</label>
+              <div class="col-sm-9">
+                <input
+                  type="text"
+                  class="form-control"
+                  id="name"
+                  name="userName"
+                  formControlName="userName"
+                  placeholder="Họ tên"
+                />
+                <span
+                  *ngIf="
+                    !addReviewForm.get('userName').valid &&
+                    addReviewForm.get('userName').touched
+                  "
+                  class="help-block"
+                  >Vui lòng nhập họ tên</span
+                >
+              </div>
+            </div>
+            <div class="form-group row">
+              <label for="content" class="col-sm-3 col-form-label"
+                >Nội dung</label
+              >
+              <div class="col-sm-9">
+                <textarea
+                  rows="3"
+                  class="form-control"
+                  id="content"
+                  name="content"
+                  formControlName="content"
+                  placeholder="Nội dung"
+                ></textarea>
+                <span
+                  *ngIf="
+                    !addReviewForm.get('content').valid &&
+                    addReviewForm.get('content').touched
+                  "
+                  class="help-block"
+                  >Vui lòng nhập nội dung</span
+                >
+              </div>
+            </div>
+            <div class="form-group row">
+              <label for="content" class="col-sm-3 col-form-label"
+                >Số điểm</label
+              >
+              <div class="col-sm-9">
+                <div class="rate">
+                  <input
+                    type="radio"
+                    id="star5"
+                    name="rating"
+                    formControlName="rating"
+                    value="5"
+                  />
+                  <label for="star5" title="text">5 stars</label>
+                  <input
+                    type="radio"
+                    id="star4"
+                    name="rating"
+                    formControlName="rating"
+                    value="4"
+                  />
+                  <label for="star4" title="text">4 stars</label>
+                  <input
+                    type="radio"
+                    id="star3"
+                    name="rating"
+                    formControlName="rating"
+                    value="3"
+                  />
+                  <label for="star3" title="text">3 stars</label>
+                  <input
+                    type="radio"
+                    id="star2"
+                    name="rating"
+                    formControlName="rating"
+                    value="2"
+                  />
+                  <label for="star2" title="text">2 stars</label>
+                  <input
+                    type="radio"
+                    id="star1"
+                    name="rating"
+                    formControlName="rating"
+                    value="1"
+                  />
+                  <label for="star1" title="text">1 star</label>
+                </div>
+              </div>
+            </div>
+            <div class="form-group row text-center">
+              <div class="col-sm-12">
+                <button
+                  type="button"
+                  class="btn btn-secondary mr-2"
+                  data-dismiss="modal"
+                >
+                  Đóng
+                </button>
+                <button
+                  type="submit"
+                  class="btn btn-success"
+                  [disabled]="!addReviewForm.valid"
+                >
+                  Thêm
+                </button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
+
+<lib-toastify-toast-container [autoClose]="2000"></lib-toastify-toast-container>
