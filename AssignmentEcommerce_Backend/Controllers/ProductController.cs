@@ -52,20 +52,10 @@ namespace AssignmentEcommerce_Backend.Controllers
             return productRes;
         }
 
-        [HttpGet("GetProducts")]
+        [HttpPost("GetProducts")]
         [AllowAnonymous]
         public async Task<PagedResponseModel<ProductVm>> GetProducts([FromQuery] ProductPaged productPaged)
         {
-            //var listProduct = await _context.Products
-            //    .Include(product => product.Category)
-            //    .AsNoTracking()
-            //    .ToListAsync();
-
-            //foreach (var item in listProduct)
-            //{
-            //    item.Images = _storageService.GetFileUrl(item.Images);
-            //}
-
             var products = await _context.Products
                 .Include(product => product.Category)
                 .AsNoTracking()
