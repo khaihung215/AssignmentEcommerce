@@ -50,29 +50,27 @@
     </div>
   </div>
 
-  <!-- <div class="container">
+  <div class="container">
     <h2>Bình luận</h2>
     <hr />
-    <div class="media">
-      <img class="mr-3" src="{{ user }}" alt="Generic placeholder image" />
-      <div class="media-body">
-        <h5 class="mt-0">Trần Hiếu Nhân</h5>
-        Đẹp đẹp !
+    <div class="media mt-2 mb-2" *ngFor="let review of listReviews">
+      <img
+        class="mr-3 img-thumbnail"
+        src="{{ user }}"
+        alt="Generic placeholder image"
+      />
+      <div class="media-body mt-3">
+        <p>
+          <span *ngFor="let i of [].constructor(review.rating)">
+            <i class="fas fa-star icon"></i>
+          </span>
+        </p>
+        <p>
+          By <span class="font-weight-bold">{{ review.userName }}</span> on
+          {{ review.dateReview | date }}
+        </p>
+        <p>{{ review.content }}</p>
       </div>
     </div>
-    <div class="media">
-      <img class="mr-3" src="{{ user }}" alt="Generic placeholder image" />
-      <div class="media-body">
-        <h5 class="mt-0">Trần Hiếu Nhân</h5>
-        Đẹp đẹp !
-      </div>
-    </div>
-    <div class="media">
-      <img class="mr-3" src="{{ user }}" alt="Generic placeholder image" />
-      <div class="media-body">
-        <h5 class="mt-0">Trần Hiếu Nhân</h5>
-        Đẹp đẹp !
-      </div>
-    </div>
-  </div> -->
+  </div>
 </div>
