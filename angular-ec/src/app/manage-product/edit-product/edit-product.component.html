@@ -98,6 +98,16 @@
             <input type="file" id="image" (change)="onFileChange($event)" />
           </div>
         </div>
+        <div class="form-group row">
+          <div class="col-sm-2"></div>
+          <div class="col-sm-10">
+            <img
+              [src]="imageSrc"
+              *ngIf="imageSrc"
+              style="height: 500px; width: 500px"
+            />
+          </div>
+        </div>
         <div class="form-group row text-center">
           <div class="col-sm-12">
             <a

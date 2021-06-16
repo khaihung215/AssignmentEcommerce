@@ -11,6 +11,8 @@ import { ProductService } from 'src/services/productService';
   providers: [CategoryService, ProductService],
 })
 export class AddProductComponent implements OnInit {
+  imageSrc: string;
+
   addProductForm = new FormGroup({
     name: new FormControl('', [Validators.required]),
     description: new FormControl('', [Validators.required]),
@@ -47,9 +49,18 @@ export class AddProductComponent implements OnInit {
   }
 
   onFileChange(event) {
-    if (event.target.files && event.target.files.length > 0) {
-      const file = event.target.files[0] as File;
-      this.addProductForm.get('images').setValue(file);
+    const reader = new FileReader();
+
+    if (event.target.files && event.target.files.length) {
+      const [file] = event.target.files;
+      reader.readAsDataURL(file);
+
+      reader.onload = () => {
+        this.imageSrc = reader.result as string;
+      };
+
+      const fileImage = event.target.files[0] as File;
+      this.addProductForm.get('images').setValue(fileImage);
     }
   }
 }

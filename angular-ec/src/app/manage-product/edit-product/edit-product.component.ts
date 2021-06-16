@@ -12,6 +12,8 @@ import { ProductService } from 'src/services/productService';
   providers: [CategoryService, ProductService],
 })
 export class EditProductComponent implements OnInit {
+  imageSrc: string;
+
   editProductForm = new FormGroup({
     name: new FormControl('', [Validators.required]),
     description: new FormControl('', [Validators.required]),
@@ -46,7 +48,8 @@ export class EditProductComponent implements OnInit {
 
   getProductById(id: String) {
     this.productService.getProductById(id).subscribe(
-      (product) =>
+      (product) => (
+        (this.imageSrc = product.images),
         (this.editProductForm = new FormGroup({
           name: new FormControl(product.name, [Validators.required]),
           description: new FormControl(product.description, [
@@ -58,6 +61,7 @@ export class EditProductComponent implements OnInit {
           ]),
           images: new FormControl(''),
         }))
+      )
     );
   }
 
@@ -72,9 +76,18 @@ export class EditProductComponent implements OnInit {
   }
 
   onFileChange(event) {
-    if (event.target.files && event.target.files.length > 0) {
-      const file = event.target.files[0] as File;
-      this.editProductForm.get('images').setValue(file);
+    const reader = new FileReader();
+
+    if (event.target.files && event.target.files.length) {
+      const [file] = event.target.files;
+      reader.readAsDataURL(file);
+
+      reader.onload = () => {
+        this.imageSrc = reader.result as string;
+      };
+
+      const fileImage = event.target.files[0] as File;
+      this.editProductForm.get('images').setValue(fileImage);
     }
   }
 }
