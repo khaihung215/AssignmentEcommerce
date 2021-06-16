@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Product } from 'src/models/product';
+import { Product, ProductPaged } from 'src/models/product';
 import { ProductService } from 'src/services/productService';
 
 @Component({
@@ -10,18 +10,45 @@ import { ProductService } from 'src/services/productService';
 })
 export class ManageProductComponent implements OnInit {
   listProducts: Product[];
+  currentPage: number;
+  totalItems: number;
+  totalPages: number;
   productId: String = '';
 
   constructor(private productService: ProductService) {}
 
   ngOnInit() {
-    this.getProducts();
+    this.getProductsV2();
   }
 
-  getProducts() {
-    this.productService
-      .getProducts()
-      .subscribe((products) => (this.listProducts = products));
+  getProductsV2() {
+    const formData: ProductPaged = {
+      limit: 10,
+      page: 1,
+    };
+
+    this.productService.getProductsV2(formData).subscribe((products) => {
+      this.listProducts = products.items;
+      this.totalItems = products.totalItems;
+      this.totalPages = products.totalPages;
+      this.currentPage = products.currentPage;
+    });
+  }
+
+  handlePagination(page: any) {
+    const formData: ProductPaged = {
+      limit: 10,
+      page: page,
+    };
+
+    this.productService.getProductsV2(formData).subscribe((products) => {
+      this.listProducts = products.items;
+      this.totalItems = products.totalItems;
+      this.totalPages = products.totalPages;
+      this.currentPage = products.currentPage;
+    });
+
+    window.scrollTo(0, 0);
   }
 
   getProductId(id: String) {

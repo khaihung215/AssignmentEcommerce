@@ -1,3 +1,9 @@
 .icon {
   color: #f0e68c !important;
 }
+
+.btn.disabled,
+.btn:disabled {
+  background-color: blue;
+  color: white;
+}

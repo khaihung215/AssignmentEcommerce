@@ -22,3 +22,9 @@
   border-radius: 10px;
   margin: 20px;
 }
+
+.btn.disabled,
+.btn:disabled {
+  background-color: blue;
+  color: white;
+}

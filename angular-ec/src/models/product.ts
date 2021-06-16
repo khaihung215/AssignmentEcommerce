@@ -28,3 +28,15 @@ export class Product {
     this.rating = rating;
   }
 }
+
+export class ProductPaged {
+  limit: number;
+  page: number;
+}
+
+export class ProductRespone {
+  currentPage: number;
+  totalItems: number;
+  totalPages: number;
+  items: Product[];
+}

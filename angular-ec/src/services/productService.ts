@@ -2,7 +2,7 @@ import { backEnd_Url } from '../config';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { Product } from 'src/models/product';
+import { Product, ProductPaged, ProductRespone } from 'src/models/product';
 import { map } from 'rxjs/operators';
 import { ToastService } from 'angular-toastify';
 
@@ -14,6 +14,16 @@ export class ProductService {
 
   getProducts(): Observable<Product[]> {
     return this.http.get(product_url).pipe(map((response: any) => response));
+  }
+
+  getProductsV2(formData: ProductPaged) {
+    return this.http
+      .post(
+        product_url +
+          `/getproducts?limit=${formData.limit}&page=${formData.page}`,
+        formData
+      )
+      .pipe(map((response: ProductRespone) => response));
   }
 
   getProductById(id: String): Observable<Product> {

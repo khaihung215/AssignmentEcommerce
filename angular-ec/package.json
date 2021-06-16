@@ -19,6 +19,7 @@
     "@angular/platform-browser": "~11.2.5",
     "@angular/platform-browser-dynamic": "~11.2.5",
     "@angular/router": "~11.2.5",
+    "@ng-bootstrap/ng-bootstrap": "^9.1.2",
     "angular-toastify": "^1.0.3",
     "axios": "^0.21.1",
     "rxjs": "~6.6.0",
