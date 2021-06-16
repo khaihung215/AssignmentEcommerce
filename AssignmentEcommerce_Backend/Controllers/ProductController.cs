@@ -1,4 +1,5 @@
 ﻿using AssignmentEcommerce_Backend.Data;
+using AssignmentEcommerce_Backend.Extensions;
 using AssignmentEcommerce_Backend.Models;
 using AssignmentEcommerce_Backend.Services;
 using AssignmentEcommerce_Shared;
@@ -49,6 +50,46 @@ namespace AssignmentEcommerce_Backend.Controllers
             var productRes = _mapper.Map<IEnumerable<ProductVm>>(products);
 
             return productRes;
+        }
+
+        [HttpGet("GetProducts")]
+        [AllowAnonymous]
+        public async Task<PagedResponseModel<ProductVm>> GetProducts([FromQuery] ProductPaged productPaged)
+        {
+            //var listProduct = await _context.Products
+            //    .Include(product => product.Category)
+            //    .AsNoTracking()
+            //    .ToListAsync();
+
+            //foreach (var item in listProduct)
+            //{
+            //    item.Images = _storageService.GetFileUrl(item.Images);
+            //}
+
+            var products = await _context.Products
+                .Include(product => product.Category)
+                .AsNoTracking()
+                .PaginateAsync(productPaged.page, productPaged.limit);
+
+            return new PagedResponseModel<ProductVm>
+            {
+                CurrentPage = products.CurrentPage,
+                TotalPages = products.TotalPages,
+                TotalItems = products.TotalItems,
+                Items = products.Items.Select(x => 
+                    new ProductVm
+                    {
+                        ProductId = x.ProductId,
+                        Name = x.Name,
+                        Description = x.Description,
+                        Images = _storageService.GetFileUrl(x.Images),
+                        Price = x.Price,
+                        CategoryId = x.CategoryId,
+                        NameCategory = x.Category.NameCategory,
+                        Rating = x.Rating
+                    }
+                ).ToList()
+            };
         }
 
         [HttpGet("GetHotProduct")]
@@ -236,7 +277,7 @@ namespace AssignmentEcommerce_Backend.Controllers
             }
 
             var reviews = await _context.Reviews.Where(x => x.ProductId.Equals(product.ProductId)).ToListAsync();
-            foreach(var review in reviews)
+            foreach (var review in reviews)
             {
                 _context.Reviews.Remove(review);
             }
