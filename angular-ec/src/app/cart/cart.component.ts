@@ -1,5 +1,7 @@
+import { identifierModuleUrl } from '@angular/compiler';
 import { Component, OnInit } from '@angular/core';
-import { Cart } from 'src/models/cart';
+import { ToastService } from 'angular-toastify';
+import { Cart, CartUpdateRequest } from 'src/models/cart';
 import { CartService } from 'src/services/cartService';
 
 @Component({
@@ -13,7 +15,10 @@ export class CartComponent implements OnInit {
   totalPrice: number;
   totalItems: number;
 
-  constructor(private cartService: CartService) {}
+  constructor(
+    private cartService: CartService,
+    private toastService: ToastService
+  ) {}
 
   ngOnInit(): void {
     this.getCartItems();
@@ -29,5 +34,35 @@ export class CartComponent implements OnInit {
           (this.totalItems = cartItems.totalItems)
         )
       );
+  }
+
+  buttonMinus(id: any) {
+    const formData: CartUpdateRequest = {
+      cartDetailId: id,
+      quantity: -1,
+    };
+
+    this.cartService.updateCartItem(formData).subscribe((cartItems) => {
+      this.listCartItems = cartItems.items;
+      this.totalPrice = cartItems.totalPrice;
+      this.totalItems = cartItems.totalItems;
+    });
+
+    this.toastService.success('Cập nhật thành công !');
+  }
+
+  buttonPlus(id: any) {
+    const formData: CartUpdateRequest = {
+      cartDetailId: id,
+      quantity: 1,
+    };
+
+    this.cartService.updateCartItem(formData).subscribe((cartItems) => {
+      this.listCartItems = cartItems.items;
+      this.totalPrice = cartItems.totalPrice;
+      this.totalItems = cartItems.totalItems;
+    });
+
+    this.toastService.success('Cập nhật thành công !');
   }
 }

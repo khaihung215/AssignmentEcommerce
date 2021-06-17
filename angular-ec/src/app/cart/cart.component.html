@@ -21,8 +21,9 @@
               <div class="row">{{ cartItem.productName }}</div>
             </div>
             <div class="col">
-              <a>-</a><a class="border">{{ cartItem.quantity }}</a
-              ><a>+</a>
+              <button (click)="buttonMinus(cartItem.cartDetailId)">-</button
+              ><a class="border">{{ cartItem.quantity }}</a
+              ><button (click)="buttonPlus(cartItem.cartDetailId)">+</button>
             </div>
             <div class="col">
               {{ cartItem.price | number: "1.0":"en-US" }} VNĐ
@@ -71,3 +72,4 @@
     </div>
   </div>
 </div>
+<lib-toastify-toast-container [autoClose]="2000"></lib-toastify-toast-container>

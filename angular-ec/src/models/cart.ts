@@ -33,3 +33,8 @@ export class CartCreateRequest {
   productId: string;
   quantity: number;
 }
+
+export class CartUpdateRequest {
+  cartDetailId: string;
+  quantity: number;
+}

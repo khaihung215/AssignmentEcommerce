@@ -24,4 +24,10 @@ export class CartService {
       (error) => this.toastService.error('Thêm vào giỏ hàng thất bại !')
     );
   }
+
+  updateCartItem(formData: any) {
+    return this.http
+      .put(cart_url + '/updatecartitems', formData)
+      .pipe(map((response: CartRespone) => response));
+  }
 }
