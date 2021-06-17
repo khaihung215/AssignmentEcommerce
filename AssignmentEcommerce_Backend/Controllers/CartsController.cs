@@ -40,7 +40,7 @@ namespace AssignmentEcommerce_Backend.Controllers
 
             var cart = await _context.Carts.FirstOrDefaultAsync(x => x.UserId.Equals(userId));
 
-            if(cart == null)
+            if (cart == null)
             {
                 cart = new Cart
                 {
@@ -60,7 +60,7 @@ namespace AssignmentEcommerce_Backend.Controllers
 
             var cartResponds = _mapper.Map<IEnumerable<CartRespond>>(cartDetails);
 
-            foreach(var item in cartResponds)
+            foreach (var item in cartResponds)
             {
                 item.Image = _storageService.GetFileUrl(item.Image);
             }
@@ -75,7 +75,7 @@ namespace AssignmentEcommerce_Backend.Controllers
 
             var check = CheckUserCart(userId);
 
-            if(check.Result == true)
+            if (check.Result == true)
             {
                 var cart = await _context.Carts.FirstOrDefaultAsync(x => x.UserId.Equals(userId));
 
@@ -128,7 +128,7 @@ namespace AssignmentEcommerce_Backend.Controllers
                 return NotFound();
             }
 
-            if(cartUpdateRequest.Quantity > 0)
+            if (cartUpdateRequest.Quantity > 0)
             {
                 cart.Quantity++;
             }
@@ -139,7 +139,7 @@ namespace AssignmentEcommerce_Backend.Controllers
                     cart.Quantity--;
                 }
             }
-       
+
             await _context.SaveChangesAsync();
 
             var cartRes = _mapper.Map<CartRespond>(cart);
@@ -169,7 +169,7 @@ namespace AssignmentEcommerce_Backend.Controllers
         {
             var check = await _context.Carts.Where(x => x.UserId.Equals(userId)).ToListAsync();
 
-            if(check.Count() > 0)
+            if (check.Count() > 0)
             {
                 return true;
             }
@@ -177,7 +177,118 @@ namespace AssignmentEcommerce_Backend.Controllers
             {
                 return false;
             }
-            
+
+        }
+
+        [HttpGet("GetCartItems")]
+        [AllowAnonymous]
+        public async Task<IEnumerable<CartRespond>> GetCartItems()
+        {
+            var cartDetails = await _context.CartDetails
+                .Include(p => p.Product)
+                .Where(p => p.CartId.Equals("cart1"))
+                .AsNoTracking()
+                .ToListAsync();
+
+            var cartResponds = _mapper.Map<IEnumerable<CartRespond>>(cartDetails);
+
+            foreach (var item in cartResponds)
+            {
+                item.Image = _storageService.GetFileUrl(item.Image);
+            }
+
+            return cartResponds;
+        }
+
+        [HttpPost("PostCartItems")]
+        [AllowAnonymous]
+        public async Task<ActionResult<CartDetail>> PostCartItems([FromForm] CartCreateRequest cartCreateRequest)
+        {
+            var cart = await _context.Carts.FirstOrDefaultAsync(x => x.UserId.Equals("user1"));
+
+            var cartDetail = new CartDetail
+            {
+                CartDetailId = Guid.NewGuid().ToString(),
+                Quantity = cartCreateRequest.Quantity,
+                CartId = cart.CartId,
+                ProductId = cartCreateRequest.ProductId
+            };
+
+            await _context.CartDetails.AddAsync(cartDetail);
+            await _context.SaveChangesAsync();
+
+            return cartDetail;
+        }
+
+        [HttpPut("UpdateCartItems")]
+        [AllowAnonymous]
+        public async Task<IEnumerable<CartRespond>> UpdateCartItems([FromForm] CartUpdateRequest cartUpdateRequest)
+        {
+            var cart = await _context.CartDetails.FindAsync(cartUpdateRequest.CartDetailId);
+
+            if (cart == null)
+            {
+                return null;
+            }
+
+            if (cartUpdateRequest.Quantity > 0)
+            {
+                cart.Quantity++;
+            }
+            else
+            {
+                if (cart.Quantity > 1)
+                {
+                    cart.Quantity--;
+                }
+            }
+
+            await _context.SaveChangesAsync();
+
+            var cartDetails = await _context.CartDetails
+                .Include(p => p.Product)
+                .Where(p => p.CartId.Equals("cart1"))
+                .AsNoTracking()
+                .ToListAsync();
+
+            var cartResponds = _mapper.Map<IEnumerable<CartRespond>>(cartDetails);
+
+            foreach (var item in cartResponds)
+            {
+                item.Image = _storageService.GetFileUrl(item.Image);
+            }
+
+            return cartResponds;
+        }
+
+        [HttpDelete("RemoveCartItems/{id}")]
+        [AllowAnonymous]
+        public async Task<IEnumerable<CartRespond>> RemoveCartItems(string id)
+        {
+            var cart = await _context.CartDetails.FindAsync(id);
+
+            if (cart == null)
+            {
+                return null;
+            }
+
+            _context.CartDetails.Remove(cart);
+            await _context.SaveChangesAsync();
+
+            var cartDetails = await _context.CartDetails
+                .Include(p => p.Product)
+                .Where(p => p.CartId.Equals("cart1"))
+                .AsNoTracking()
+                .ToListAsync();
+
+            var cartResponds = _mapper.Map<IEnumerable<CartRespond>>(cartDetails);
+
+            foreach (var item in cartResponds)
+            {
+                item.Image = _storageService.GetFileUrl(item.Image);
+            }
+
+            return cartResponds;
         }
     }
 }
