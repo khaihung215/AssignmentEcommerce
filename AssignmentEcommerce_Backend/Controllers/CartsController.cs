@@ -202,7 +202,7 @@ namespace AssignmentEcommerce_Backend.Controllers
                         ProductName = x.Product.Name,
                         Price = x.Product.Price,
                         Quantity = x.Quantity,
-                        Image = x.Product.Images
+                        Image = _storageService.GetFileUrl(x.Product.Images)
                     }
                ).ToList()
             };
@@ -210,27 +210,39 @@ namespace AssignmentEcommerce_Backend.Controllers
 
         [HttpPost("PostCartItems")]
         [AllowAnonymous]
-        public async Task<ActionResult<CartDetail>> PostCartItems([FromForm] CartCreateRequest cartCreateRequest)
+        public async Task<ActionResult<CartDetail>> PostCartItems(CartCreateRequest cartCreateRequest)
         {
             var cart = await _context.Carts.FirstOrDefaultAsync(x => x.UserId.Equals("user1"));
 
-            var cartDetail = new CartDetail
+            var checkItem = await _context.CartDetails.FirstOrDefaultAsync(x => x.ProductId.Equals(cartCreateRequest.ProductId));
+
+            if (checkItem == null)
             {
-                CartDetailId = Guid.NewGuid().ToString(),
-                Quantity = cartCreateRequest.Quantity,
-                CartId = cart.CartId,
-                ProductId = cartCreateRequest.ProductId
-            };
+                var cartDetail = new CartDetail
+                {
+                    CartDetailId = Guid.NewGuid().ToString(),
+                    Quantity = cartCreateRequest.Quantity,
+                    CartId = cart.CartId,
+                    ProductId = cartCreateRequest.ProductId
+                };
 
-            await _context.CartDetails.AddAsync(cartDetail);
-            await _context.SaveChangesAsync();
+                await _context.CartDetails.AddAsync(cartDetail);
+                await _context.SaveChangesAsync();
+                
+                return cartDetail;
+            }
+            else
+            {
+                checkItem.Quantity++;
+                await _context.SaveChangesAsync();
 
-            return cartDetail;
+                return Ok();
+            }
         }
 
         [HttpPut("UpdateCartItems")]
         [AllowAnonymous]
-        public async Task<CartResponseModel<CartRespond>> UpdateCartItems([FromForm] CartUpdateRequest cartUpdateRequest)
+        public async Task<CartResponseModel<CartRespond>> UpdateCartItems(CartUpdateRequest cartUpdateRequest)
         {
             var cart = await _context.CartDetails.FindAsync(cartUpdateRequest.CartDetailId);
 
@@ -271,7 +283,7 @@ namespace AssignmentEcommerce_Backend.Controllers
                         ProductName = x.Product.Name,
                         Price = x.Product.Price,
                         Quantity = x.Quantity,
-                        Image = x.Product.Images
+                        Image = _storageService.GetFileUrl(x.Product.Images)
                     }
                ).ToList()
             };
@@ -309,7 +321,7 @@ namespace AssignmentEcommerce_Backend.Controllers
                         ProductName = x.Product.Name,
                         Price = x.Product.Price,
                         Quantity = x.Quantity,
-                        Image = x.Product.Images
+                        Image = _storageService.GetFileUrl(x.Product.Images)
                     }
                ).ToList()
             };
