@@ -65,4 +65,14 @@ export class CartComponent implements OnInit {
 
     this.toastService.success('Cập nhật thành công !');
   }
+
+  buttonRemove(id: any) {
+    this.cartService.removeCartItem(id).subscribe((cartItems) => {
+      this.listCartItems = cartItems.items;
+      this.totalPrice = cartItems.totalPrice;
+      this.totalItems = cartItems.totalItems;
+    });
+
+    this.toastService.success('Xoá sản phẩm thành công !');
+  }
 }

@@ -289,7 +289,7 @@ namespace AssignmentEcommerce_Backend.Controllers
             };
         }
 
-        [HttpDelete("RemoveCartItems/{id}")]
+        [HttpPut("RemoveCartItems")]
         [AllowAnonymous]
         public async Task<CartResponseModel<CartRespond>> RemoveCartItems(string id)
         {

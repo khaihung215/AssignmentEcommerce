@@ -30,4 +30,10 @@ export class CartService {
       .put(cart_url + '/updatecartitems', formData)
       .pipe(map((response: CartRespone) => response));
   }
+
+  removeCartItem(id: any) {
+    return this.http
+      .put(cart_url + '/removecartitems?id=' + id, id)
+      .pipe(map((response: CartRespone) => response));
+  }
 }

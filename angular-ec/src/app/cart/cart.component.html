@@ -27,7 +27,12 @@
             </div>
             <div class="col">
               {{ cartItem.price | number: "1.0":"en-US" }} VNĐ
-              <span class="close">&#10005;</span>
+              <button
+                class="close"
+                (click)="buttonRemove(cartItem.cartDetailId)"
+              >
+                &#10005;
+              </button>
             </div>
           </div>
         </div>
