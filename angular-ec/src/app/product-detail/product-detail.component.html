@@ -12,7 +12,12 @@
         </span>
       </p>
       <p *ngIf="product">{{ product.description }}</p>
-      <button class="btn btn-primary btn-order">Thêm vào giỏ hàng</button>
+      <button
+        class="btn btn-primary btn-order"
+        (click)="addToCart(product.productId)"
+      >
+        Thêm vào giỏ hàng
+      </button>
     </div>
   </div>
 
@@ -40,7 +45,10 @@
                   <i class="fas fa-star icon"></i>
                 </span>
               </p>
-              <button class="btn btn-primary btn-order">
+              <button
+                class="btn btn-primary btn-order"
+                (click)="addToCart(product.productId)"
+              >
                 Thêm vào giỏ hàng
               </button>
             </div>

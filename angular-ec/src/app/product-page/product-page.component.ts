@@ -1,12 +1,14 @@
 import { Component, OnInit } from '@angular/core';
+import { CartCreateRequest } from 'src/models/cart';
 import { Product, ProductPaged, ProductRespone } from 'src/models/product';
+import { CartService } from 'src/services/cartService';
 import { ProductService } from 'src/services/productService';
 
 @Component({
   selector: 'app-product-page',
   templateUrl: './product-page.component.html',
   styleUrls: ['./product-page.component.css'],
-  providers: [ProductService],
+  providers: [ProductService, CartService],
 })
 export class ProductPageComponent implements OnInit {
   listProducts: Product[];
@@ -14,7 +16,10 @@ export class ProductPageComponent implements OnInit {
   totalItems: number;
   totalPages: number;
 
-  constructor(private productService: ProductService) {}
+  constructor(
+    private productService: ProductService,
+    private cartService: CartService
+  ) {}
 
   ngOnInit() {
     this.getProductsV2();
@@ -48,5 +53,14 @@ export class ProductPageComponent implements OnInit {
     });
 
     window.scrollTo(0, 0);
+  }
+
+  addToCart(id: any) {
+    const formData: CartCreateRequest = {
+      productId: id,
+      quantity: 1,
+    };
+
+    this.cartService.addToCart(formData);
   }
 }

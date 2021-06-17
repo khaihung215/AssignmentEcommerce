@@ -7,12 +7,14 @@ import { ProductService } from 'src/services/productService';
 import { ReviewService } from 'src/services/reviewService';
 import { ToastService } from 'angular-toastify';
 import { error } from 'protractor';
+import { CartService } from 'src/services/cartService';
+import { CartCreateRequest } from 'src/models/cart';
 
 @Component({
   selector: 'app-product-detail',
   templateUrl: './product-detail.component.html',
   styleUrls: ['./product-detail.component.css'],
-  providers: [ProductService, ReviewService],
+  providers: [ProductService, ReviewService, CartService],
 })
 export class ProductDetailComponent implements OnInit {
   @ViewChild('closebutton') closebutton;
@@ -34,6 +36,7 @@ export class ProductDetailComponent implements OnInit {
     private activatedRoute: ActivatedRoute,
     private productService: ProductService,
     private reviewService: ReviewService,
+    private cartService: CartService,
     private toastService: ToastService
   ) {}
 
@@ -89,5 +92,14 @@ export class ProductDetailComponent implements OnInit {
     this.reviewService
       .getReviews(id)
       .subscribe((reviews) => (this.listReviews = reviews));
+  }
+
+  addToCart(id: any) {
+    const formData: CartCreateRequest = {
+      productId: id,
+      quantity: 1,
+    };
+
+    this.cartService.addToCart(formData);
   }
 }
