@@ -182,7 +182,7 @@ namespace AssignmentEcommerce_Backend.Controllers
 
         [HttpGet("GetCartItems")]
         [AllowAnonymous]
-        public async Task<IEnumerable<CartRespond>> GetCartItems()
+        public async Task<CartResponseModel<CartRespond>> GetCartItems()
         {
             var cartDetails = await _context.CartDetails
                 .Include(p => p.Product)
@@ -190,14 +190,22 @@ namespace AssignmentEcommerce_Backend.Controllers
                 .AsNoTracking()
                 .ToListAsync();
 
-            var cartResponds = _mapper.Map<IEnumerable<CartRespond>>(cartDetails);
-
-            foreach (var item in cartResponds)
+            return new CartResponseModel<CartRespond>
             {
-                item.Image = _storageService.GetFileUrl(item.Image);
-            }
-
-            return cartResponds;
+                TotalPrice = cartDetails.Sum(x => x.Product.Price * x.Quantity),
+                TotalItems = cartDetails.Count(),
+                Items = cartDetails.Select(x =>
+                    new CartRespond
+                    {
+                        CartDetailId = x.CartDetailId,
+                        ProductId = x.ProductId,
+                        ProductName = x.Product.Name,
+                        Price = x.Product.Price,
+                        Quantity = x.Quantity,
+                        Image = x.Product.Images
+                    }
+               ).ToList()
+            };
         }
 
         [HttpPost("PostCartItems")]
@@ -222,7 +230,7 @@ namespace AssignmentEcommerce_Backend.Controllers
 
         [HttpPut("UpdateCartItems")]
         [AllowAnonymous]
-        public async Task<IEnumerable<CartRespond>> UpdateCartItems([FromForm] CartUpdateRequest cartUpdateRequest)
+        public async Task<CartResponseModel<CartRespond>> UpdateCartItems([FromForm] CartUpdateRequest cartUpdateRequest)
         {
             var cart = await _context.CartDetails.FindAsync(cartUpdateRequest.CartDetailId);
 
@@ -251,19 +259,27 @@ namespace AssignmentEcommerce_Backend.Controllers
                 .AsNoTracking()
                 .ToListAsync();
 
-            var cartResponds = _mapper.Map<IEnumerable<CartRespond>>(cartDetails);
-
-            foreach (var item in cartResponds)
+            return new CartResponseModel<CartRespond>
             {
-                item.Image = _storageService.GetFileUrl(item.Image);
-            }
-
-            return cartResponds;
+                TotalPrice = cartDetails.Sum(x => x.Product.Price * x.Quantity),
+                TotalItems = cartDetails.Count(),
+                Items = cartDetails.Select(x =>
+                    new CartRespond
+                    {
+                        CartDetailId = x.CartDetailId,
+                        ProductId = x.ProductId,
+                        ProductName = x.Product.Name,
+                        Price = x.Product.Price,
+                        Quantity = x.Quantity,
+                        Image = x.Product.Images
+                    }
+               ).ToList()
+            };
         }
 
         [HttpDelete("RemoveCartItems/{id}")]
         [AllowAnonymous]
-        public async Task<IEnumerable<CartRespond>> RemoveCartItems(string id)
+        public async Task<CartResponseModel<CartRespond>> RemoveCartItems(string id)
         {
             var cart = await _context.CartDetails.FindAsync(id);
 
@@ -281,14 +297,22 @@ namespace AssignmentEcommerce_Backend.Controllers
                 .AsNoTracking()
                 .ToListAsync();
 
-            var cartResponds = _mapper.Map<IEnumerable<CartRespond>>(cartDetails);
-
-            foreach (var item in cartResponds)
+            return new CartResponseModel<CartRespond>
             {
-                item.Image = _storageService.GetFileUrl(item.Image);
-            }
-
-            return cartResponds;
+                TotalPrice = cartDetails.Sum(x => x.Product.Price * x.Quantity),
+                TotalItems = cartDetails.Count(),
+                Items = cartDetails.Select(x =>
+                    new CartRespond
+                    {
+                        CartDetailId = x.CartDetailId,
+                        ProductId = x.ProductId,
+                        ProductName = x.Product.Name,
+                        Price = x.Product.Price,
+                        Quantity = x.Quantity,
+                        Image = x.Product.Images
+                    }
+               ).ToList()
+            };
         }
     }
 }
