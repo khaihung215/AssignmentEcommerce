@@ -8,52 +8,25 @@
               <h4><b>Giỏ hàng</b></h4>
             </div>
             <div class="col align-self-center text-right text-muted">
-              3 sản phẩm
+              {{ totalItems }} sản phẩm
             </div>
           </div>
         </div>
-        <div class="row">
+        <div class="row" *ngFor="let cartItem of listCartItems">
           <div class="row main align-items-center">
             <div class="col-2">
-              <img class="img-fluid" src="{{ product1 }}" />
+              <img class="img-fluid" src="{{ cartItem.image }}" />
             </div>
             <div class="col">
-              <div class="row text-muted">Áo thun</div>
-              <div class="row">Áo 1</div>
-            </div>
-            <div class="col"><a>-</a><a class="border">1</a><a>+</a></div>
-            <div class="col">
-              100.000.000 VNĐ<span class="close">&#10005;</span>
-            </div>
-          </div>
-        </div>
-        <div class="row">
-          <div class="row main align-items-center">
-            <div class="col-2">
-              <img class="img-fluid" src="{{ product2 }}" />
+              <div class="row">{{ cartItem.productName }}</div>
             </div>
             <div class="col">
-              <div class="row text-muted">Áo thun</div>
-              <div class="row">Áo 2</div>
-            </div>
-            <div class="col"><a>-</a><a class="border">1</a><a>+</a></div>
-            <div class="col">
-              100.000.000 VNĐ<span class="close">&#10005;</span>
-            </div>
-          </div>
-        </div>
-        <div class="row">
-          <div class="row main align-items-center">
-            <div class="col-2">
-              <img class="img-fluid" src="{{ product1 }}" />
+              <a>-</a><a class="border">{{ cartItem.quantity }}</a
+              ><a>+</a>
             </div>
             <div class="col">
-              <div class="row text-muted">Áo thun</div>
-              <div class="row">Áo 3</div>
-            </div>
-            <div class="col"><a>-</a><a class="border">1</a><a>+</a></div>
-            <div class="col">
-              100.000.000 VNĐ<span class="close">&#10005;</span>
+              {{ cartItem.price | number: "1.0":"en-US" }} VNĐ
+              <span class="close">&#10005;</span>
             </div>
           </div>
         </div>
@@ -70,7 +43,9 @@
         <hr />
         <div class="row">
           <div class="col" style="padding-left: 0">Tất cả sản phẩm</div>
-          <div class="col text-right">300.000.000 VNĐ</div>
+          <div class="col text-right">
+            {{ totalPrice | number: "1.0":"en-US" }} VNĐ
+          </div>
         </div>
         <form>
           <p>Vận chuyển</p>
@@ -87,7 +62,9 @@
           style="border-top: 1px solid rgba(0, 0, 0, 0.1); padding: 2vh 0"
         >
           <div class="col">Tổng tiền</div>
-          <div class="col text-right">300.000.000 VNĐ</div>
+          <div class="col text-right">
+            {{ totalPrice | number: "1.0":"en-US" }} VNĐ
+          </div>
         </div>
         <button class="btn">Thanh toán</button>
       </div>
